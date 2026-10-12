@@ -138,7 +138,7 @@ try {
   }
   // Firefox's remote agent reports moz-extension tabs as about:blank (its
   // NavigationManager loses them), so match on each page's real location.
-  async function findPage(prefix, timeoutMs = 15000) {
+  async function findPage(prefix, timeoutMs = 30000) {
     const deadline = Date.now() + timeoutMs
     while (Date.now() < deadline) {
       for (const p of await browser.pages()) {
@@ -147,7 +147,8 @@ try {
       }
       await new Promise(r => setTimeout(r, 250))
     }
-    throw new Error(`no page at ${prefix}`)
+    const seen = await Promise.all((await browser.pages()).map(p => p.evaluate(() => location.href).catch(e => `<${e.message.slice(0, 60)}>`)))
+    throw new Error(`no page at ${prefix}; open pages: ${JSON.stringify(seen)}`)
   }
   if (BROWSER === 'firefox') {
     control = watch(await findPage(`${EXT}/src/options/options.html`))

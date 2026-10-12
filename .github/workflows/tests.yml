@@ -73,8 +73,16 @@ jobs:
         run: npm run ext:build
       - name: Mozilla add-on lint
         run: npx --yes web-ext@8 lint --source-dir services/extension/dist/firefox --self-hosted
+      # Ubuntu's /usr/bin/firefox is a snap; confinement breaks automated profiles
+      # and extension installs. Use Mozilla's own build.
+      - uses: browser-actions/setup-firefox@v1
+        id: firefox
+        with:
+          firefox-version: latest
       - name: Real-browser end-to-end (Chrome + Firefox, fake microphone)
         run: npm run test:extension:e2e
+        env:
+          FIREFOX_PATH: ${{ steps.firefox.outputs.firefox-path }}
       - uses: actions/upload-artifact@v4
         with:
           name: semaje-extension-packages
