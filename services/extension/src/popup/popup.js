@@ -21,9 +21,14 @@ function renderSessions(sessions) {
   $('live-kind').textContent = sessions.map(s => s.kind).join(', ')
 }
 
-async function openPanel() {
-  const [tab] = await ext.tabs.query({ active: true, currentWindow: true })
-  if (ext.sidePanel?.open && tab?.windowId != null) return ext.sidePanel.open({ windowId: tab.windowId })
+// sidePanel.open / sidebarAction.open only work synchronously inside the click
+// handler (an await first loses the user gesture), so the window id is fetched
+// up front.
+let windowId = null
+ext.windows?.getCurrent().then(w => { windowId = w.id }).catch(() => {})
+
+function openPanel() {
+  if (ext.sidePanel?.open && windowId != null) return ext.sidePanel.open({ windowId })
   if (ext.sidebarAction?.open) return ext.sidebarAction.open()
   return ext.tabs.create({ url: ext.runtime.getURL('src/panel/panel.html') })
 }
@@ -38,8 +43,11 @@ for (const [id, name] of [['dictate', 'dictate'], ['tab', 'tab'], ['speak', 'spe
   })
 }
 // File pickers close Firefox popups, so files are handled in the panel.
-$('file').addEventListener('click', async () => { await openPanel(); window.close() })
-$('library').addEventListener('click', async () => { await openPanel(); window.close() })
+for (const id of ['file', 'library']) {
+  $(id).addEventListener('click', () => {
+    Promise.resolve(openPanel()).finally(() => window.close())
+  })
+}
 $('settings').addEventListener('click', () => ext.runtime.openOptionsPage())
 
 const { config, locked } = await loadConfig()

@@ -69,7 +69,7 @@ async function open(id) {
     el('div', { className: 'row', style: 'margin:8px 0' },
       button('Copy', async b => { await navigator.clipboard.writeText(t.text); flash(b, 'Copied') }),
       button('Read aloud', () => speak(t.text, t.language)),
-      button('Open in semaje', () => ext.tabs.create({ url: `${config.apiBase.replace(/:\d+$/, '')}/library/${t.id}` })),
+      button('Open in semaje', () => ext.tabs.create({ url: `${config.apiBase}/t/${encodeURIComponent(t.id)}` })),
     ),
     el('p', { textContent: t.result ? String(t.result) : t.text }),
   )
