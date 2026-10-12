@@ -21,7 +21,7 @@ export const Role = z.enum(['owner', 'admin', 'member', 'viewer'])
 export type Role = z.infer<typeof Role>
 export const SharePermission = z.enum(['view', 'comment'])
 
-// ── STT result (mirrors services/stt/contract.md) ───────────
+// ── STT result (mirrors semajehq/semaje-stt contract.md) ─────
 export const SttSegment = z.object({
   start: z.number(),
   end: z.number(),

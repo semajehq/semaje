@@ -3,7 +3,12 @@ name: tests
 on:
   push:
     branches: [main]
+    tags: ["v*"]
   pull_request:
+
+permissions:
+  contents: read
+  packages: write
 
 concurrency:
   group: tests-${{ github.ref }}
@@ -25,81 +30,60 @@ jobs:
           PATTERN="vox""ail|vox-""ai|transcribe""-ai|transcribe""ai|gem""ini"
           ! git grep -n -i -E "$PATTERN" -- . ':!package-lock.json' \
             || (echo "Found old-brand or hosted-LLM references" && exit 1)
+      - name: No cloud-sync conflict copies ("file 2.ts")
+        run: |
+          ! git ls-files | grep -E ' [0-9]+(\.[^/]*)?$' || (echo "Remove iCloud/Dropbox conflict copies" && exit 1)
       - name: TypeScript typecheck
         run: npm run typecheck
-      - name: Node gate tests (services + extension)
+      - name: Node gate tests (all platform services)
         run: npm test
       - name: Deterministic quality smoke eval
         run: npm run eval:smoke
-      - name: Frontend build
-        run: npm run build
+      - name: Compose files are valid (base, dev overlay, GPU overlays)
+        run: |
+          cp .env.example .env
+          docker compose config -q
+          docker compose -f docker-compose.yml -f compose.dev.yml config -q
+          docker compose -f docker-compose.yml -f deploy/compose.workstation-gpu.yml config -q
+          docker compose -f docker-compose.yml -f deploy/compose.server-gpu.yml config -q
 
-  stt:
+  image:
+    # API / worker / migrate image (one image, different commands).
+    needs: gate
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libsndfile1
-      - run: pip install -r services/stt/requirements.txt -r services/stt/requirements-dev.txt
-      - name: STT + language registry gate tests (real ffmpeg format matrix)
-        run: python -m pytest services/stt/tests packages/languages/tests -q
-
-  tts:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
-      - run: pip install -r services/tts/requirements.txt -r services/tts/requirements-dev.txt
-      - name: TTS gate tests
-        run: python -m pytest services/tts/tests -q
-
-  extension:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Build every browser package (lint + reproducible zips)
-        run: npm run ext:build
-      - name: Mozilla add-on lint
-        run: npx --yes web-ext@8 lint --source-dir services/extension/dist/firefox --self-hosted
-      # Ubuntu's /usr/bin/firefox is a snap; confinement breaks automated profiles
-      # and extension installs. Use Mozilla's own build, pinned: from Firefox 157,
-      # WebDriver BiDi refuses script.callFunction in moz-extension:// pages, which
-      # the e2e harness needs to drive the extension's own UI.
-      - uses: browser-actions/setup-firefox@v1
-        id: firefox
-        with:
-          firefox-version: "153.0.4"
-      - name: Real-browser end-to-end (Chrome + Firefox, fake microphone)
-        run: npm run test:extension:e2e
-        env:
-          FIREFOX_PATH: ${{ steps.firefox.outputs.firefox-path }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: semaje-extension-packages
-          path: services/extension/dist/*.zip
-
-  images:
-    # x86-64 is the production target: proves the full STT image (Whisper + Omnilingual,
-    # kenlm compiled in the builder stage, fairseq2 from Meta's index) and TTS image build.
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
-      - name: Build STT image (both engines)
-        run: docker buildx build --load -f services/stt/Dockerfile -t semaje-stt:ci .
-      - name: Omnilingual is importable in the image
-        run: docker run --rm --entrypoint python semaje-stt:ci -c "import omnilingual_asr, faster_whisper; from services.stt.models import omnilingual_available; assert omnilingual_available(); print('both engines installed')"
-      - name: Build TTS image
-        run: docker buildx build --load -f services/tts/Dockerfile -t semaje-tts:ci .
+      - name: Build and smoke-test
+        run: |
+          docker buildx build --load --target app -t semaje:ci .
+          docker run --rm --entrypoint node semaje:ci --import tsx -e "await import('./services/api/src/app.ts'); console.log('api module loads')"
+      - uses: docker/login-action@v3
+        if: github.event_name == 'push'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        if: github.event_name == 'push'
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=main,enable={{is_default_branch}}
+            type=sha
+      - name: Publish multi-arch image
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: app
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

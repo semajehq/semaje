@@ -14,5 +14,5 @@
     "types": ["node"]
   },
   "include": ["services/**/*.ts", "packages/**/*.ts"],
-  "exclude": ["node_modules", "dist", "services/stt/vendor", "services/stt/.venv", "services/tts/.venv", "services/extension/src", "src"]
+  "exclude": ["node_modules", "dist", "data"]
 }

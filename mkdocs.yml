@@ -21,7 +21,7 @@ theme:
 nav:
   - Home: index.md
   - Languages and accuracy: languages.md
-  - Browser extension: browser-extension.md
+  - Browser extension: https://github.com/semajehq/semaje-extension/blob/main/docs/browser-extension.md
   - Low-cost operations: low-cost-operations.md
   - Quality evaluations: evaluations.md
   - Backup and restore: backup-restore.md

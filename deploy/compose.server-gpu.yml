@@ -1,8 +1,10 @@
 services:
   stt:
+    # CUDA image built straight from the semaje-stt release tag (no local checkout needed).
+    image: semaje-stt:${SEMAJE_STT_VERSION:-2.0.0}-cuda
     build:
-      context: .
-      dockerfile: services/stt/Dockerfile.cuda
+      context: https://github.com/semajehq/semaje-stt.git#v${SEMAJE_STT_VERSION:-2.0.0}
+      dockerfile: Dockerfile.cuda
     environment:
       STT_DEVICE: cuda
       STT_COMPUTE_TYPE: float16

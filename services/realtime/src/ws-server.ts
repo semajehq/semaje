@@ -4,7 +4,7 @@ import type { Server as HttpServer, IncomingMessage } from 'node:http'
 import { WebSocketServer, WebSocket } from 'ws'
 import type { Principal } from '@semaje/schemas'
 import { authenticate } from '../../auth/src/index.ts'
-import { sttTranscribe } from '../../stt/client/index.ts'
+import { sttTranscribe } from '../../speech/stt-client.ts'
 import { createTranscript } from '../../transcripts/src/index.ts'
 import { RealtimeSession, type Transcriber, type Persister } from './session.ts'
 

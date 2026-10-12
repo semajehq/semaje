@@ -22,7 +22,7 @@ including fully air-gapped.
   languages when an operator accepts its non-commercial license; custom voices
   for anything else.
 - **Everywhere you type.** The browser extension for Chrome, Edge, Brave, Opera,
-  Vivaldi, Arc, Firefox, and Safari: [Browser extension](browser-extension.md).
+  Vivaldi, Arc, Firefox, and Safari: [semaje-extension](https://github.com/semajehq/semaje-extension).
 - **Built for organizations.** SSO, scoped API keys, tenancy, audit trails,
   retention, Prometheus metrics, request tracing, readiness probes, and
   back-pressure under load.
@@ -46,7 +46,8 @@ open http://localhost:8080
 ## Guides
 
 - [Languages and accuracy](languages.md): coverage, routing, measured results, choosing models
-- [Browser extension](browser-extension.md): install, publish, enterprise rollout, daily use
+- [Browser extension](https://github.com/semajehq/semaje-extension/blob/main/docs/browser-extension.md): install, publish, enterprise rollout, daily use
+- Repositories: [platform](https://github.com/semajehq/semaje) · [stt](https://github.com/semajehq/semaje-stt) · [tts](https://github.com/semajehq/semaje-tts) · [web](https://github.com/semajehq/semaje-web) · [extension](https://github.com/semajehq/semaje-extension) · [languages](https://github.com/semajehq/semaje-languages)
 - [Quality evaluations](evaluations.md)
 - [Low-cost operations](low-cost-operations.md)
 - [Backup and restore](backup-restore.md)

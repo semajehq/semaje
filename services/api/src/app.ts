@@ -35,10 +35,12 @@ import { assertBotTransition, detectMeetingProvider } from '../../meeting-bot/sr
 import {
   sttHealth, sttTranscribe, sttModels, sttDownloadModel,
   sttActivateModel, sttDeleteModel, sttLanguages, SttError,
-} from '../../stt/client/index.ts'
-import { ttsHealth, ttsSynthesize, ttsVoices, TtsError } from '../../tts/client/index.ts'
+} from '../../speech/stt-client.ts'
+import { ttsHealth, ttsSynthesize, ttsVoices, TtsError } from '../../speech/tts-client.ts'
 import { needsLlm, renderPlainTranscript, buildTranscriptContext } from '../../pipeline/src/index.ts'
 import { createLlm, runWithFallback } from '../../llm/src/index.ts'
+// @ts-ignore — plain JS prompt library shared with the worker and evals
+import { TASK_DEFINITIONS, CATEGORIES } from '../../llm/src/prompts.js'
 import { runMeetingWithFallback } from '../../llm/src/structured.ts'
 import {
   getWorkspaceLlmConfig, saveWorkspaceLlmConfig, isLocalEndpoint,
@@ -163,6 +165,12 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
       tts: { reachable: t.ok === true, allowNoncommercial: t.allowNoncommercial ?? null },
       llmAdapter: process.env.LLM_ADAPTER || 'ollama',
     })
+  })
+
+  // ── Task catalog (labels/options for clients; prompts stay server-side) ──
+  app.get('/api/tasks', requireAuth(), rateLimit(), (_req, res) => {
+    res.setHeader('Cache-Control', 'private, max-age=3600')
+    res.json({ tasks: TASK_DEFINITIONS, categories: CATEGORIES })
   })
 
   // ── Languages + speech synthesis ───────────────────────────

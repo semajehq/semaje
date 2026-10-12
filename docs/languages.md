@@ -8,7 +8,7 @@ language is handled, what accuracy to expect, and how to improve it.
 
 Every request names a language in any common form (`sw`, `swa`, `swh_Latn`,
 `sw-KE`, `Swahili`, `Kiswahili`) or leaves it on auto-detect. The shared
-registry (`packages/languages`) resolves it to one canonical code
+registry ([semaje-languages](https://github.com/semajehq/semaje-languages)) resolves it to one canonical code
 (`swh_Latn`), and the STT service routes it:
 
 ```
@@ -60,11 +60,11 @@ handle them far better.
 Reproduce, or test your own languages:
 
 ```bash
-npm run dev:stt
-npm run eval:fleurs -- --langs sw_ke,yo_ng,am_et,luo_ke,lg_ug,ha_ng,zu_za --n 10 --engines auto,whisper
+# in semaje-stt, with the service running
+make eval-fleurs ARGS="--langs sw_ke,yo_ng,am_et,luo_ke,lg_ug,ha_ng,zu_za --n 10 --engines auto,whisper"
 ```
 
-The eval fails if any language regresses past `services/stt/evals/fleurs_thresholds.json`,
+The eval fails if any language regresses past `semaje_stt/evals/fleurs_thresholds.json` in semaje-stt,
 or if `auto` ever does worse than forced Whisper on a language where both ran.
 
 ## Choosing models

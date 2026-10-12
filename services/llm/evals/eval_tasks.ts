@@ -12,7 +12,7 @@ import { getLlm, _setLlm } from '../src/index.ts'
 import { buildTranscriptContext } from '../../pipeline/src/index.ts'
 // The frontend prompt library is the single source of task prompts.
 // @ts-ignore — plain JS module
-import { buildPrompt, getDefaultOptions, TASK_DEFINITIONS } from '../../../src/utils/promptBuilder.js'
+import { buildPrompt, getDefaultOptions, TASK_DEFINITIONS } from '../src/prompts.js'
 
 const FIXTURE = {
   text:

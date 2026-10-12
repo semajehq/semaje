@@ -1,0 +1,25 @@
+# Build stt, tts, and web from sibling checkouts instead of pulling released
+# images. Clone them with `npm run workspace`, then:
+#
+#   docker compose -f docker-compose.yml -f compose.dev.yml up -d --build
+#
+# Paths are relative to this repo; override with SEMAJE_STT_SRC etc.
+services:
+  stt:
+    image: semaje-stt:dev
+    build:
+      context: ${SEMAJE_STT_SRC:-../semaje-stt}
+      args:
+        OMNILINGUAL: ${STT_OMNILINGUAL_BUILD:-1}
+  tts:
+    image: semaje-tts:dev
+    build:
+      context: ${SEMAJE_TTS_SRC:-../semaje-tts}
+      args:
+        MMS: ${TTS_MMS_BUILD:-0}
+  frontend:
+    image: semaje-web:dev
+    build:
+      context: ${SEMAJE_WEB_SRC:-../semaje-web}
+      args:
+        VITE_AUTH_MODE: ${AUTH_ADAPTER:-single-user}

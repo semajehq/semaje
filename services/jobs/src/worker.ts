@@ -5,7 +5,7 @@ import type pg from 'pg'
 import { getPool } from '@semaje/db'
 import { JobInput } from '@semaje/schemas'
 import { getStorage } from '../../storage/src/index.ts'
-import { sttTranscribe } from '../../stt/client/index.ts'
+import { sttTranscribe } from '../../speech/stt-client.ts'
 import { needsLlm, renderPlainTranscript, buildTranscriptContext } from '../../pipeline/src/index.ts'
 import { runWithFallback } from '../../llm/src/index.ts'
 import { runMeetingWithFallback } from '../../llm/src/structured.ts'
@@ -19,7 +19,7 @@ import {
 } from '../../transcripts/src/quality.ts'
 import { getBoss, markJob, notifyWebhook, QUEUE_TRANSCRIBE } from './index.ts'
 // @ts-ignore — plain JS prompt library (single source of task prompts)
-import { buildPrompt } from '../../../src/utils/promptBuilder.js'
+import { buildPrompt } from '../../llm/src/prompts.js'
 
 export async function processJob(jobId: string, pool: pg.Pool = getPool()): Promise<void> {
   const found = await pool.query(`SELECT * FROM jobs WHERE id = $1`, [jobId])
