@@ -1,0 +1,5 @@
+# Optional: Meta MMS-TTS for ~1,100 languages. Weights are CC-BY-NC-4.0 (non-commercial);
+# only used when TTS_ALLOW_NONCOMMERCIAL=true.
+torch>=2.4
+transformers>=4.44,<5
+uroman>=1.3                    # romanizer MMS needs for non-Latin scripts (Ge'ez, Devanagari, Arabic...)

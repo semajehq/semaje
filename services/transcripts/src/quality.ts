@@ -1,4 +1,4 @@
-import type { WhisperResult, WhisperSegment } from '@semaje/schemas'
+import type { SttResult, SttSegment } from '@semaje/schemas'
 
 export interface GlossaryTerm { term: string; replacement: string }
 
@@ -12,7 +12,7 @@ function replaceTerm(text: string, term: GlossaryTerm): { text: string; matches:
   }
 }
 
-export function applyGlossary(result: WhisperResult, terms: GlossaryTerm[]) {
+export function applyGlossary(result: SttResult, terms: GlossaryTerm[]) {
   let matches = 0
   let text = result.text
   let segments = result.segments.map(segment => ({ ...segment }))
@@ -25,7 +25,7 @@ export function applyGlossary(result: WhisperResult, terms: GlossaryTerm[]) {
   return { ...result, text, segments, glossaryMatches: matches }
 }
 
-export function cleanupPunctuation(result: WhisperResult): WhisperResult {
+export function cleanupPunctuation(result: SttResult): SttResult {
   const segments = result.segments.map(segment => {
     const raw = segment.text.trim()
     const capitalized = raw ? raw[0].toLocaleUpperCase() + raw.slice(1) : raw
@@ -35,7 +35,7 @@ export function cleanupPunctuation(result: WhisperResult): WhisperResult {
   return { ...result, segments, text: segments.map(segment => segment.text).join(' ').trim() }
 }
 
-export function summarizeQuality(result: WhisperResult, glossaryMatches = 0) {
+export function summarizeQuality(result: SttResult, glossaryMatches = 0) {
   const confidenceValues = result.segments
     .map(segment => segment.confidence)
     .filter((value): value is number => typeof value === 'number')
@@ -54,7 +54,7 @@ export function summarizeQuality(result: WhisperResult, glossaryMatches = 0) {
   }
 }
 
-export function speakerLabels(segments: WhisperSegment[]) {
+export function speakerLabels(segments: SttSegment[]) {
   return Object.fromEntries(
     [...new Set(segments.map(segment => segment.speaker).filter(Boolean) as string[])]
       .map(speaker => [speaker, speaker.replace(/^SPEAKER_0*/, 'Speaker ')]),
@@ -62,7 +62,7 @@ export function speakerLabels(segments: WhisperSegment[]) {
 }
 
 export function renameSpeakerInSegments(
-  segments: WhisperSegment[], speaker: string, name: string,
-): WhisperSegment[] {
+  segments: SttSegment[], speaker: string, name: string,
+): SttSegment[] {
   return segments.map(segment => segment.speaker === speaker ? { ...segment, speaker: name } : segment)
 }

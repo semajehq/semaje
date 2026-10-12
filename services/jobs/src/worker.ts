@@ -1,11 +1,11 @@
 // The transcription worker — consumes the queue and runs the full pipeline:
-// storage → whisper → pipeline routing → (llm?) → transcripts. Progress and
+// storage → stt → pipeline routing → (llm?) → transcripts. Progress and
 // state land on the user-facing jobs row; webhook fires on terminal states.
 import type pg from 'pg'
 import { getPool } from '@semaje/db'
 import { JobInput } from '@semaje/schemas'
 import { getStorage } from '../../storage/src/index.ts'
-import { whisperTranscribe } from '../../whisper/client/index.ts'
+import { sttTranscribe } from '../../stt/client/index.ts'
 import { needsLlm, renderPlainTranscript, buildTranscriptContext } from '../../pipeline/src/index.ts'
 import { runWithFallback } from '../../llm/src/index.ts'
 import { runMeetingWithFallback } from '../../llm/src/structured.ts'
@@ -49,31 +49,39 @@ export async function processJob(jobId: string, pool: pg.Pool = getPool()): Prom
     const audio = await storage.get(blobRow.storage_key)
     await pool.query(`UPDATE jobs SET progress = 20 WHERE id = $1`, [jobId])
 
-    // 2. Whisper STT
+    // 2. Speech-to-text (engine chosen per language by the STT service)
     const sttStartedAt = performance.now()
-    let whisper = await whisperTranscribe(
+    const engine = String(input.options.engine || 'auto')
+    let stt = await sttTranscribe(
       audio, blobRow.storage_key.split('/').pop() || 'audio.bin', blobRow.mime_type,
       {
         language: input.language,
         diarize: input.task === 'diarization' || input.options.speakerLabels === true,
+        engine: engine === 'whisper' || engine === 'omnilingual' ? engine : 'auto',
+        enhance: input.options.enhance === true,
+        requestId: `job-${jobId}`,
       },
     )
     const glossaryTerms = (await pool.query(
       `SELECT term, replacement FROM glossary_terms WHERE org_id = $1 ORDER BY length(term) DESC`,
       [job.org_id],
     )).rows
-    const glossaryResult = applyGlossary(whisper, glossaryTerms)
-    whisper = input.options.polish ? cleanupPunctuation(glossaryResult) : glossaryResult
-    const qualityMeta = summarizeQuality(whisper, glossaryResult.glossaryMatches)
+    const glossaryResult = applyGlossary(stt, glossaryTerms)
+    stt = input.options.polish ? cleanupPunctuation(glossaryResult) : glossaryResult
+    const qualityMeta = summarizeQuality(stt, glossaryResult.glossaryMatches)
     const runtimeSec = (performance.now() - sttStartedAt) / 1000
     const processingMeta: Record<string, unknown> = {
-      backend: whisper.backend,
-      model: whisper.model,
-      language: whisper.language,
-      durationSec: whisper.duration,
+      backend: stt.backend,
+      engine: stt.engine ?? 'whisper',
+      model: stt.model,
+      language: stt.language,
+      languageCode: stt.languageCode ?? null,
+      routing: stt.routing ?? null,
+      audio: stt.audio ?? null,
+      durationSec: stt.duration,
       runtimeSec: Number(runtimeSec.toFixed(3)),
-      realtimeFactor: Number((runtimeSec / Math.max(whisper.duration, 0.001)).toFixed(3)),
-      device: process.env.WHISPER_DEVICE || 'auto',
+      realtimeFactor: Number((runtimeSec / Math.max(stt.duration, 0.001)).toFixed(3)),
+      device: process.env.STT_DEVICE || process.env.WHISPER_DEVICE || 'auto',
       queueLatencySec: Number(queueLatencySec.toFixed(3)),
     }
     await pool.query(
@@ -85,19 +93,19 @@ export async function processJob(jobId: string, pool: pg.Pool = getPool()): Prom
     let text: string
     let result: unknown = null
     if (!needsLlm(input.task, input.options)) {
-      text = renderPlainTranscript(whisper, input.options)
+      text = renderPlainTranscript(stt, input.options)
     } else {
-      const ctx = buildTranscriptContext(input.task, whisper)
+      const ctx = buildTranscriptContext(input.task, stt)
       const config = await getWorkspaceLlmConfig(job.org_id, pool)
       if (input.task === 'meeting') {
         const enriched = await runMeetingWithFallback(config, ctx, config.preset)
-        text = whisper.text
+        text = stt.text
         result = enriched.result
         processingMeta.llm = { ...enriched.meta, fallbackUsed: enriched.fallbackUsed }
       } else {
         const prompt = buildPrompt(input.task, input.options)
         const generated = await runWithFallback(config, prompt, ctx)
-        text = input.task === 'transcription' ? generated.text : whisper.text
+        text = input.task === 'transcription' ? generated.text : stt.text
         result = input.task === 'transcription' ? null : generated.text
         processingMeta.llm = { ...generated.meta, fallbackUsed: generated.fallbackUsed }
       }
@@ -112,13 +120,13 @@ export async function processJob(jobId: string, pool: pg.Pool = getPool()): Prom
       title: input.title,
       source: input.source,
       task: input.task,
-      language: whisper.language,
-      durationSec: whisper.duration,
+      language: stt.languageCode || stt.language,
+      durationSec: stt.duration,
       text,
-      segments: whisper.segments,
+      segments: stt.segments,
       result,
       audioBlobId: input.audioBlobId,
-      speakerLabels: speakerLabels(whisper.segments),
+      speakerLabels: speakerLabels(stt.segments),
       qualityMeta,
     }, pool)
     await pool.query(
@@ -144,7 +152,7 @@ export async function processJob(jobId: string, pool: pg.Pool = getPool()): Prom
     const done = await markJob(jobId, 'running', 'succeeded',
       { transcript_id: transcript.id, progress: 100 }, pool)
     if (done) {
-      logInfo('job.succeeded', { jobId, orgId: job.org_id, transcriptId: transcript.id, model: whisper.model, runtimeSec: processingMeta.runtimeSec, realtimeFactor: processingMeta.realtimeFactor })
+      logInfo('job.succeeded', { jobId, orgId: job.org_id, transcriptId: transcript.id, model: stt.model, runtimeSec: processingMeta.runtimeSec, realtimeFactor: processingMeta.realtimeFactor })
       await notifyWebhook(done)
       try {
         await emitIntegrationEvent(principal, 'job.succeeded', {

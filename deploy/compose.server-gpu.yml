@@ -1,18 +1,21 @@
 services:
-  whisper:
+  stt:
     build:
       context: .
-      dockerfile: services/whisper/Dockerfile.cuda
+      dockerfile: services/stt/Dockerfile.cuda
     environment:
-      WHISPER_DEVICE: cuda
-      WHISPER_COMPUTE_TYPE: float16
-      WHISPER_MODEL: ${WHISPER_MODEL:-large-v3}
+      STT_DEVICE: cuda
+      STT_COMPUTE_TYPE: float16
+      STT_OMNILINGUAL_DEVICE: cuda
+      STT_WHISPER_MODEL: ${STT_WHISPER_MODEL:-large-v3}
+      STT_OMNILINGUAL_MODEL: ${STT_OMNILINGUAL_MODEL:-omniASR_LLM_3B_v2}
+      STT_MAX_CONCURRENCY: ${STT_MAX_CONCURRENCY:-2}
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              count: 1
               capabilities: [gpu]
 
   ollama:

@@ -1,30 +1,33 @@
 # semaje — Setup Guide
 
-Transcription platform: **local Whisper** does all speech-to-text, a **swappable
-LLM** (local Ollama by default, Gemini optional) handles the 15 language
-tasks over the transcript, and everything lands in a **persistent, searchable
-library** with sharing, exports, async jobs for big files, and a realtime
-WebSocket for dictation. A browser extension dictates into any text box.
+Open-source speech platform: **Whisper + Omnilingual ASR** do speech-to-text in
+1,600+ languages, **Piper / MMS-TTS** do text-to-speech, a **local open LLM**
+(Ollama or llama.cpp) handles the 15 language tasks over the transcript, and
+everything lands in a **persistent, searchable library** with sharing, exports,
+async jobs for long recordings, and a realtime WebSocket for dictation. The
+browser extension brings dictation, live captions, and read-aloud to any page.
 
 ## Architecture
 
 ```
-                       ┌─ services/whisper (STT, :8011, Python)
+                       ┌─ services/stt (Whisper + Omnilingual ASR, :8011, Python)
+                       ├─ services/tts (Piper | MMS-TTS, :8012, Python)
 web app / extension ─▶ services/api (:3001, HTTP + /ws)
-                       ├─ services/realtime (WS windows → whisper)
+                       ├─ services/realtime (WS windows → stt)
                        ├─ services/jobs (pg-boss queue + worker)
-                       │    └─ storage → whisper → pipeline → llm → transcripts
+                       │    └─ storage → stt → pipeline → llm → transcripts
                        ├─ services/transcripts (Postgres FTS library, shares)
-                       ├─ services/auth (single-user | local-db)
+                       ├─ services/auth (single-user | local-db | oidc)
                        ├─ services/storage (fs | s3/MinIO)
-                       └─ services/llm (claude-local | gemini)
+                       └─ services/llm (ollama | llama-cpp | claude-local)
+      packages/languages: shared registry (1,693 languages) used by stt, tts, api
 ```
 
 Deployment mode is **adapter-driven** — the same codebase runs:
 
 | Mode | AUTH_ADAPTER | STORAGE_ADAPTER | Stack |
 |---|---|---|---|
-| Single user (default) | `single-user` | `fs` | postgres + whisper + api/worker |
+| Single user (default) | `single-user` | `fs` | postgres + stt + tts + api/worker |
 | Small team | `local-db` | `fs` or `s3` | + accounts/login |
 | Cloud (Phase 3) | `oidc` | `s3` | + SSO, GPU pool |
 
@@ -44,28 +47,40 @@ needed.
 
 | Profile | Recommended hardware | Defaults | Command |
 |---|---|---|---|
-| `cpu` | 4 cores, 8 GB RAM, 10 GB disk | Whisper `base` int8, one worker | `deploy/semaje cpu up` |
-| `workstation-gpu` | NVIDIA 8+ GB VRAM, 16 GB RAM | Whisper `medium` fp16, two jobs | `deploy/semaje workstation-gpu up` |
-| `server-gpu` | NVIDIA 16+ GB VRAM, 32 GB RAM | Whisper `large-v3` fp16, two workers | `deploy/semaje server-gpu up` |
+| `cpu` | 4 cores, 8 GB RAM, 15 GB disk | Whisper `base` int8 + Omnilingual CTC-300M, one worker | `deploy/semaje cpu up` |
+| `workstation-gpu` | NVIDIA 8+ GB VRAM, 16 GB RAM | Whisper `large-v3-turbo` + Omnilingual LLM-1B, two jobs | `deploy/semaje workstation-gpu up` |
+| `server-gpu` | NVIDIA 16+ GB VRAM, 32 GB RAM | Whisper `large-v3` + Omnilingual LLM-3B, two workers | `deploy/semaje server-gpu up` |
 
 GPU profiles require the NVIDIA driver and NVIDIA Container Toolkit. Override
-`WHISPER_MODEL`, `WORKER_CONCURRENCY`, and `WORKER_REPLICAS` in `.env` to fit
-your machine. Use `deploy/semaje <profile> status|logs|down` for operations.
+`STT_WHISPER_MODEL`, `STT_OMNILINGUAL_MODEL`, `WORKER_CONCURRENCY`, and
+`WORKER_REPLICAS` in `.env` to fit your machine. The first start downloads the
+speech models; `stt` reports healthy only once they are loaded, so no request
+ever waits on a download. Set `STT_OMNILINGUAL_BUILD=0` for a Whisper-only image
+(about 1.5 GB smaller) if you only need its 99 languages.
+
+> **Apple Silicon / ARM hosts.** Omnilingual ASR's runtime has prebuilt Linux
+> wheels for x86-64 only, so a Docker image built on an ARM machine is
+> Whisper-only. On a Mac, run the speech services natively (`npm run setup`,
+> `npm run dev:stt`) to get both engines, or build with
+> `DOCKER_DEFAULT_PLATFORM=linux/amd64`. Production x86-64 servers get both
+> engines in Docker with no extra steps. Use `deploy/semaje <profile> status|logs|down` for operations.
 
 ## Local development (no Docker for the app)
 
-Prereqs: Node 18+, Python 3.11+, ffmpeg, and Postgres running with a `semaje`
+Prereqs: Node 22+, Python 3.11, ffmpeg, libsndfile (`brew install ffmpeg
+libsndfile` / `apt install ffmpeg libsndfile1`), and Postgres with a `semaje`
 database (`docker compose up -d postgres` works).
 
 ```bash
-# 1. Whisper STT service (one-time)
-services/whisper/setup.sh
+# 1. Speech services (one-time): venvs + models in ~/.local/share/semaje
+#    (kept out of the repo: iCloud/OneDrive eviction breaks venvs)
+npm run setup
 
 # 2. App deps + DB schema
 npm install
 npm run migrate
 
-# 3. Everything at once: whisper (:8011) + api (:3001) + web (:5173)
+# 3. Everything at once: stt (:8011) + tts (:8012) + api (:3001) + web (:5173)
 npm run dev
 
 # 4. The job worker (needed for >20MB async uploads), separate terminal:
@@ -74,14 +89,25 @@ npm run worker
 
 ## Browser extension
 
-See `services/extension/README.md` — load unpacked from `services/extension/`,
-point it at your server, dictate with `Cmd/Ctrl+Shift+1`.
+`npm run ext:build`, then follow [docs/browser-extension.md](docs/browser-extension.md)
+for Chrome, Edge, Brave, Opera, Vivaldi, Arc, Firefox, Safari, store publishing,
+and enterprise force-install.
+
+## Languages, speech output, and licenses
+
+See [docs/languages.md](docs/languages.md) for routing, measured accuracy, and
+model choices. Text-to-speech uses Piper by default.
+`TTS_ALLOW_NONCOMMERCIAL=true` adds MMS-TTS for about 1,100 more languages under
+its CC-BY-NC-4.0 license (install with `SEMAJE_MMS=1 services/tts/setup.sh` or
+build with `TTS_MMS_BUILD=1`). For production, set `STT_API_TOKEN` and
+`TTS_API_TOKEN` so only the API and worker can reach the speech services.
 
 ## LLM adapter
 
-`LLM_ADAPTER=ollama` (default) calls the Ollama service on your own machine.
+`LLM_ADAPTER=ollama` (default) runs open-weight models through Ollama on your
+own machine. `LLM_ADAPTER=llama-cpp` uses a llama.cpp server.
 `LLM_ADAPTER=claude-local` shells out to a locally installed Claude Code CLI.
-`LLM_ADAPTER=gemini` is an opt-in cloud adapter and requires `GEMINI_API_KEY`.
+There is no hosted-API adapter.
 The local deployment profile pulls `OLLAMA_MODEL` automatically. A llama.cpp
 OpenAI-compatible server is also supported: place a GGUF file in the
 `llamamodels` volume and run compose with `--profile llama-cpp`.
@@ -146,12 +172,16 @@ an older release.
 ## Tests & evals
 
 ```bash
-npm test               # gate tests, all TS services (fast, free, no network)
-npm run test:whisper   # Python STT service gate tests
-npm run typecheck      # strict TS across services
-npm run eval:whisper   # STT accuracy (WER)
-npm run eval:llm       # 15 task rubrics × adapter(s)  [EVAL_ADAPTERS=claude-local,gemini]
-npm run eval:realtime  # streaming WER vs batch
+npm test                    # gate tests: all TS services + extension (fast, free, no network)
+npm run test:stt            # STT + language registry, incl. real ffmpeg format matrix
+npm run test:tts            # TTS
+npm run typecheck           # strict TS across services
+npm run test:extension:e2e  # built extension in real Chrome + Firefox
+npm run eval:fleurs         # real-speech WER/CER per language (FLEURS) vs thresholds
+npm run eval:tts            # TTS → STT round-trip intelligibility
+npm run eval:stt            # English smoke eval (macOS `say`)
+npm run eval:llm            # 15 task rubrics × adapter(s)  [EVAL_ADAPTERS=ollama,claude-local]
+npm run eval:realtime       # streaming WER vs batch
 ```
 
 ## Project structure
@@ -169,10 +199,12 @@ services/ingest/        watched-folder intake through the shared ingest API
 services/desktop/       optional ffmpeg microphone/system-audio capture helper
 services/integrations/  default-off outbound adapters, signed events, delivery ledger
 services/realtime/      WebSocket streaming STT (/ws)
-services/llm/           claude-local | gemini adapters + task evals
-services/pipeline/      pure Whisper↔LLM routing
-services/whisper/       STT engine (Python, faster-whisper | whisper.cpp)
-services/extension/     MV3 browser extension (dictation + library panel)
+services/llm/           ollama | llama-cpp | claude-local adapters + task evals
+services/pipeline/      pure STT↔LLM routing
+services/stt/           speech-to-text (Python: Whisper + Omnilingual ASR, any-format intake)
+services/tts/           text-to-speech (Python: Piper, MMS-TTS, custom voices)
+packages/languages/     shared language registry (1,693 languages)
+services/extension/     cross-browser MV3 extension
 src/                    React web app (transcribe, library, shares, settings)
 ```
 
@@ -180,9 +212,12 @@ src/                    React web app (transcribe, library, shares, settings)
 
 | Issue | Fix |
 |---|---|
-| `whisper.reachable: false` in /api/health | Start it: `npm run dev:whisper` (or the compose `whisper` service). |
+| `stt.reachable: false` in /api/health | Start it: `npm run dev:stt` (or the compose `stt` service; first start downloads models). |
+| `tts.reachable: false` | `npm run dev:tts` (or compose `tts`). |
+| Omnilingual import error (`_torch_library_impl`, `pyarrow requires NumPy 2`) | Install with `services/stt/setup.sh`; it pins `torchaudio==2.8.0` and `pyarrow<21`. |
+| `fairseq2 requires libsndfile` | `brew install libsndfile` / `apt install libsndfile1`. |
 | Jobs stay `queued` | The worker isn't running: `npm run worker` (or compose `worker`). |
-| `claude-local failed to start` | Install Claude Code CLI or set `LLM_ADAPTER=gemini`. |
+| `claude-local failed to start` | Install the Claude Code CLI, or use `LLM_ADAPTER=ollama`. |
 | 401s in local-db mode | Register at `/login`, or create an API key at `/settings/api-keys`. |
-| Extension can't connect | Popup → set Server URL; check CORS_ORIGINS; API key valid? |
-| macOS: hangs / vanishing .venv | Project on iCloud Drive — keep it downloaded or move it off iCloud. |
+| Extension can't connect | Extension settings → Save & test; see [docs/browser-extension.md](docs/browser-extension.md#6-troubleshooting). |
+| macOS: hangs / vanishing .venv | Project on iCloud Drive. `setup.sh` already keeps venvs/models in `~/.local/share/semaje`; keep `node_modules` downloaded or move the repo off iCloud. |

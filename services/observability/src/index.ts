@@ -5,7 +5,7 @@ import { getPool } from '@semaje/db'
 
 const number = (value: unknown) => Number(value || 0)
 
-export async function readWerReport(path = process.env.OBSERVABILITY_WER_REPORT || 'data/observability/whisper-eval.json') {
+export async function readWerReport(path = process.env.OBSERVABILITY_WER_REPORT || 'data/observability/stt-eval.json') {
   try { return JSON.parse(await readFile(path, 'utf8')) }
   catch { return null }
 }

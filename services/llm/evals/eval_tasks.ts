@@ -6,7 +6,7 @@
 // Usage:
 //   npm run eval:llm                       # adapters from EVAL_ADAPTERS
 //   EVAL_ADAPTERS=claude-local npm run eval:llm
-//   EVAL_ADAPTERS=claude-local,gemini npm run eval:llm
+//   EVAL_ADAPTERS=ollama,claude-local npm run eval:llm
 // ═══════════════════════════════════════════════════════════════
 import { getLlm, _setLlm } from '../src/index.ts'
 import { buildTranscriptContext } from '../../pipeline/src/index.ts'

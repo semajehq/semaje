@@ -1,7 +1,7 @@
-site_name: semaje - AI-Powered Audio Transcription Platform
-site_url: https://markkimotho.github.io/transcribe-ai/
-repo_url: https://github.com/Markkimotho/transcribe-ai
-repo_name: Markkimotho/transcribe-ai
+site_name: semaje · open-source speech for every language
+site_url: https://markkimotho.github.io/semaje/
+repo_url: https://github.com/Markkimotho/semaje
+repo_name: Markkimotho/semaje
 docs_dir: docs
 
 theme:
@@ -20,6 +20,8 @@ theme:
 
 nav:
   - Home: index.md
+  - Languages and accuracy: languages.md
+  - Browser extension: browser-extension.md
   - Low-cost operations: low-cost-operations.md
   - Quality evaluations: evaluations.md
   - Backup and restore: backup-restore.md

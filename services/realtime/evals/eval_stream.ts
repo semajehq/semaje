@@ -7,7 +7,7 @@ import { readFileSync, mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { RealtimeSession } from '../src/session.ts'
-import { whisperTranscribe } from '../../whisper/client/index.ts'
+import { sttTranscribe } from '../../stt/client/index.ts'
 import type { RTServerMessage } from '@semaje/schemas'
 
 const REF = 'The quick brown fox jumps over the lazy dog and then takes a well deserved rest in the shade.'
@@ -41,7 +41,7 @@ const audio = readFileSync(wav)
 const sent: RTServerMessage[] = []
 const session = new RealtimeSession(
   P,
-  (buf, _mime, lang) => whisperTranscribe(buf, 'win.wav', 'audio/wav', { language: lang }),
+  (buf, _mime, lang) => sttTranscribe(buf, 'win.wav', 'audio/wav', { language: lang }),
   null,
   { send: m => sent.push(m) },
   1_000_000, // we drive windows manually

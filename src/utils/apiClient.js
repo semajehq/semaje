@@ -1,5 +1,5 @@
 // semaje platform API client — token custody + library/jobs/share calls.
-// Sits beside transcribeApi.js (which keeps the legacy sync endpoints).
+// The single HTTP client for the web app.
 
 const ACCESS_KEY = 'semaje_access_token'
 const REFRESH_KEY = 'semaje_refresh_token'
@@ -282,6 +282,24 @@ export async function pollJob(id, { intervalMs = 2000, onProgress } = {}) {
 }
 
 // ── API keys ─────────────────────────────────────────────────
+// ── Languages + speech synthesis ────────────────────────────
+let languagesCache = null
+export async function listLanguages() {
+  if (!languagesCache) {
+    languagesCache = json(await api('/api/languages')).catch(err => { languagesCache = null; throw err })
+  }
+  return languagesCache
+}
+
+export async function synthesizeSpeech({ text, language, voice, format = 'mp3', speed = 1 }) {
+  const res = await api('/api/tts', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, language, voice, format, speed }),
+  })
+  if (!res.ok) await json(res)
+  return { blob: await res.blob(), voice: res.headers.get('x-semaje-voice'), engine: res.headers.get('x-semaje-engine') }
+}
+
 export async function listApiKeys() { return (await json(await api('/api/api-keys'))).apiKeys }
 export async function createApiKey(name, scopes = ['transcribe', 'read']) {
   return json(await api('/api/api-keys', {

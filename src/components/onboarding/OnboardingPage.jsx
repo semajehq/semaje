@@ -18,7 +18,7 @@ const sources = [
 ]
 
 export default function OnboardingPage() {
-  const { onboarding, completeOnboarding, account, apiMode, toggleApiMode } = useContext(AppContext)
+  const { onboarding, completeOnboarding, account } = useContext(AppContext)
   const navigate = useNavigate()
   const [workspaceName, setWorkspaceName] = useState(onboarding.workspaceName || account.workspaceName)
   const [primaryUse, setPrimaryUse] = useState(onboarding.primaryUse || 'meetings')
@@ -129,14 +129,12 @@ export default function OnboardingPage() {
             <div className="field-label">Runtime</div>
             <div className="runtime-card">
               <div>
-                <div className="text-sm font-semibold">{apiMode === 'proxy' ? 'Server mode' : 'Direct mode'}</div>
+                <div className="text-sm font-semibold">Fully local, fully open source</div>
                 <p className="text-xs muted mt-1">
-                  {apiMode === 'proxy'
-                    ? 'Recommended: credentials stay on the backend and platform realtime is enabled.'
-                    : 'Fallback: use a browser-held task key for formatting.'}
+                  Speech recognition (Whisper + Omnilingual ASR, 1,600+ languages) and text-to-speech
+                  (Piper) run on your own server. No audio leaves your infrastructure.
                 </p>
               </div>
-              <button type="button" className="secondary-button" onClick={toggleApiMode}>Switch</button>
             </div>
           </div>
 

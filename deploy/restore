@@ -23,8 +23,8 @@ docker compose exec -T postgres pg_restore -U semaje -d semaje --clean --if-exis
 docker compose run --rm --no-deps -T api sh -c \
   'rm -rf /data/blobs /data/exports /data/logs /data/integrations /data/observability; mkdir -p /data; tar -C /data -xzf -' \
   < "$archive/app-data.tar.gz"
-docker compose run --rm --no-deps -T whisper sh -c \
-  'rm -rf /models/*; tar -C /models -xzf -' < "$archive/whisper-models.tar.gz"
+docker compose run --rm --no-deps -T stt sh -c \
+  'rm -rf /models/*; tar -C /models -xzf -' < "$archive/stt-models.tar.gz"
 
 if [[ -f "$archive/ollama-models.tar.gz" ]]; then
   docker compose --profile local-llm run --rm --no-deps -T ollama sh -c \

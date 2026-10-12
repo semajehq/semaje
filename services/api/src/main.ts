@@ -6,7 +6,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createApp } from './app.ts'
 import { attachRealtime } from '../../realtime/src/ws-server.ts'
-import { whisperHealth } from '../../whisper/client/index.ts'
+import { sttHealth } from '../../stt/client/index.ts'
 import { ensureSeed } from '../../auth/src/index.ts'
 import { logInfo, logWarn } from '../../observability/src/logger.ts'
 
@@ -33,9 +33,9 @@ server.listen(PORT, async () => {
   } else {
     logInfo('auth.ready', { adapter: process.env.AUTH_ADAPTER })
   }
-  const w = await whisperHealth()
+  const w = await sttHealth()
   logInfo('dependencies.ready', {
-    whisper: (w as { backend?: string }).backend || null,
+    stt: (w as { backend?: string }).backend || null,
     llm: process.env.LLM_ADAPTER || 'claude-local', storage: process.env.STORAGE_ADAPTER || 'fs',
   })
 })

@@ -6,9 +6,7 @@ RUN npm ci --ignore-scripts
 
 FROM dependencies AS build
 ARG VITE_AUTH_MODE=single-user
-ARG VITE_API_MODE=proxy
-ENV VITE_AUTH_MODE=$VITE_AUTH_MODE \
-    VITE_API_MODE=$VITE_API_MODE
+ENV VITE_AUTH_MODE=$VITE_AUTH_MODE
 COPY . .
 RUN npm run build
 

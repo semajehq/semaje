@@ -67,7 +67,6 @@ export async function runMeetingWithFallback(
   const names = [primary.adapter, ...fallbackNames.filter(name => name !== primary.adapter)]
   const errors: string[] = []
   for (const name of names) {
-    if (process.env.STRICT_LOCAL_MODE === 'true' && name === 'gemini') continue
     const adapter = createLlm(name, name === primary.adapter ? primary : {})
     try {
       const result = await runMeetingIntelligence(adapter, transcriptContext, preset)

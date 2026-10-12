@@ -1,6 +1,6 @@
 import type pg from 'pg'
 import { getPool } from '@semaje/db'
-import type { Principal, WhisperSegment } from '@semaje/schemas'
+import type { Principal, SttSegment } from '@semaje/schemas'
 import { embedText, type EmbeddingConfig } from './embeddings.ts'
 
 export interface SearchFilters {
@@ -39,7 +39,7 @@ export function buildSearchQuery(orgId: string, filters: SearchFilters) {
   }
 }
 
-export function locateTimestamp(segments: WhisperSegment[] | null, query: string) {
+export function locateTimestamp(segments: SttSegment[] | null, query: string) {
   if (!segments?.length) return { startSec: null, excerpt: '' }
   const words = query.toLowerCase().split(/\W+/).filter(word => word.length > 2)
   const match = segments.find(segment => words.some(word => segment.text.toLowerCase().includes(word))) || segments[0]

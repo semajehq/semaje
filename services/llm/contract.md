@@ -14,12 +14,12 @@ LlmAdapter.run(taskPrompt, transcriptContext): Promise<string>
 |---|---|---|
 | `ollama` (default) | Ollama HTTP API | Fully local, retry x3, model and endpoint configurable per workspace. |
 | `llama-cpp` | llama.cpp OpenAI-compatible server | Fully local GGUF runtime. |
-| `claude-local` | Local Claude Code CLI (`claude -p`, stdin) | Optional local CLI adapter. |
-| `gemini` | Gemini HTTP API | Fallback. Needs `GEMINI_API_KEY`. 429 retry ×3. |
+| `claude-local` | Local Claude Code CLI (`claude -p`, stdin) | Optional; routes through the operator's own Claude Code install. |
 
-`claude-local` becomes the active default only after `npm run eval:llm` passes all
-15 task rubrics for it (see `evals/eval_tasks.ts`). Until then deployments pin
-`LLM_ADAPTER=gemini`. Strict local mode never selects it as a fallback.
+There is no hosted-API adapter. `ollama` and `llama-cpp` run open-weight models
+(Qwen, Llama, Mistral, Gemma) on your own hardware, which keeps the whole
+platform open source end to end. A gate test asserts no hosted adapter is
+registered.
 
 Meeting enrichment is validated as structured JSON containing summary,
 decisions, action items with owners/dates, risks, follow-ups, and chapters.

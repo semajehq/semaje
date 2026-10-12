@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   gate:
     runs-on: ubuntu-latest
@@ -15,32 +19,77 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Rebrand gate — no stray old-brand references
+      - name: Brand + open-source gate (no old brand, no hosted-LLM vendor code)
         run: |
-          # split string so this workflow doesn't match itself
-          BRAND="vox""ail"
-          ! grep -ri "$BRAND" --exclude-dir=node_modules --exclude-dir=dist \
-            --exclude-dir=.venv --exclude-dir=_site --exclude-dir=.git \
-            --exclude-dir=vendor --exclude="*.pdf" . \
-            || (echo "Found leftover old branding" && exit 1)
+          # split strings so this workflow doesn't match itself
+          PATTERN="vox""ail|vox-""ai|transcribe""-ai|transcribe""ai|gem""ini"
+          ! git grep -n -i -E "$PATTERN" -- . ':!package-lock.json' \
+            || (echo "Found old-brand or hosted-LLM references" && exit 1)
       - name: TypeScript typecheck
         run: npm run typecheck
-      - name: Node gate tests
+      - name: Node gate tests (services + extension)
         run: npm test
       - name: Deterministic quality smoke eval
         run: npm run eval:smoke
       - name: Frontend build
         run: npm run build
 
-  whisper:
+  stt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: |
-          python -m venv services/whisper/.venv
-          services/whisper/.venv/bin/pip install -q -r services/whisper/requirements.txt -r services/whisper/requirements-dev.txt
-      - name: Whisper service gate tests
-        run: npm run test:whisper
+          cache: pip
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libsndfile1
+      - run: pip install -r services/stt/requirements.txt -r services/stt/requirements-dev.txt
+      - name: STT + language registry gate tests (real ffmpeg format matrix)
+        run: python -m pytest services/stt/tests packages/languages/tests -q
+
+  tts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: pip install -r services/tts/requirements.txt -r services/tts/requirements-dev.txt
+      - name: TTS gate tests
+        run: python -m pytest services/tts/tests -q
+
+  extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build every browser package (lint + reproducible zips)
+        run: npm run ext:build
+      - name: Mozilla add-on lint
+        run: npx --yes web-ext@8 lint --source-dir services/extension/dist/firefox --self-hosted
+      - name: Real-browser end-to-end (Chrome + Firefox, fake microphone)
+        run: npm run test:extension:e2e
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semaje-extension-packages
+          path: services/extension/dist/*.zip
+
+  images:
+    # x86-64 is the production target: proves the full STT image (Whisper + Omnilingual,
+    # kenlm compiled in the builder stage, fairseq2 from Meta's index) and TTS image build.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build STT image (both engines)
+        run: docker buildx build --load -f services/stt/Dockerfile -t semaje-stt:ci .
+      - name: Omnilingual is importable in the image
+        run: docker run --rm --entrypoint python semaje-stt:ci -c "import omnilingual_asr, faster_whisper; from services.stt.models import omnilingual_available; assert omnilingual_available(); print('both engines installed')"
+      - name: Build TTS image
+        run: docker buildx build --load -f services/tts/Dockerfile -t semaje-tts:ci .

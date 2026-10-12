@@ -1,11 +1,11 @@
 // A realtime session: WS messages in, transcript segments out.
 // Transcription is injected so gate tests never touch Whisper.
-import { RTClientMessage, type RTServerMessage, type Principal, type WhisperResult } from '@semaje/schemas'
+import { RTClientMessage, type RTServerMessage, type Principal, type SttResult } from '@semaje/schemas'
 import { WindowBuffer, WINDOW_MS } from './window-buffer.ts'
 
 export type Transcriber = (
   audio: Buffer, mimeType: string, language?: string,
-) => Promise<Pick<WhisperResult, 'text' | 'duration' | 'language'>>
+) => Promise<Pick<SttResult, 'text' | 'duration' | 'language'>>
 
 export type Persister = (
   principal: Principal,

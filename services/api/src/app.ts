@@ -33,9 +33,10 @@ import {
 import { enqueueTranscribeJob, getJob, listJobs, retryJob } from '../../jobs/src/index.ts'
 import { assertBotTransition, detectMeetingProvider } from '../../meeting-bot/src/index.ts'
 import {
-  whisperHealth, whisperTranscribe, whisperModels, whisperDownloadModel,
-  whisperActivateModel, whisperDeleteModel,
-} from '../../whisper/client/index.ts'
+  sttHealth, sttTranscribe, sttModels, sttDownloadModel,
+  sttActivateModel, sttDeleteModel, sttLanguages, SttError,
+} from '../../stt/client/index.ts'
+import { ttsHealth, ttsSynthesize, ttsVoices, TtsError } from '../../tts/client/index.ts'
 import { needsLlm, renderPlainTranscript, buildTranscriptContext } from '../../pipeline/src/index.ts'
 import { createLlm, runWithFallback } from '../../llm/src/index.ts'
 import { runMeetingWithFallback } from '../../llm/src/structured.ts'
@@ -45,7 +46,6 @@ import {
 import {
   keywordSearch, semanticSearch, indexTranscriptEmbedding, locateTimestamp,
 } from '../../search/src/index.ts'
-import { GeminiAdapter } from '../../llm/src/adapters/gemini.ts'
 import {
   deliverTranscript, emitIntegrationEvent, integrationStatus,
 } from '../../integrations/src/index.ts'
@@ -107,6 +107,14 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
     credentials: true,
   }))
   app.use(express.json({ limit: '2mb' }))
+  // One id per request, echoed back and forwarded to STT/TTS so a single id
+  // traces a request across every service's logs.
+  app.use((req, res, next) => {
+    const incoming = req.header('x-request-id')
+    req.requestId = incoming && /^[\w.-]{1,128}$/.test(incoming) ? incoming : randomUUID()
+    res.setHeader('x-request-id', req.requestId)
+    next()
+  })
 
   const upload = multer({
     dest: process.env.UPLOAD_TMP_DIR || 'uploads/',
@@ -146,14 +154,81 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
 
   // ── Health ─────────────────────────────────────────────────
   app.get('/api/health', async (_req, res) => {
-    const w = await whisperHealth()
+    const [w, t] = await Promise.all([sttHealth(), ttsHealth()])
     res.json({
       ok: true,
       name: 'semaje',
       mode: process.env.AUTH_ADAPTER || 'single-user',
-      whisper: { reachable: !!(w as { backend?: string }).backend, backend: (w as { backend?: string }).backend ?? null },
-      llmAdapter: process.env.LLM_ADAPTER || 'claude-local',
+      stt: { reachable: w.ok === true, backend: w.backend ?? null, engines: w.engines ?? null },
+      tts: { reachable: t.ok === true, allowNoncommercial: t.allowNoncommercial ?? null },
+      llmAdapter: process.env.LLM_ADAPTER || 'ollama',
     })
+  })
+
+  // ── Languages + speech synthesis ───────────────────────────
+  // STT languages enriched with TTS voice coverage. Cached: both lists only
+  // change when an operator installs models.
+  let languagesCache: { at: number; body: unknown } | null = null
+  app.get('/api/languages', requireAuth(), rateLimit(), async (_req, res, next) => {
+    try {
+      if (!languagesCache || Date.now() - languagesCache.at > 5 * 60 * 1000) {
+        const [stt, tts] = await Promise.all([
+          sttLanguages(),
+          ttsVoices().catch(() => ({ voices: [] as Array<Record<string, any>>, allowNoncommercial: false })),
+        ])
+        const voicesByLanguage = new Map<string, Array<Record<string, any>>>()
+        for (const voice of tts.voices) {
+          const list = voicesByLanguage.get(voice.language) || []
+          list.push(voice)
+          voicesByLanguage.set(voice.language, list)
+        }
+        const languages = stt.languages.map((lang: Record<string, any>) => {
+          const voices = voicesByLanguage.get(lang.code) || []
+          return {
+            code: lang.code, name: lang.name, iso1: lang.iso1, whisper: lang.whisper, aliases: lang.aliases,
+            engines: lang.engines, whisperStrong: lang.whisperStrong, translate: lang.translate,
+            tts: { voices: voices.length, engines: [...new Set(voices.map(v => v.engine))] },
+          }
+        })
+        languagesCache = {
+          at: Date.now(),
+          body: {
+            total: stt.total, available: stt.available, ttsNoncommercial: tts.allowNoncommercial,
+            withTts: languages.filter((l: any) => l.tts.voices > 0).length, languages,
+          },
+        }
+      }
+      res.setHeader('Cache-Control', 'private, max-age=300')
+      res.json(languagesCache.body)
+    } catch (e) { next(e) }
+  })
+
+  app.get('/api/tts/voices', requireAuth(), rateLimit(), async (req, res, next) => {
+    try { res.json(await ttsVoices(typeof req.query.language === 'string' ? req.query.language : undefined)) }
+    catch (e) {
+      if (e instanceof TtsError) return res.status(e.status).json({ error: e.message, code: e.code })
+      next(e)
+    }
+  })
+
+  app.post('/api/tts', requireAuth(), requireScope('read'), rateLimit(), async (req, res, next) => {
+    try {
+      const body = req.body || {}
+      if (typeof body.text !== 'string' || !body.text.trim()) {
+        return res.status(400).json({ error: 'text is required', code: 'invalid_text' })
+      }
+      const out = await ttsSynthesize({
+        text: body.text, language: body.language, voice: body.voice,
+        format: body.format, speed: body.speed, requestId: req.requestId,
+      })
+      for (const [key, value] of Object.entries(out.headers)) res.setHeader(key, value)
+      res.setHeader('Content-Type', out.contentType)
+      res.setHeader('Access-Control-Expose-Headers', 'x-semaje-voice, x-semaje-engine, x-semaje-language, x-semaje-license, x-request-id')
+      res.send(out.audio)
+    } catch (e) {
+      if (e instanceof TtsError) return res.status(e.status).json({ error: e.message, code: e.code })
+      next(e)
+    }
   })
 
   app.get('/metrics', async (req, res, next) => {
@@ -269,7 +344,7 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
       if (!['owner', 'admin'].includes(req.principal!.role)) return res.status(403).json({ error: 'Admin access required' })
       const [snapshot, runtime] = await Promise.all([
         getOperationsSnapshot(req.principal!),
-        whisperModels().catch(() => ({ models: [], active: null, hardware: null })),
+        sttModels().catch(() => ({ models: [], active: null, hardware: null })),
       ])
       res.json({ ...snapshot, modelCache: runtime })
     } catch (error) { next(error) }
@@ -351,7 +426,7 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
   app.get('/api/admin/stt', requireAuth(), requireScope('admin'), rateLimit(), async (req, res, next) => {
     try {
       if (!['owner', 'admin'].includes(req.principal!.role)) return res.status(403).json({ error: 'Admin access required' })
-      const runtime = await whisperModels()
+      const runtime = await sttModels()
       res.json({
         ...runtime,
         queue: {
@@ -365,21 +440,21 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
   app.post('/api/admin/stt/models/download', requireAuth(), requireScope('admin'), rateLimit(), async (req, res, next) => {
     try {
       if (!['owner', 'admin'].includes(req.principal!.role)) return res.status(403).json({ error: 'Admin access required' })
-      res.json(await whisperDownloadModel(String(req.body?.backend || ''), String(req.body?.model || '')))
+      res.json(await sttDownloadModel(String(req.body?.backend || ''), String(req.body?.model || '')))
     } catch (e) { next(e) }
   })
 
   app.post('/api/admin/stt/models/activate', requireAuth(), requireScope('admin'), rateLimit(), async (req, res, next) => {
     try {
       if (!['owner', 'admin'].includes(req.principal!.role)) return res.status(403).json({ error: 'Admin access required' })
-      res.json(await whisperActivateModel(String(req.body?.backend || ''), String(req.body?.model || '')))
+      res.json(await sttActivateModel(String(req.body?.backend || ''), String(req.body?.model || '')))
     } catch (e) { next(e) }
   })
 
   app.delete('/api/admin/stt/models/:backend/:model', requireAuth(), requireScope('admin'), rateLimit(), async (req, res, next) => {
     try {
       if (!['owner', 'admin'].includes(req.principal!.role)) return res.status(403).json({ error: 'Admin access required' })
-      res.json(await whisperDeleteModel(routeParam(req, 'backend'), routeParam(req, 'model')))
+      res.json(await sttDeleteModel(routeParam(req, 'backend'), routeParam(req, 'model')))
     } catch (e) { next(e) }
   })
 
@@ -1016,7 +1091,7 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
   // ── Legacy sync transcribe (small files, no persistence) ───
   // Kept for the existing web UI + BYO-key mode. Auth applies in
   // local-db mode; single-user mode works credential-free as before.
-  const syncTranscribe = async (req: express.Request, res: express.Response, geminiKey?: string) => {
+  const syncTranscribe = async (req: express.Request, res: express.Response) => {
     const filePath = req.file?.path
     try {
       if (!req.file) return res.status(400).json({ error: 'No audio file provided.' })
@@ -1024,60 +1099,64 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
       let options: Record<string, unknown> = {}
       try { options = JSON.parse(req.body.options || '{}') } catch { /* default */ }
 
-      let whisper = await whisperTranscribe(
+      const engine = String(req.body.engine || options.engine || 'auto')
+      let stt = await sttTranscribe(
         await readFile(filePath!), req.file.originalname || 'audio.bin',
         req.file.mimetype, {
           language: req.body.language || undefined,
           diarize: task === 'diarization' || options.speakerLabels === true,
+          engine: engine === 'whisper' || engine === 'omnilingual' ? engine : 'auto',
+          channel: req.body.channel || undefined,
+          enhance: req.body.enhance === 'true' || options.enhance === true,
+          requestId: req.requestId,
         },
       )
       const glossaryTerms = (await getPool().query(
         `SELECT term, replacement FROM glossary_terms WHERE org_id = $1 ORDER BY length(term) DESC`,
         [req.principal!.orgId],
       )).rows
-      const glossaryResult = applyGlossary(whisper, glossaryTerms)
-      whisper = options.polish ? cleanupPunctuation(glossaryResult) : glossaryResult
-      const qualityMeta = summarizeQuality(whisper, glossaryResult.glossaryMatches)
+      const glossaryResult = applyGlossary(stt, glossaryTerms)
+      stt = options.polish ? cleanupPunctuation(glossaryResult) : glossaryResult
+      const qualityMeta = summarizeQuality(stt, glossaryResult.glossaryMatches)
 
       let transcript: string
       let enrichedResult: unknown = null
       let llmMeta: unknown = null
       if (!needsLlm(task, options)) {
-        transcript = renderPlainTranscript(whisper, options)
+        transcript = renderPlainTranscript(stt, options)
       } else {
-        const ctx = buildTranscriptContext(task, whisper)
-        if (geminiKey) {
+        const ctx = buildTranscriptContext(task, stt)
+        const config = await getWorkspaceLlmConfig(req.principal!.orgId)
+        if (task === 'meeting') {
+          const enriched = await runMeetingWithFallback(config, ctx, config.preset)
+          transcript = stt.text
+          enrichedResult = enriched.result
+          llmMeta = { ...enriched.meta, fallbackUsed: enriched.fallbackUsed }
+        } else {
           const prompt = String(req.body.prompt || '')
           if (!prompt) return res.status(400).json({ error: 'No task prompt provided.' })
-          const llm = new GeminiAdapter(geminiKey)
-          transcript = await llm.run(prompt, ctx)
-        } else {
-          const config = await getWorkspaceLlmConfig(req.principal!.orgId)
-          if (task === 'meeting') {
-            const enriched = await runMeetingWithFallback(config, ctx, config.preset)
-            transcript = whisper.text
-            enrichedResult = enriched.result
-            llmMeta = { ...enriched.meta, fallbackUsed: enriched.fallbackUsed }
-          } else {
-            const prompt = String(req.body.prompt || '')
-            if (!prompt) return res.status(400).json({ error: 'No task prompt provided.' })
-            const generated = await runWithFallback(config, prompt, ctx)
-            transcript = generated.text
-            enrichedResult = task === 'transcription' ? null : generated.text
-            llmMeta = { ...generated.meta, fallbackUsed: generated.fallbackUsed }
-          }
+          const generated = await runWithFallback(config, prompt, ctx)
+          transcript = generated.text
+          enrichedResult = task === 'transcription' ? null : generated.text
+          llmMeta = { ...generated.meta, fallbackUsed: generated.fallbackUsed }
         }
       }
       res.json({
         transcript,
-        whisper: { language: whisper.language, duration: whisper.duration, segments: whisper.segments },
+        stt: {
+          language: stt.language, languageCode: stt.languageCode ?? null, languageName: stt.languageName ?? null,
+          duration: stt.duration, segments: stt.segments, engine: stt.engine ?? null, model: stt.model,
+          routing: stt.routing ?? null, audio: stt.audio ?? null,
+        },
         qualityMeta,
-        speakerLabels: speakerLabels(whisper.segments),
+        speakerLabels: speakerLabels(stt.segments),
         result: enrichedResult,
         processingMeta: llmMeta ? { llm: llmMeta } : {},
       })
     } catch (e: any) {
-      res.status(500).json({ error: e.message || 'Transcription failed.' })
+      // STT 4xx (bad audio, unknown language, too long) are the caller's to fix.
+      const status = e instanceof SttError ? (e.status < 500 || e.status === 503 ? e.status : 502) : 500
+      res.status(status).json({ error: e.message || 'Transcription failed.', code: e.code, requestId: req.requestId })
     } finally {
       if (filePath) unlink(filePath).catch(() => {})
     }
@@ -1085,8 +1164,6 @@ export function createApp(opts: { enableJobs?: boolean } = {}): Express {
 
   app.post('/api/transcribe', requireAuth(), requireScope('transcribe'), rateLimit(), upload.single('audio'),
     (req, res) => syncTranscribe(req, res))
-  app.post('/api/transcribe-direct', requireAuth(), requireScope('transcribe'), rateLimit(), upload.single('audio'),
-    (req, res) => syncTranscribe(req, res, String(req.body.apiKey || '')))
 
   app.use(errorHandler())
   return app

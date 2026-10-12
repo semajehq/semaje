@@ -15,7 +15,7 @@ const steps = [
   {
     icon: Mic,
     title: 'Speech pipeline',
-    description: 'Local Whisper handles speech-to-text, then the active task adapter formats, summarizes, translates, or structures the result.',
+    description: 'Open-source speech recognition (Whisper + Omnilingual ASR, 1,600+ languages) runs on your server, then the local task model formats, summarizes, translates, or structures the result.',
   },
   {
     icon: FileText,

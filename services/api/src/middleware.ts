@@ -8,7 +8,7 @@ import { logError } from '../../observability/src/logger.ts'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Express { interface Request { principal?: Principal } }
+  namespace Express { interface Request { principal?: Principal; requestId?: string } }
 }
 
 export function requireAuth() {

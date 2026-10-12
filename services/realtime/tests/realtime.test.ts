@@ -120,7 +120,7 @@ test('session: transcriber failure emits error but stream continues', async () =
   let calls = 0
   const flaky: Transcriber = async (audio) => {
     calls++
-    if (calls === 1) throw new Error('whisper hiccup')
+    if (calls === 1) throw new Error('stt hiccup')
     return { text: 'recovered', duration: 5, language: 'en' }
   }
   const s = new RealtimeSession(P, flaky, null, out, 1_000_000)

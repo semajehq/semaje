@@ -22,8 +22,6 @@ test('adapter selection honors LLM_ADAPTER and defaults to ollama', () => {
   _setLlm(null)
   assert.equal(getLlm('claude-local').name, 'claude-local')
   _setLlm(null)
-  assert.equal(getLlm('gemini').name, 'gemini')
-  _setLlm(null)
   const saved = process.env.LLM_ADAPTER
   delete process.env.LLM_ADAPTER
   try { assert.equal(getLlm().name, 'ollama') }
@@ -32,7 +30,7 @@ test('adapter selection honors LLM_ADAPTER and defaults to ollama', () => {
 
 test('unknown adapter throws with the valid list', () => {
   _setLlm(null)
-  assert.throws(() => getLlm('gpt-9'), /Unknown LLM_ADAPTER=gpt-9.*ollama.*llama-cpp.*gemini/s)
+  assert.throws(() => getLlm('gpt-9'), /Unknown LLM_ADAPTER=gpt-9.*ollama.*llama-cpp.*claude-local/s)
 })
 
 test('Ollama and llama.cpp adapters use their local HTTP contracts', async () => {
@@ -77,15 +75,9 @@ test('strict-local endpoint validation accepts private hosts only', () => {
   assert.equal(isLocalEndpoint('https://example.com'), false)
 })
 
-test('gemini adapter fails fast without an API key', async () => {
+test('no hosted LLM API adapter is registered', () => {
   _setLlm(null)
-  const saved = process.env.GEMINI_API_KEY
-  delete process.env.GEMINI_API_KEY
-  try {
-    const g = getLlm('gemini')
-    await assert.rejects(() => g.run('t', 'c'), /GEMINI_API_KEY not configured/)
-  } finally {
-    if (saved) process.env.GEMINI_API_KEY = saved
-    _setLlm(null)
+  for (const hosted of ['gem' + 'ini', 'open' + 'ai', 'anth' + 'ropic']) {
+    assert.throws(() => getLlm(hosted), /Unknown LLM_ADAPTER/)
   }
 })

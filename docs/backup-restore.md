@@ -3,7 +3,7 @@
 ## Backup
 
 Run `deploy/backup`. It creates a timestamped, checksummed directory under `backups/` containing a
-custom-format Postgres dump, local blobs/exports/logs/integration files, Whisper models, optional
+custom-format Postgres dump, local blobs/exports/logs/integration files, speech models (STT + TTS voices), optional
 observability reports, Ollama models, the source revision, and a copy of `.env` when present. Set `BACKUP_DIR` to write to
 encrypted removable or network storage.
 
@@ -14,7 +14,7 @@ cd backups/semaje-YYYYMMDDTHHMMSSZ
 shasum -a 256 -c SHA256SUMS
 docker compose exec -T postgres pg_restore --list < postgres.dump >/dev/null
 tar -tzf app-data.tar.gz >/dev/null
-tar -tzf whisper-models.tar.gz >/dev/null
+tar -tzf stt-models.tar.gz >/dev/null
 ```
 
 ## Restore drill

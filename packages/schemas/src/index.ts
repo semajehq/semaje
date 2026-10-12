@@ -21,8 +21,8 @@ export const Role = z.enum(['owner', 'admin', 'member', 'viewer'])
 export type Role = z.infer<typeof Role>
 export const SharePermission = z.enum(['view', 'comment'])
 
-// ── Whisper STT result (mirrors services/whisper/contract.md) ─
-export const WhisperSegment = z.object({
+// ── STT result (mirrors services/stt/contract.md) ───────────
+export const SttSegment = z.object({
   start: z.number(),
   end: z.number(),
   text: z.string(),
@@ -35,17 +35,33 @@ export const WhisperSegment = z.object({
     probability: z.number().min(0).max(1).optional(),
   })).optional(),
 })
-export type WhisperSegment = z.infer<typeof WhisperSegment>
+export type SttSegment = z.infer<typeof SttSegment>
 
-export const WhisperResult = z.object({
+export const SttEngine = z.enum(['auto', 'whisper', 'omnilingual'])
+export type SttEngine = z.infer<typeof SttEngine>
+
+export const SttResult = z.object({
   text: z.string(),
   language: z.string(),
   duration: z.number(),
-  segments: z.array(WhisperSegment),
+  segments: z.array(SttSegment),
   backend: z.string(),
   model: z.string(),
+  // v2: multi-engine routing metadata (optional so v1 payloads still parse)
+  engine: z.enum(['whisper', 'omnilingual']).optional(),
+  engineLanguage: z.string().nullable().optional(),
+  languageCode: z.string().nullable().optional(),
+  languageName: z.string().nullable().optional(),
+  routing: z.object({
+    engine: z.string(), language: z.string().nullable(), canonical: z.string().nullable(), reason: z.string(),
+  }).optional(),
+  audio: z.object({
+    container: z.string(), codec: z.string(), sampleRate: z.number(), channels: z.number(),
+    duration: z.number(), bitRate: z.number().nullable(), hasVideo: z.boolean(), channelLayout: z.string().optional(),
+  }).optional(),
+  requestId: z.string().optional(),
 })
-export type WhisperResult = z.infer<typeof WhisperResult>
+export type SttResult = z.infer<typeof SttResult>
 
 // ── Auth ─────────────────────────────────────────────────────
 export const Principal = z.object({
@@ -84,7 +100,7 @@ export const Transcript = z.object({
   language: z.string().nullable(),
   durationSec: z.number().nullable(),
   text: z.string(),
-  segments: z.array(WhisperSegment).nullable(),
+  segments: z.array(SttSegment).nullable(),
   result: z.unknown().nullable(),
   audioBlobId: z.string().uuid().nullable(),
   status: z.enum(['draft', 'complete']),
@@ -97,10 +113,10 @@ export const CreateTranscriptRequest = z.object({
   title: z.string().min(1).max(300).optional(),
   source: TranscriptSource.default('upload'),
   task: TaskId.default('transcription'),
-  language: z.string().max(16).optional(),
+  language: z.string().max(32).optional(),
   durationSec: z.number().nonnegative().optional(),
   text: z.string(),
-  segments: z.array(WhisperSegment).optional(),
+  segments: z.array(SttSegment).optional(),
   result: z.unknown().optional(),
   audioBlobId: z.string().uuid().optional(),
   speakerLabels: z.record(z.string()).optional(),
@@ -112,7 +128,7 @@ export type CreateTranscriptRequest = z.infer<typeof CreateTranscriptRequest>
 export const UpdateTranscriptRequest = z.object({
   title: z.string().min(1).max(300).optional(),
   text: z.string().optional(),
-  segments: z.array(WhisperSegment).optional(),
+  segments: z.array(SttSegment).optional(),
   collectionId: z.string().uuid().nullable().optional(),
   tags: z.array(z.string().min(1).max(80)).max(30).optional(),
   reason: z.string().min(1).max(240).default('manual correction'),
@@ -183,7 +199,7 @@ export const JobInput = z.object({
   audioBlobId: z.string().uuid(),
   task: TaskId.default('transcription'),
   options: z.record(z.unknown()).default({}),
-  language: z.string().max(16).optional(),
+  language: z.string().max(32).optional(),
   title: z.string().max(300).optional(),
   source: TranscriptSource.default('upload'),
 })
@@ -217,7 +233,7 @@ export const CreateJobRequest = JobInput.extend({
 export const IngestRequest = z.object({
   task: TaskId.default('transcription'),
   options: z.record(z.unknown()).default({}),
-  language: z.string().max(16).optional(),
+  language: z.string().max(32).optional(),
   title: z.string().max(300).optional(),
   source: TranscriptSource.default('api'),
   webhookUrl: z.string().url().optional(),
@@ -298,7 +314,7 @@ export const RTClientStart = z.object({
   type: z.literal('start'),
   mode: z.enum(['dictation', 'meeting']).default('dictation'),
   source: z.enum(['dictation', 'meeting', 'extension', 'desktop']).optional(),
-  language: z.string().max(16).optional(),
+  language: z.string().max(32).optional(),
   mimeType: z.string().max(100).optional(),
   title: z.string().max(300).optional(),
 })

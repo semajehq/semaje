@@ -3,14 +3,14 @@ import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { promisify } from 'node:util'
-import { whisperHealth, whisperTranscribe } from '../../whisper/client/index.ts'
+import { sttHealth, sttTranscribe } from '../../stt/client/index.ts'
 
 const exec = promisify(execFile)
 const root = resolve(import.meta.dirname, '../../..')
 const manifest = JSON.parse(await readFile(resolve(root, 'services/evals/fixtures/stt-smoke.json'), 'utf8'))
 const audioDirectory = process.env.EVAL_AUDIO_DIR
 const temporary = await mkdtemp(join(tmpdir(), 'semaje-eval-'))
-const health = await whisperHealth()
+const health = await sttHealth()
 const hypotheses: Record<string, string> = {}
 let runtimeMs = 0
 
@@ -23,7 +23,7 @@ for (const fixture of manifest.fixtures) {
   }
   const audio = await readFile(wav)
   const started = performance.now()
-  const result = await whisperTranscribe(audio, `${fixture.id}.wav`, 'audio/wav', { language: 'en' })
+  const result = await sttTranscribe(audio, `${fixture.id}.wav`, 'audio/wav', { language: 'en' })
   runtimeMs += performance.now() - started
   hypotheses[fixture.id] = result.text
 }

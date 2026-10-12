@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation, Link } from 'react
 import { Activity, FileAudio, FolderInput, Puzzle, Radio, TerminalSquare } from 'lucide-react'
 import { AppContext, AppProvider } from './context/AppContext'
 import Header from './components/Header'
-import ApiKeySetup from './components/ApiKeySetup'
 import Instructions from './components/Instructions'
 import TabSwitcher from './components/TabSwitcher'
 import TaskSelector from './components/TaskSelector'
 import DropZone from './components/DropZone'
 import OptionsBar from './components/OptionsBar'
+import LanguagePicker from './components/LanguagePicker'
 import TranscriptOutput from './components/TranscriptOutput'
 import LiveTranscription from './components/LiveTranscription'
 import Footer from './components/Footer'
@@ -27,34 +27,28 @@ import MeetingsPage from './components/meetings/MeetingsPage'
 import OnboardingPage from './components/onboarding/OnboardingPage'
 import CaptureActivity from './components/capture/CaptureActivity'
 import { useTranscribe } from './hooks/useTranscribe'
-import { useLiveTranscribe } from './hooks/useLiveTranscribe'
 import { useRealtimeTranscribe } from './hooks/useRealtimeTranscribe'
 
 function TranscribeScreen() {
-  const { apiMode, apiKey, account } = useContext(AppContext)
+  const { account } = useContext(AppContext)
   const {
     transcript, status, error, loading, task, changeTask, options, setOptions,
-    handleFile, savedId, jobId,
+    handleFile, savedId, jobId, language, setLanguage, engine, setEngine,
   } = useTranscribe()
-  const legacyLive = useLiveTranscribe()
   const realtimeLive = useRealtimeTranscribe()
 
   const [activeTab, setActiveTab] = useState('upload')
 
-  const showKeySetup = apiMode === 'direct'
-  const isBlocked = apiMode === 'direct' && !apiKey
-  const liveTranscribe = apiMode === 'proxy'
-    ? {
-        isRecording: realtimeLive.isRecording,
-        isProcessing: false,
-        segments: realtimeLive.segments,
-        error: realtimeLive.error,
-        savedId: realtimeLive.savedId,
-        startRecording: () => realtimeLive.start({ mode: 'dictation', title: `${account.workspaceName} dictation` }),
-        stopRecording: realtimeLive.stop,
-        clearSegments: realtimeLive.clear,
-      }
-    : legacyLive
+  const liveTranscribe = {
+    isRecording: realtimeLive.isRecording,
+    isProcessing: false,
+    segments: realtimeLive.segments,
+    error: realtimeLive.error,
+    savedId: realtimeLive.savedId,
+    startRecording: () => realtimeLive.start({ mode: 'dictation', title: `${account.workspaceName} dictation`, language }),
+    stopRecording: realtimeLive.stop,
+    clearSegments: realtimeLive.clear,
+  }
 
   const handleTabChange = (tab) => {
     if (tab !== 'live' && liveTranscribe.isRecording) liveTranscribe.stopRecording()
@@ -79,8 +73,6 @@ function TranscribeScreen() {
         <Link className="capture-lane" to="/settings/integrations"><Puzzle size={17} /><span>Extension</span><b>Browser fields</b></Link>
       </div>
 
-      {showKeySetup && <div className="mt-4"><ApiKeySetup /></div>}
-
       <section className="capture-console reveal-in stagger-2">
         <div className="capture-workbench">
           <div className="capture-workbench-head">
@@ -94,7 +86,8 @@ function TranscribeScreen() {
           {activeTab === 'upload' && (
             <div className="capture-controls">
               <TaskSelector task={task} onTaskChange={changeTask} />
-              <DropZone onFile={handleFile} disabled={loading || isBlocked} active={loading} />
+              <LanguagePicker language={language} onLanguage={setLanguage} engine={engine} onEngine={setEngine} disabled={loading} />
+              <DropZone onFile={handleFile} disabled={loading} active={loading} />
               <OptionsBar task={task} options={options} onChange={setOptions} />
               {(loading || transcript || error) && (
                 <TranscriptOutput transcript={transcript} status={status} error={error} loading={loading} savedId={savedId} />
@@ -107,7 +100,7 @@ function TranscribeScreen() {
           <div className="capture-signal" aria-hidden="true">
             <Activity size={14} />
             <div>{[24, 58, 36, 78, 44, 68, 30, 88, 42, 62, 34, 72, 48, 84, 38, 56].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</div>
-            <span>{apiMode === 'proxy' ? 'QUEUE' : 'DIRECT'}</span>
+            <span>QUEUE</span>
           </div>
         </div>
         <CaptureActivity activeJobId={jobId} />

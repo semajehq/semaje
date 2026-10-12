@@ -1,5 +1,4 @@
 import { ClaudeLocalAdapter } from './adapters/claude-local.ts'
-import { GeminiAdapter } from './adapters/gemini.ts'
 import { OllamaAdapter } from './adapters/ollama.ts'
 import { LlamaCppAdapter } from './adapters/llama-cpp.ts'
 
@@ -29,8 +28,7 @@ export function createLlm(name: string, config: LlmConfig = {}): LlmAdapter {
   if (name === 'ollama') return new OllamaAdapter(config)
   if (name === 'llama-cpp') return new LlamaCppAdapter(config)
   if (name === 'claude-local') return new ClaudeLocalAdapter()
-  if (name === 'gemini') return new GeminiAdapter()
-  throw new Error(`Unknown LLM_ADAPTER=${name}. Use one of: ollama, llama-cpp, claude-local, gemini`)
+  throw new Error(`Unknown LLM_ADAPTER=${name}. Use one of: ollama, llama-cpp, claude-local`)
 }
 
 let active: LlmAdapter | null = null
@@ -50,7 +48,6 @@ export async function runWithFallback(
   const attempts = [primary.adapter, ...fallbackNames.filter(name => name !== primary.adapter)]
   const errors: string[] = []
   for (const name of attempts) {
-    if (process.env.STRICT_LOCAL_MODE === 'true' && name === 'gemini') continue
     const adapter = createLlm(name, name === primary.adapter ? primary : {})
     try {
       const text = await adapter.run(taskPrompt, transcriptContext)

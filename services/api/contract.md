@@ -6,7 +6,10 @@ Rate limit: 120 req/min per org (429). Validation: zod (400 with `details`).
 
 | Method | Path | Auth | Body / Notes |
 |---|---|---|---|
-| GET | /api/health | – | service + whisper + llm status |
+| GET | /api/health | – | service + stt (engines) + tts + llm status |
+| GET | /api/languages | ✓ | STT languages (1,693) enriched with TTS voice coverage; cached 5 min |
+| POST | /api/tts | ✓ read | {text, language?, voice?, format?, speed?} → audio; `x-semaje-*` provenance headers; 403 `license_noncommercial`, 404 `no_voice` |
+| GET | /api/tts/voices?language= | ✓ | voice catalog with licenses |
 | POST | /api/auth/register | – | {email, password, displayName?} → tokens (local-db) |
 | POST | /api/auth/token | – | {email, password} → {accessToken, refreshToken} |
 | POST | /api/auth/refresh | – | {refreshToken} → {accessToken} |
@@ -25,9 +28,12 @@ Rate limit: 120 req/min per org (429). Validation: zod (400 with `details`).
 | POST | /api/api-keys | ✓ | {name, scopes?} → {apiKey, token} (token shown once) |
 | GET | /api/api-keys | ✓ | list (no secrets) |
 | DELETE | /api/api-keys/:id | ✓ | revoke |
-| POST | /api/transcribe | ✓ | legacy sync path (small files; no persistence) |
-| POST | /api/transcribe-direct | ✓ | same, with user-supplied Gemini key |
+| POST | /api/transcribe | ✓ | sync path for short audio: `audio`, `language?`, `engine?` (auto\|whisper\|omnilingual), `channel?`, `enhance?`; STT 4xx pass through (413/415/400) |
+| POST | /api/ingest | ✓ | multipart `audio` + `language?` + `options.engine?` → queued job (any length) |
 | WS | /ws?token= | ✓ | realtime STT — services/realtime/contract.md |
 
-Errors: `{error}` with 400/401/403/404/429/500. Tenancy: every read/write is
+Every response carries `x-request-id` (accepted from the caller when it is
+`[\w.-]{1,128}`), forwarded to STT/TTS so one id traces a request end to end.
+
+Errors: `{error, code?, requestId?}` with 400/401/403/404/413/415/429/500/502/503. Tenancy: every read/write is
 org-scoped via the authenticated principal — cross-org rows 404.

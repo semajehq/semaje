@@ -1,5 +1,5 @@
 // Pure transcript exporters — SRT / VTT / TXT / MD from Whisper segments.
-import type { WhisperSegment } from '@semaje/schemas'
+import type { SttSegment } from '@semaje/schemas'
 
 function pad(n: number, w = 2): string { return String(n).padStart(w, '0') }
 
@@ -12,13 +12,13 @@ function ts(seconds: number, sep: ',' | '.'): string {
   return `${pad(hh)}:${pad(mm)}:${pad(ss)}${sep}${pad(ms, 3)}`
 }
 
-export function toSRT(segments: WhisperSegment[]): string {
+export function toSRT(segments: SttSegment[]): string {
   return segments
     .map((s, i) => `${i + 1}\n${ts(s.start, ',')} --> ${ts(s.end, ',')}\n${s.speaker ? `${s.speaker}: ` : ''}${s.text}`)
     .join('\n\n') + (segments.length ? '\n' : '')
 }
 
-export function toVTT(segments: WhisperSegment[]): string {
+export function toVTT(segments: SttSegment[]): string {
   const body = segments
     .map(s => `${ts(s.start, '.')} --> ${ts(s.end, '.')}\n${s.speaker ? `<v ${s.speaker}>` : ''}${s.text}`)
     .join('\n\n')
@@ -31,7 +31,7 @@ export interface ExportableTranscript {
   id?: string
   title: string
   text: string
-  segments: WhisperSegment[] | null
+  segments: SttSegment[] | null
   source?: string
   task?: string
   language?: string | null
@@ -87,7 +87,7 @@ function metadataLines(t: ExportableTranscript): string[] {
 }
 
 export function toMD(
-  title: string, text: string, segments: WhisperSegment[] | null,
+  title: string, text: string, segments: SttSegment[] | null,
   metadata: Omit<ExportableTranscript, 'title' | 'text' | 'segments'> = {},
 ): string {
   const lines = [`# ${title}`, '']

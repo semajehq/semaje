@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="w-full py-8 text-center text-xs font-mono flex flex-wrap items-center justify-center gap-2" style={{ color: 'var(--muted)' }}>
       <Cpu size={12} />
-      Local Whisper STT
+      Open-source STT + TTS · 1,600+ languages
       <span style={{ color: 'var(--border)' }}>·</span>
       <Workflow size={12} />
       Swappable LLM tasks

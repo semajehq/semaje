@@ -2,7 +2,10 @@ name: semaje
 
 x-app-env: &app-env
   DATABASE_URL: postgres://semaje:${POSTGRES_PASSWORD:-semaje}@postgres:5432/semaje
-  WHISPER_URL: http://whisper:8011
+  STT_URL: http://stt:8011
+  STT_API_TOKEN: ${STT_API_TOKEN:-}
+  TTS_URL: http://tts:8012
+  TTS_API_TOKEN: ${TTS_API_TOKEN:-}
   AUTH_ADAPTER: ${AUTH_ADAPTER:-single-user}
   STORAGE_ADAPTER: ${STORAGE_ADAPTER:-fs}
   STORAGE_FS_DIR: /data/blobs
@@ -19,7 +22,7 @@ x-app-env: &app-env
   SHARE_LOCAL_ONLY: ${SHARE_LOCAL_ONLY:-false}
   TRUST_PROXY_HOPS: ${TRUST_PROXY_HOPS:-1}
   INTEGRATION_FILE_SYNC_DIR: ${INTEGRATION_FILE_SYNC_DIR:-/data/integrations}
-  OBSERVABILITY_WER_REPORT: /data/observability/whisper-eval.json
+  OBSERVABILITY_WER_REPORT: /data/observability/stt-eval.json
   METRICS_TOKEN: ${METRICS_TOKEN:-}
   METRICS_ORG_ID: ${METRICS_ORG_ID:-}
   NEXTCLOUD_WEBDAV_URL: ${NEXTCLOUD_WEBDAV_URL:-}
@@ -56,27 +59,55 @@ services:
       timeout: 5s
       retries: 20
 
-  whisper:
+  # Speech-to-text: Whisper + Omnilingual ASR (1,600+ languages). First start
+  # downloads models into the sttmodels volume; readiness waits for them.
+  stt:
     build:
       context: .
-      dockerfile: services/whisper/Dockerfile
+      dockerfile: services/stt/Dockerfile
+      args:
+        OMNILINGUAL: ${STT_OMNILINGUAL_BUILD:-1}
     restart: unless-stopped
     environment:
-      WHISPER_BACKEND: faster-whisper
-      WHISPER_MODEL: ${WHISPER_MODEL:-base}
-      WHISPER_DEVICE: ${WHISPER_DEVICE:-cpu}
-      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
-      HF_HOME: /models
-      EVAL_REPORT_PATH: /data/observability/whisper-eval.json
+      STT_ROUTING: ${STT_ROUTING:-auto}
+      STT_WHISPER_BACKEND: faster-whisper
+      STT_WHISPER_MODEL: ${STT_WHISPER_MODEL:-base}
+      STT_OMNILINGUAL_MODEL: ${STT_OMNILINGUAL_MODEL:-omniASR_CTC_300M_v2}
+      STT_DEVICE: ${STT_DEVICE:-cpu}
+      STT_COMPUTE_TYPE: ${STT_COMPUTE_TYPE:-int8}
+      STT_MAX_CONCURRENCY: ${STT_MAX_CONCURRENCY:-1}
+      STT_API_TOKEN: ${STT_API_TOKEN:-}
+      EVAL_REPORT_PATH: /data/observability/stt-eval.json
     volumes:
-      - whispermodels:/models
+      - sttmodels:/models
       - ./data/observability:/data/observability
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8011/health', timeout=3)"]
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8011/health/ready', timeout=3).status == 200 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 600s
+
+  # Text-to-speech: Piper by default; MMS-TTS only with TTS_ALLOW_NONCOMMERCIAL=true.
+  tts:
+    build:
+      context: .
+      dockerfile: services/tts/Dockerfile
+      args:
+        MMS: ${TTS_MMS_BUILD:-0}
+    restart: unless-stopped
+    environment:
+      TTS_ALLOW_NONCOMMERCIAL: ${TTS_ALLOW_NONCOMMERCIAL:-false}
+      TTS_AUTO_DOWNLOAD: ${TTS_AUTO_DOWNLOAD:-true}
+      TTS_API_TOKEN: ${TTS_API_TOKEN:-}
+    volumes:
+      - ttsvoices:/voices
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8012/health/live', timeout=3)"]
       interval: 15s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 30s
 
   ollama:
     image: ollama/ollama:0.9.6
@@ -129,7 +160,7 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
-      whisper:
+      stt:
         condition: service_healthy
     environment: *app-env
     volumes: *app-volumes
@@ -150,7 +181,7 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
-      whisper:
+      stt:
         condition: service_healthy
     environment:
       <<: *app-env
@@ -203,7 +234,6 @@ services:
       target: frontend
       args:
         VITE_AUTH_MODE: ${AUTH_ADAPTER:-single-user}
-        VITE_API_MODE: proxy
     restart: unless-stopped
     depends_on:
       api:
@@ -216,7 +246,8 @@ volumes:
   blobdata:
   exports:
   logs:
-  whispermodels:
+  sttmodels:
+  ttsvoices:
   ollamamodels:
   llamamodels:
   integrationdata:

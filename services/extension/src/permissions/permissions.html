@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>semaje permissions</title>
+  <link rel="stylesheet" href="../ui/theme.css" />
+  <style> main { max-width: 560px; margin: 48px auto; padding: 0 16px; } .card { margin-top: 16px; } </style>
+</head>
+<body>
+  <main>
+    <h1>Allow semaje to listen</h1>
+    <p class="muted">Browsers only let an extension use the microphone after you allow it once on this page. Audio goes only to the semaje server you configured, never to a third party.</p>
+    <div class="card stack" id="mic-card">
+      <strong>Microphone</strong>
+      <span class="muted">Needed for dictation into any text field.</span>
+      <button class="primary" id="mic">Allow microphone</button>
+      <div class="status" id="mic-status" role="status"></div>
+    </div>
+    <div class="card stack" id="server-card">
+      <strong>Server access</strong>
+      <span class="muted">semaje needs permission to reach <span class="mono" id="server"></span>.</span>
+      <button class="primary" id="grant-server">Allow server access</button>
+      <div class="status" id="server-status" role="status"></div>
+    </div>
+    <div class="card stack" id="media-card" hidden>
+      <strong>Download page media</strong>
+      <span class="muted">To transcribe a file from <span class="mono" id="media-origin"></span>, semaje must download it.</span>
+      <button class="primary" id="grant-media">Allow for this site</button>
+      <div class="status" id="media-status" role="status"></div>
+    </div>
+    <p class="muted" style="margin-top:20px">You can close this tab when done. Change settings any time in <a href="../options/options.html">semaje settings</a>.</p>
+  </main>
+  <script type="module" src="permissions.js"></script>
+</body>
+</html>

@@ -24,7 +24,7 @@ Logs from the API and worker are newline-delimited JSON. Index `event`, `jobId`,
 
 1. Start with `base` on CPU and `WORKER_CONCURRENCY=1`. Increase concurrency only when memory remains
    stable and queue wait is the dominant delay.
-2. Use `WHISPER_COMPUTE_TYPE=int8` on CPU. Use GPU-specific compute types only after confirming the
+2. Use `STT_COMPUTE_TYPE=int8` on CPU. Use GPU-specific compute types only after confirming the
    runtime selected the accelerator in the model workshop.
 3. Prefer `tiny` or `base` for high-volume drafts; reserve larger models for noisy or multilingual
    recordings where the confidence and WER measurements justify the cost.
@@ -37,8 +37,8 @@ Logs from the API and worker are newline-delimited JSON. Index `event`, `jobId`,
 
 ## Quality fixture
 
-Run `npm run eval:whisper` on the host. The evaluator writes
-`data/observability/whisper-eval.json`; the signal room and Prometheus endpoint publish that result.
+Run `npm run eval:stt` on the host. The evaluator writes
+`data/observability/stt-eval.json`; the signal room and Prometheus endpoint publish that result.
 Keep the same fixture, language, model, and hardware when comparing changes. A missing report is
 shown as `not run`, never interpreted as zero WER.
 
