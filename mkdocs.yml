@@ -1,7 +1,7 @@
 site_name: semaje · open-source speech for every language
-site_url: https://markkimotho.github.io/semaje/
-repo_url: https://github.com/Markkimotho/semaje
-repo_name: Markkimotho/semaje
+site_url: https://semajehq.github.io/semaje/
+repo_url: https://github.com/semajehq/semaje
+repo_name: semajehq/semaje
 docs_dir: docs
 
 theme:

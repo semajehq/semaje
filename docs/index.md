@@ -30,7 +30,7 @@ including fully air-gapped.
 ## Quick start
 
 ```bash
-git clone https://github.com/Markkimotho/semaje
+git clone https://github.com/semajehq/semaje
 cd semaje
 cp .env.example .env
 deploy/semaje cpu up
