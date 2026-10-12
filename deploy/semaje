@@ -16,7 +16,8 @@ case "$profile" in
 esac
 
 case "$action" in
-  up) "${compose[@]}" --profile local-llm up -d --build ;;
+  up) "${compose[@]}" --profile local-llm pull --ignore-buildable --quiet || true
+      "${compose[@]}" --profile local-llm up -d --build ;;
   down) "${compose[@]}" --profile local-llm down ;;
   status) "${compose[@]}" --profile local-llm ps ;;
   logs) "${compose[@]}" --profile local-llm logs -f --tail=150 ;;

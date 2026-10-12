@@ -37,7 +37,7 @@ Logs from the API and worker are newline-delimited JSON. Index `event`, `jobId`,
 
 ## Quality fixture
 
-Run `npm run eval:stt` on the host. The evaluator writes
+Run `make eval` in semaje-stt on the host. The evaluator writes
 `data/observability/stt-eval.json`; the signal room and Prometheus endpoint publish that result.
 Keep the same fixture, language, model, and hardware when comparing changes. A missing report is
 shown as `not run`, never interpreted as zero WER.

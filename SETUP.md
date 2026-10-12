@@ -10,9 +10,9 @@ browser extension brings dictation, live captions, and read-aloud to any page.
 ## Architecture
 
 ```
-                       ┌─ services/stt (Whisper + Omnilingual ASR, :8011, Python)
-                       ├─ services/tts (Piper | MMS-TTS, :8012, Python)
-web app / extension ─▶ services/api (:3001, HTTP + /ws)
+                       ┌─ semaje-stt (repo · Whisper + Omnilingual ASR, :8011)
+                       ├─ semaje-tts (repo · Piper | MMS-TTS, :8012)
+semaje-web / semaje-extension (repos) ─▶ services/api (:3001, HTTP + /ws)
                        ├─ services/realtime (WS windows → stt)
                        ├─ services/jobs (pg-boss queue + worker)
                        │    └─ storage → stt → pipeline → llm → transcripts
@@ -20,7 +20,7 @@ web app / extension ─▶ services/api (:3001, HTTP + /ws)
                        ├─ services/auth (single-user | local-db | oidc)
                        ├─ services/storage (fs | s3/MinIO)
                        └─ services/llm (ollama | llama-cpp | claude-local)
-      packages/languages: shared registry (1,693 languages) used by stt, tts, api
+      semaje-languages (repo): shared registry (1,693 languages) used by stt and tts
 ```
 
 Deployment mode is **adapter-driven** — the same codebase runs:
@@ -59,11 +59,10 @@ ever waits on a download. Set `STT_OMNILINGUAL_BUILD=0` for a Whisper-only image
 (about 1.5 GB smaller) if you only need its 99 languages.
 
 > **Apple Silicon / ARM hosts.** Omnilingual ASR's runtime has prebuilt Linux
-> wheels for x86-64 only, so a Docker image built on an ARM machine is
-> Whisper-only. On a Mac, run the speech services natively (`npm run setup`,
-> `npm run dev:stt`) to get both engines, or build with
-> `DOCKER_DEFAULT_PLATFORM=linux/amd64`. Production x86-64 servers get both
-> engines in Docker with no extra steps. Use `deploy/semaje <profile> status|logs|down` for operations.
+> wheels for x86-64 only, so the arm64 STT image is Whisper-only. On a Mac, run
+> semaje-stt natively (`make setup && make run` in that repo) and point
+> `STT_URL` at it to get both engines. Production x86-64 servers get both
+> engines from the published image with no extra steps. Use `deploy/semaje <profile> status|logs|down` for operations.
 
 ## Local development (no Docker for the app)
 
@@ -72,16 +71,22 @@ libsndfile` / `apt install ffmpeg libsndfile1`), and Postgres with a `semaje`
 database (`docker compose up -d postgres` works).
 
 ```bash
-# 1. Speech services (one-time): venvs + models in ~/.local/share/semaje
-#    (kept out of the repo: iCloud/OneDrive eviction breaks venvs)
-npm run setup
+# 1. Sibling repos (stt, tts, web, extension, languages) next to this one
+npm run workspace
 
-# 2. App deps + DB schema
+# 2. Speech services (one-time): venvs + models in ~/.local/share/semaje
+#    (kept out of the repos: iCloud/OneDrive eviction breaks venvs)
+(cd ../semaje-stt && make setup) && (cd ../semaje-tts && make setup)
+
+# 3. Platform deps + DB schema
 npm install
 npm run migrate
 
-# 3. Everything at once: stt (:8011) + tts (:8012) + api (:3001) + web (:5173)
-npm run dev
+# 4. Run, one terminal each
+(cd ../semaje-stt && make run)        # :8011
+(cd ../semaje-tts && make run)        # :8012
+npm run dev                           # api :3001 + worker
+(cd ../semaje-web && npm install && npm run dev)   # web :5173
 
 # 4. The job worker (needed for >20MB async uploads), separate terminal:
 npm run worker
@@ -89,17 +94,27 @@ npm run worker
 
 ## Browser extension
 
-`npm run ext:build`, then follow [docs/browser-extension.md](docs/browser-extension.md)
-for Chrome, Edge, Brave, Opera, Vivaldi, Arc, Firefox, Safari, store publishing,
-and enterprise force-install.
+Lives in [semaje-extension](https://github.com/semajehq/semaje-extension):
+prebuilt packages on its releases page, plus the full guide for Chrome, Edge,
+Brave, Opera, Vivaldi, Arc, Firefox, Safari, store publishing, and enterprise
+force-install.
+
+## Releases and versions
+
+Each repo releases on its own tag and publishes its image to
+`ghcr.io/semajehq/<repo>`. This repo pins what it runs in `.env`:
+`SEMAJE_STT_VERSION`, `SEMAJE_TTS_VERSION`, `SEMAJE_WEB_VERSION`. Upgrade a
+component by bumping its pin and running `deploy/semaje <profile> up`. For
+unreleased changes, `compose.dev.yml` builds stt, tts, and web from the sibling
+checkouts.
 
 ## Languages, speech output, and licenses
 
 See [docs/languages.md](docs/languages.md) for routing, measured accuracy, and
 model choices. Text-to-speech uses Piper by default.
 `TTS_ALLOW_NONCOMMERCIAL=true` adds MMS-TTS for about 1,100 more languages under
-its CC-BY-NC-4.0 license (install with `SEMAJE_MMS=1 services/tts/setup.sh` or
-build with `TTS_MMS_BUILD=1`). For production, set `STT_API_TOKEN` and
+its CC-BY-NC-4.0 license (natively: `SEMAJE_MMS=1 make setup` in semaje-tts;
+Docker: `TTS_MMS_BUILD=1` with `compose.dev.yml`). For production, set `STT_API_TOKEN` and
 `TTS_API_TOKEN` so only the API and worker can reach the speech services.
 
 ## LLM adapter
@@ -173,13 +188,7 @@ an older release.
 
 ```bash
 npm test                    # gate tests: all TS services + extension (fast, free, no network)
-npm run test:stt            # STT + language registry, incl. real ffmpeg format matrix
-npm run test:tts            # TTS
 npm run typecheck           # strict TS across services
-npm run test:extension:e2e  # built extension in real Chrome + Firefox
-npm run eval:fleurs         # real-speech WER/CER per language (FLEURS) vs thresholds
-npm run eval:tts            # TTS → STT round-trip intelligibility
-npm run eval:stt            # English smoke eval (macOS `say`)
 npm run eval:llm            # 15 task rubrics × adapter(s)  [EVAL_ADAPTERS=ollama,claude-local]
 npm run eval:realtime       # streaming WER vs batch
 ```
@@ -201,10 +210,9 @@ services/integrations/  default-off outbound adapters, signed events, delivery l
 services/realtime/      WebSocket streaming STT (/ws)
 services/llm/           ollama | llama-cpp | claude-local adapters + task evals
 services/pipeline/      pure STT↔LLM routing
-services/stt/           speech-to-text (Python: Whisper + Omnilingual ASR, any-format intake)
-services/tts/           text-to-speech (Python: Piper, MMS-TTS, custom voices)
-packages/languages/     shared language registry (1,693 languages)
-services/extension/     cross-browser MV3 extension
+services/speech/        clients for the semaje-stt and semaje-tts HTTP contracts
+compose.dev.yml         build stt/tts/web from sibling checkouts
+scripts/workspace.sh    clone/update the sibling repos
 src/                    React web app (transcribe, library, shares, settings)
 ```
 
@@ -212,12 +220,12 @@ src/                    React web app (transcribe, library, shares, settings)
 
 | Issue | Fix |
 |---|---|
-| `stt.reachable: false` in /api/health | Start it: `npm run dev:stt` (or the compose `stt` service; first start downloads models). |
-| `tts.reachable: false` | `npm run dev:tts` (or compose `tts`). |
-| Omnilingual import error (`_torch_library_impl`, `pyarrow requires NumPy 2`) | Install with `services/stt/setup.sh`; it pins `torchaudio==2.8.0` and `pyarrow<21`. |
+| `stt.reachable: false` in /api/health | Start semaje-stt (`make run` there, or the compose `stt` service; first start downloads models). |
+| `tts.reachable: false` | Start semaje-tts (`make run`, or compose `tts`). |
+| Omnilingual import error (`_torch_library_impl`, `pyarrow requires NumPy 2`) | Install with semaje-stt's `setup.sh`; it pins `torchaudio==2.8.0` and `pyarrow<21`. |
 | `fairseq2 requires libsndfile` | `brew install libsndfile` / `apt install libsndfile1`. |
 | Jobs stay `queued` | The worker isn't running: `npm run worker` (or compose `worker`). |
 | `claude-local failed to start` | Install the Claude Code CLI, or use `LLM_ADAPTER=ollama`. |
 | 401s in local-db mode | Register at `/login`, or create an API key at `/settings/api-keys`. |
-| Extension can't connect | Extension settings → Save & test; see [docs/browser-extension.md](docs/browser-extension.md#6-troubleshooting). |
+| Extension can't connect | Extension settings → Save & test; see the [extension guide](https://github.com/semajehq/semaje-extension/blob/main/docs/browser-extension.md#6-troubleshooting). |
 | macOS: hangs / vanishing .venv | Project on iCloud Drive. `setup.sh` already keeps venvs/models in `~/.local/share/semaje`; keep `node_modules` downloaded or move the repo off iCloud. |

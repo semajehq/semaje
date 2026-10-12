@@ -59,14 +59,10 @@ services:
       timeout: 5s
       retries: 20
 
-  # Speech-to-text: Whisper + Omnilingual ASR (1,600+ languages). First start
+  # Speech-to-text (semajehq/semaje-stt): Whisper + Omnilingual ASR (1,600+ languages). First start
   # downloads models into the sttmodels volume; readiness waits for them.
   stt:
-    build:
-      context: .
-      dockerfile: services/stt/Dockerfile
-      args:
-        OMNILINGUAL: ${STT_OMNILINGUAL_BUILD:-1}
+    image: ghcr.io/semajehq/semaje-stt:${SEMAJE_STT_VERSION:-2.0.0}
     restart: unless-stopped
     environment:
       STT_ROUTING: ${STT_ROUTING:-auto}
@@ -88,13 +84,9 @@ services:
       retries: 40
       start_period: 600s
 
-  # Text-to-speech: Piper by default; MMS-TTS only with TTS_ALLOW_NONCOMMERCIAL=true.
+  # Text-to-speech (semajehq/semaje-tts): Piper by default; MMS-TTS only with TTS_ALLOW_NONCOMMERCIAL=true.
   tts:
-    build:
-      context: .
-      dockerfile: services/tts/Dockerfile
-      args:
-        MMS: ${TTS_MMS_BUILD:-0}
+    image: ghcr.io/semajehq/semaje-tts:${SEMAJE_TTS_VERSION:-1.0.0}
     restart: unless-stopped
     environment:
       TTS_ALLOW_NONCOMMERCIAL: ${TTS_ALLOW_NONCOMMERCIAL:-false}
@@ -228,13 +220,12 @@ services:
       RETENTION_INTERVAL_HOURS: ${RETENTION_INTERVAL_HOURS:-24}
     volumes: *app-volumes
 
+  # Web app (semajehq/semaje-web): nginx serving the app, proxying /api and /ws to api.
   frontend:
-    build:
-      context: .
-      target: frontend
-      args:
-        VITE_AUTH_MODE: ${AUTH_ADAPTER:-single-user}
+    image: ghcr.io/semajehq/semaje-web:${SEMAJE_WEB_VERSION:-2.0.0}
     restart: unless-stopped
+    environment:
+      SEMAJE_API_UPSTREAM: api:3001
     depends_on:
       api:
         condition: service_healthy

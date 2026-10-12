@@ -25,5 +25,6 @@ Meeting enrichment is validated as structured JSON containing summary,
 decisions, action items with owners/dates, risks, follow-ups, and chapters.
 Malformed model output receives one repair pass before the job fails safely.
 
-Task prompts come from `src/utils/promptBuilder.js` (the 15-task prompt library);
+Task prompts come from `services/llm/src/prompts.js` (the 15-task prompt library,
+served to clients as metadata by `GET /api/tasks`);
 transcript context from `services/pipeline`.

@@ -17,7 +17,7 @@ downloaded speech model.
 
 ## Compare a real STT backend
 
-Start the local STT service (`npm run dev:stt`), then run:
+Start semaje-stt (`make run` in that repo, or the compose `stt` service), then run:
 
 ```bash
 npm run eval:stt:capture
@@ -75,17 +75,17 @@ case instead.
 
 ## Multilingual speech accuracy (FLEURS)
 
-`npm run eval:fleurs` streams the first N test utterances per language straight
+`make eval-fleurs` in [semaje-stt](https://github.com/semajehq/semaje-stt) streams the first N test utterances per language straight
 from Google's FLEURS dataset (CC-BY-4.0, no full download), sends them to the
 running STT service as a black box, and scores WER and CER against FLEURS'
 normalized references. It fails when:
 
-- a language's CER exceeds `services/stt/evals/fleurs_thresholds.json`, or
+- a language's CER exceeds `semaje_stt/evals/fleurs_thresholds.json`, or
 - with `--engines auto,whisper`, automatic routing does worse than forced
   Whisper on any language (routing must never hurt).
 
 ```bash
-npm run eval:fleurs -- --langs en_us,sw_ke,yo_ng,am_et,luo_ke,lg_ug --n 5 --engines auto,whisper
+make eval-fleurs ARGS="--langs en_us,sw_ke,yo_ng,am_et,luo_ke,lg_ug --n 5 --engines auto,whisper"
 ```
 
 The report lands in `data/observability/stt-fleurs-eval.json`. Dated baselines
@@ -94,9 +94,9 @@ models, re-run, then tighten the thresholds.
 
 ## Text-to-speech intelligibility (round trip)
 
-`npm run eval:tts` synthesizes a reference sentence per language with the TTS
+`make eval` in [semaje-tts](https://github.com/semajehq/semaje-tts) synthesizes a reference sentence per language with the TTS
 service, recognizes it with the STT service, and scores CER: a voice the
 recognizer cannot understand is a voice people will struggle with too.
-Thresholds: `services/tts/evals/roundtrip_thresholds.json`. Languages without an
+Thresholds: `semaje_tts/evals/roundtrip_thresholds.json`. Languages without an
 allowed voice are reported as skipped with the reason (for example
 `license_noncommercial`), never as passes.

@@ -1,9 +1,0 @@
-{
-  "name": "com.semaje.host",
-  "description": "semaje native dictation host",
-  "path": "/usr/local/bin/semaje-native-host",
-  "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://__EXTENSION_ID__/"
-  ]
-}

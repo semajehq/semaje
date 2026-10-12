@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { promisify } from 'node:util'
-import { sttHealth, sttTranscribe } from '../../stt/client/index.ts'
+import { sttHealth, sttTranscribe } from '../../speech/stt-client.ts'
 
 const exec = promisify(execFile)
 const root = resolve(import.meta.dirname, '../../..')

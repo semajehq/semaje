@@ -1,7 +1,0 @@
-{
-  "name": "@semaje/extension",
-  "version": "2.0.0",
-  "private": true,
-  "type": "module",
-  "description": "semaje browser extension (Chrome, Edge, Brave, Opera, Vivaldi, Firefox, Safari)"
-}

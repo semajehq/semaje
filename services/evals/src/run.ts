@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 // @ts-ignore - the frontend prompt library remains the single JavaScript source of task prompts.
-import { buildPrompt, getDefaultOptions } from '../../../src/utils/promptBuilder.js'
+import { buildPrompt, getDefaultOptions } from '../../llm/src/prompts.js'
 import { compareSttRuns, matches, scoreSttRun } from './scoring.ts'
 
 const root = resolve(import.meta.dirname, '../../..')

@@ -6,7 +6,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createApp } from './app.ts'
 import { attachRealtime } from '../../realtime/src/ws-server.ts'
-import { sttHealth } from '../../stt/client/index.ts'
+import { sttHealth } from '../../speech/stt-client.ts'
 import { ensureSeed } from '../../auth/src/index.ts'
 import { logInfo, logWarn } from '../../observability/src/logger.ts'
 

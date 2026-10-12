@@ -8,7 +8,7 @@ import { createServer, type Server, type IncomingMessage } from 'node:http'
 import { _setPool } from '@semaje/db'
 import { signAccessToken, _resetSeed } from '../../auth/src/index.ts'
 import { createApp } from '../src/app.ts'
-import { sttTranscribe, SttError } from '../../stt/client/index.ts'
+import { sttTranscribe, SttError } from '../../speech/stt-client.ts'
 
 const ORG = '22222222-2222-4222-8222-222222222222'
 const USER = '11111111-1111-4111-8111-111111111111'
@@ -116,6 +116,18 @@ after(async () => {
   process.env.AUTH_ADAPTER = 'single-user'
   delete process.env.STT_URL
   delete process.env.TTS_URL
+})
+
+test('/api/tasks serves the task catalog without prompt text', async () => {
+  assert.equal((await fetch(`${base}/api/tasks`)).status, 401)
+  const res = await fetch(`${base}/api/tasks`, { headers: auth })
+  assert.equal(res.status, 200)
+  const body = await res.json() as any
+  assert.equal(Object.keys(body.tasks).length, 15)
+  assert.equal(body.tasks.transcription.label, 'Transcription')
+  assert.ok(body.tasks.transcription.options.some((o: any) => o.key === 'speakerLabels'))
+  assert.equal(body.categories.core, 'Core')
+  assert.ok(!JSON.stringify(body).includes('You are a world-class'), 'prompts never leave the server')
 })
 
 test('/api/languages requires auth and enriches STT languages with TTS coverage', async () => {

@@ -10,7 +10,10 @@ __pycache__/
 _site/
 
 data/
-services/stt/.venv/
-services/tts/.venv/
 *.tsbuildinfo
 .eval-results/
+
+# iCloud/Dropbox conflict copies ("file 2.ts", "README 3.md")
+* [0-9]
+* [0-9].*
+* [0-9][0-9].*

@@ -31,6 +31,25 @@ speech (Google FLEURS test set):
 
 Details and how to reproduce: [docs/languages.md](docs/languages.md).
 
+## Repositories
+
+semaje is split into focused repos. This one is the **platform**: the API,
+job queue, realtime streaming, transcript library, auth, local-LLM task
+pipeline, deployment, and docs. Everything else talks to it over HTTP.
+
+| Repo | What it is | Ships as |
+|---|---|---|
+| **[semaje](https://github.com/semajehq/semaje)** (this) | API, jobs, realtime, library, auth, LLM tasks, deploy, docs | `ghcr.io/semajehq/semaje` |
+| [semaje-stt](https://github.com/semajehq/semaje-stt) | speech-to-text: Whisper + Omnilingual ASR, any audio format | `ghcr.io/semajehq/semaje-stt` |
+| [semaje-tts](https://github.com/semajehq/semaje-tts) | text-to-speech: Piper, opt-in MMS-TTS, custom voices | `ghcr.io/semajehq/semaje-tts` |
+| [semaje-web](https://github.com/semajehq/semaje-web) | React web app (capture, library, meetings, model workshop) | `ghcr.io/semajehq/semaje-web` |
+| [semaje-extension](https://github.com/semajehq/semaje-extension) | browser extension for Chrome, Edge, Brave, Opera, Vivaldi, Arc, Firefox, Safari | release zips per browser |
+| [semaje-languages](https://github.com/semajehq/semaje-languages) | shared registry: 1,693 languages, every alias → one code | pip package (tagged) |
+
+Each repo owns its code, tests, evals, CI, and release; the platform pins the
+versions it runs in `.env` (`SEMAJE_STT_VERSION`, `SEMAJE_TTS_VERSION`,
+`SEMAJE_WEB_VERSION`).
+
 ## What it does
 
 - **Any audio, any format**: MP3, M4A/AAC, Opus/WebM, Ogg, FLAC, ALAC, WAV
@@ -42,10 +61,8 @@ Details and how to reproduce: [docs/languages.md](docs/languages.md).
 - **Library**: every transcript persisted, full-text and semantic search,
   revisions, glossary, exports, share links.
 - **Realtime**: streaming transcription over WebSocket for live mic and dictation.
-- **Browser extension**: Chrome, Edge, Brave, Opera, Vivaldi, Arc, Firefox,
-  Safari. Dictate into any field, live-caption any tab, transcribe any page
-  media, read text aloud. Enterprise force-install and central configuration.
-  → [docs/browser-extension.md](docs/browser-extension.md)
+- **Browser extension**: dictate into any field, live-caption any tab,
+  transcribe any page media, read text aloud, with enterprise force-install.
 - **Enterprise-ready**: SSO/OIDC, API keys with scopes, org tenancy, audit
   log, retention policies, Prometheus metrics, request tracing across services,
   readiness probes, capacity limits with back-pressure, air-gapped operation.
@@ -53,50 +70,48 @@ Details and how to reproduce: [docs/languages.md](docs/languages.md).
 ## Quick start
 
 ```bash
+git clone https://github.com/semajehq/semaje && cd semaje
 cp .env.example .env
 deploy/semaje cpu up              # or workstation-gpu / server-gpu
 open http://localhost:8080
 ```
 
-First start downloads the speech models (about 1.5 GB on CPU) before reporting
-ready. Then install the browser extension:
-[docs/browser-extension.md](docs/browser-extension.md).
+Compose pulls the released STT, TTS, and web images and builds the platform.
+The first start downloads the speech models (about 1.5 GB on CPU) before
+reporting ready. Then install the
+[browser extension](https://github.com/semajehq/semaje-extension).
 
-Local development without Docker: [SETUP.md](SETUP.md).
+Working on several repos at once: `npm run workspace` clones the others next to
+this one, and `docker compose -f docker-compose.yml -f compose.dev.yml up --build`
+runs the stack from your local checkouts. Details: [SETUP.md](SETUP.md).
 
-## Architecture
-
-Services-first monorepo. Each service owns its code, contract, tests, and evals.
+## Platform services
 
 | Service | Role |
 |---|---|
-| `services/stt` | speech-to-text: Whisper + Omnilingual ASR, per-language routing, any-format intake (Python) |
-| `services/tts` | text-to-speech: Piper, MMS-TTS, custom voices, license gating (Python) |
-| `packages/languages` | shared registry: 1,693 languages, every alias resolved to one canonical code |
-| `services/api` | HTTP gateway: auth, uploads, jobs, transcripts, languages, TTS proxy |
+| `services/api` | HTTP gateway: auth, uploads, jobs, transcripts, languages, TTS proxy, task catalog |
+| `services/speech` | clients for the semaje-stt and semaje-tts contracts |
 | `services/realtime` | WebSocket streaming STT (`/ws`) |
 | `services/jobs` | pg-boss queue + transcription worker |
 | `services/transcripts` | Postgres library, search, shares, exports |
 | `services/auth` | single-user / local-db / OIDC, JWT, API keys |
 | `services/storage` | fs / S3 blob adapters |
-| `services/llm` | local open-model adapters (Ollama, llama.cpp) |
-| `services/extension` | cross-browser MV3 extension |
+| `services/llm` | local open-model adapters (Ollama, llama.cpp) + the 15-task prompt library |
 
 ## Tests and evals
 
 ```bash
-npm test                    # Node gate tests: every service + extension (no network)
-npm run test:stt            # STT + language registry (real ffmpeg format matrix)
-npm run test:tts            # TTS
-npm run test:extension:e2e  # the built extension in real Chrome and Firefox
-npm run eval:fleurs         # real-speech accuracy per language (FLEURS), with regression thresholds
-npm run eval:tts            # TTS intelligibility via TTS → STT round trip
+npm test                    # platform gate tests (no network)
+npm run eval:smoke          # deterministic quality smoke eval
 npm run eval:llm            # task-quality rubrics for the local LLM
 ```
+
+Speech accuracy (FLEURS), TTS intelligibility, and the extension's real-browser
+tests live in their repos.
 
 ## Licenses
 
 Every model and runtime semaje uses is open source and keeps its own license
 (table above). MMS-TTS weights are non-commercial and stay disabled unless an
 operator enables them. Each Piper voice records its dataset license in
-`packages/languages/tts-voices.json`.
+[semaje-languages](https://github.com/semajehq/semaje-languages) (`tts-voices.json`).

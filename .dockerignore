@@ -5,9 +5,5 @@ dist
 .git
 data
 uploads
-services/stt/.venv
-services/stt/vendor
-services/tts/.venv
-services/extension/dist
 **/__pycache__
 **/* 2.*
