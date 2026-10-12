@@ -48,7 +48,7 @@ export const SttResult = z.object({
   backend: z.string(),
   model: z.string(),
   // v2: multi-engine routing metadata (optional so v1 payloads still parse)
-  engine: z.enum(['whisper', 'omnilingual']).optional(),
+  engine: z.enum(['whisper', 'omnilingual', 'mms']).optional(),
   engineLanguage: z.string().nullable().optional(),
   languageCode: z.string().nullable().optional(),
   languageName: z.string().nullable().optional(),

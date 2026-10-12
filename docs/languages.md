@@ -67,6 +67,23 @@ make eval-fleurs ARGS="--langs sw_ke,yo_ng,am_et,luo_ke,lg_ug,ha_ng,zu_za --n 10
 The eval fails if any language regresses past `semaje_stt/evals/fleurs_thresholds.json` in semaje-stt,
 or if `auto` ever does worse than forced Whisper on a language where both ran.
 
+## Kikuyu and Dholuo
+
+Measured on Google WAXAL test recordings (identical 40 clips per engine; rows
+whose audio doesn't match the script excluded):
+
+| Language | Omnilingual CTC-300M (default) | MMS-1b-all (opt-in, non-commercial) |
+|---|---|---|
+| Kikuyu | CER 21.4%, WER 86.1% | CER 19.1%, WER 57.1% |
+| Dholuo | CER 10.7%, WER 47.6% | CER 10.0%, WER 37.3% |
+
+MMS-1b-all is the ASR C-elo Labs uses for Kikuyu; its language adapters keep
+output in the right orthography. Enable it with `STT_ALLOW_NONCOMMERCIAL=true`
+(weights are CC-BY-NC-4.0); it then serves only `STT_MMS_LANGUAGES`.
+
+For speech output, [semaje-tts](https://github.com/semajehq/semaje-tts) can
+train commercially usable Kikuyu and Dholuo voices from WAXAL (`training/`).
+
 ## Choosing models
 
 | Hardware | Whisper | Omnilingual | Notes |

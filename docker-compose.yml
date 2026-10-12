@@ -73,6 +73,8 @@ services:
       STT_COMPUTE_TYPE: ${STT_COMPUTE_TYPE:-int8}
       STT_MAX_CONCURRENCY: ${STT_MAX_CONCURRENCY:-1}
       STT_API_TOKEN: ${STT_API_TOKEN:-}
+      STT_ALLOW_NONCOMMERCIAL: ${STT_ALLOW_NONCOMMERCIAL:-false}
+      STT_MMS_LANGUAGES: ${STT_MMS_LANGUAGES:-kik,luo}
       EVAL_REPORT_PATH: /data/observability/stt-eval.json
     volumes:
       - sttmodels:/models
