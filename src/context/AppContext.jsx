@@ -3,9 +3,6 @@ import { me, clearTokens, getRefreshToken } from '../utils/apiClient'
 
 export const AppContext = createContext(null)
 
-// "proxy"  -> all calls go through your backend (key is hidden)
-// "direct" -> user enters their own fallback task key in the UI
-const ENV_MODE = import.meta.env.VITE_API_MODE || 'proxy'
 // "single-user" deployments need no login at all
 const AUTH_MODE = import.meta.env.VITE_AUTH_MODE || 'single-user'
 const ONBOARDING_KEY = 'semaje_onboarding'
@@ -29,12 +26,6 @@ function readOnboarding() {
 export function AppProvider({ children }) {
   const [theme, setTheme] = useState(() =>
     localStorage.getItem('theme') || 'dark'
-  )
-  const [apiMode, setApiMode] = useState(() =>
-    localStorage.getItem('api_mode') || ENV_MODE
-  )
-  const [apiKey, setApiKey] = useState(() =>
-    localStorage.getItem('gemini_key') || ''
   )
   const [onboarding, setOnboarding] = useState(readOnboarding)
 
@@ -67,23 +58,11 @@ export function AppProvider({ children }) {
     localStorage.setItem('theme', theme)
   }, [theme])
 
-  // Persist user-supplied key
-  useEffect(() => {
-    if (apiKey) localStorage.setItem('gemini_key', apiKey)
-    else localStorage.removeItem('gemini_key')
-  }, [apiKey])
-
-  // Persist api mode
-  useEffect(() => {
-    localStorage.setItem('api_mode', apiMode)
-  }, [apiMode])
-
   useEffect(() => {
     localStorage.setItem(ONBOARDING_KEY, JSON.stringify(onboarding))
   }, [onboarding])
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
-  const toggleApiMode = () => setApiMode(m => m === 'proxy' ? 'direct' : 'proxy')
   const workspaceName = onboarding.workspaceName || (authRequired ? 'Team workspace' : 'Self-host workspace')
   const account = useMemo(() => ({
     workspaceName,
@@ -93,7 +72,7 @@ export function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{
-      theme, toggleTheme, apiMode, toggleApiMode, apiKey, setApiKey,
+      theme, toggleTheme,
       user, setUser, authReady, authRequired, signOut,
       onboarding, completeOnboarding, resetOnboarding, account,
     }}>

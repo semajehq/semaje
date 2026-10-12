@@ -1,0 +1,10 @@
+{
+  "_comment": "Max CER for TTS→STT round trip. Baseline 2026-10-12 (Piper medium/high voices, Whisper base + omniASR_CTC_300M_v2). Includes digit/word normalization noise (\"9\" vs \"nine\"). kik/yo/am measured on MMS-TTS (TTS_ALLOW_NONCOMMERCIAL=true).",
+  "en": 0.12,
+  "sw": 0.1,
+  "fr": 0.25,
+  "ne": 0.15,
+  "kik": 0.35,
+  "yo": 0.15,
+  "am": 0.28
+}

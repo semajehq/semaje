@@ -1,0 +1,6 @@
+# semaje TTS core: Piper (GPL-3.0-or-later engine, run as its own service process).
+piper-tts==1.8.0
+fastapi==0.115.0
+uvicorn==0.30.6
+prometheus-client>=0.20
+numpy>=1.26

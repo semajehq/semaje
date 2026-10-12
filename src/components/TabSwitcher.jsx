@@ -23,7 +23,7 @@ export default function TabSwitcher({ activeTab, onChange }) {
 
   return (
     <div
-      className="flex gap-1 p-1 rounded-xl border sm:min-w-[19rem]"
+      className="flex gap-1 p-1 rounded-lg border sm:min-w-[19rem]"
       style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
     >
       {btn('upload', <Upload size={13} />, 'Upload File', 'Upload')}

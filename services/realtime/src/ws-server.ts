@@ -4,13 +4,13 @@ import type { Server as HttpServer, IncomingMessage } from 'node:http'
 import { WebSocketServer, WebSocket } from 'ws'
 import type { Principal } from '@semaje/schemas'
 import { authenticate } from '../../auth/src/index.ts'
-import { whisperTranscribe } from '../../whisper/client/index.ts'
+import { sttTranscribe } from '../../stt/client/index.ts'
 import { createTranscript } from '../../transcripts/src/index.ts'
 import { RealtimeSession, type Transcriber, type Persister } from './session.ts'
 
 const realTranscriber: Transcriber = async (audio, mimeType, language) => {
   const ext = mimeType.includes('ogg') ? 'ogg' : mimeType.includes('mp4') ? 'mp4' : 'webm'
-  return whisperTranscribe(audio, `live.${ext}`, mimeType, { language })
+  return sttTranscribe(audio, `live.${ext}`, mimeType, { language })
 }
 
 const realPersister: Persister = async (principal, data) => {

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+destination="${BACKUP_DIR:-$ROOT/backups}"
+stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+work="$destination/.semaje-$stamp.tmp"
+archive="$destination/semaje-$stamp"
+mkdir -p "$work"
+trap 'rm -rf "$work"' EXIT
+
+docker compose build --quiet api stt >/dev/null
+docker compose exec -T postgres pg_dump -U semaje -d semaje -Fc > "$work/postgres.dump"
+docker compose run --rm --no-deps -T api sh -c \
+  'tar -C /data -czf - blobs exports logs integrations observability 2>/dev/null || tar -C /data -czf - blobs' \
+  > "$work/app-data.tar.gz"
+docker compose run --rm --no-deps -T stt tar -C /models -czf - . > "$work/stt-models.tar.gz"
+
+if docker compose --profile local-llm ps -q ollama | grep -q .; then
+  docker compose --profile local-llm exec -T ollama tar -C /root/.ollama -czf - . > "$work/ollama-models.tar.gz"
+fi
+
+if [[ -f .env ]]; then cp .env "$work/config.env"; fi
+git rev-parse HEAD > "$work/source-revision.txt" 2>/dev/null || printf 'unknown\n' > "$work/source-revision.txt"
+
+docker compose exec -T postgres pg_restore --list < "$work/postgres.dump" >/dev/null
+tar -tzf "$work/app-data.tar.gz" >/dev/null
+tar -tzf "$work/stt-models.tar.gz" >/dev/null
+if [[ -f "$work/ollama-models.tar.gz" ]]; then tar -tzf "$work/ollama-models.tar.gz" >/dev/null; fi
+(
+  cd "$work"
+  shasum -a 256 ./* > SHA256SUMS
+)
+mv "$work" "$archive"
+trap - EXIT
+printf 'Backup written to %s\n' "$archive"

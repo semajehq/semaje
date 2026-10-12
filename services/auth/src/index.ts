@@ -112,6 +112,11 @@ export async function authenticate(
     if (!row || !verifyApiKeySecret(parsed.secret, row.key_hash)) throw new AuthError('Invalid API key')
     pool.query(`UPDATE api_keys SET last_used_at = now() WHERE key_prefix = $1`, [parsed.prefix])
       .catch(() => {})
+    pool.query(
+      `INSERT INTO audit_events (org_id, actor_id, action, target_type, target_id, metadata)
+       VALUES ($1,$2,'api_key.used','api_key',$3,$4)`,
+      [row.org_id, row.owner_id, parsed.prefix, JSON.stringify({ scopes: row.scopes })],
+    ).catch(() => {})
     return { userId: row.owner_id, orgId: row.org_id, role: row.role, scopes: row.scopes, via: 'api-key' }
   }
 

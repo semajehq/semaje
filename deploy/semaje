@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+profile="${1:-cpu}"
+action="${2:-up}"
+compose=(docker compose)
+
+case "$profile" in
+  cpu) ;;
+  workstation-gpu) compose+=(-f docker-compose.yml -f deploy/compose.workstation-gpu.yml) ;;
+  server-gpu) compose+=(-f docker-compose.yml -f deploy/compose.server-gpu.yml) ;;
+  *) echo "usage: deploy/semaje [cpu|workstation-gpu|server-gpu] [up|down|status|logs]"; exit 2 ;;
+esac
+
+case "$action" in
+  up) "${compose[@]}" --profile local-llm up -d --build ;;
+  down) "${compose[@]}" --profile local-llm down ;;
+  status) "${compose[@]}" --profile local-llm ps ;;
+  logs) "${compose[@]}" --profile local-llm logs -f --tail=150 ;;
+  *) echo "unknown action: $action"; exit 2 ;;
+esac

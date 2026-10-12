@@ -22,7 +22,7 @@ export default function TranscriptOutput({ transcript, status, error, loading })
   }
 
   return (
-    <div className="rounded-xl border overflow-hidden" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+    <div className="rounded-lg border overflow-hidden" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
         <span className="text-xs font-display font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--accent)' }}>
@@ -32,12 +32,12 @@ export default function TranscriptOutput({ transcript, status, error, loading })
         {transcript && (
           <div className="flex gap-2">
             <button onClick={handleCopy}
-              className="text-xs font-mono px-3 py-1.5 rounded-xl border transition-colors flex items-center gap-1.5"
+              className="text-xs font-mono px-3 py-1.5 rounded-lg border transition-colors flex items-center gap-1.5"
               style={{ borderColor: 'var(--border)', color: copied ? '#4ade80' : 'var(--muted)' }}>
               {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}
             </button>
             <button onClick={handleDownload}
-              className="text-xs font-mono px-3 py-1.5 rounded-xl border transition-colors flex items-center gap-1.5"
+              className="text-xs font-mono px-3 py-1.5 rounded-lg border transition-colors flex items-center gap-1.5"
               style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
               <Download size={12} /> .txt
             </button>

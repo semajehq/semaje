@@ -1,0 +1,32 @@
+services:
+  stt:
+    build:
+      context: .
+      dockerfile: services/stt/Dockerfile.cuda
+    environment:
+      STT_DEVICE: cuda
+      STT_COMPUTE_TYPE: float16
+      STT_OMNILINGUAL_DEVICE: cuda
+      STT_WHISPER_MODEL: ${STT_WHISPER_MODEL:-large-v3-turbo}
+      STT_OMNILINGUAL_MODEL: ${STT_OMNILINGUAL_MODEL:-omniASR_LLM_1B_v2}
+      STT_MAX_CONCURRENCY: ${STT_MAX_CONCURRENCY:-2}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  worker:
+    environment:
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-2}

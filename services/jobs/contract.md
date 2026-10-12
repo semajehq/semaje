@@ -10,8 +10,10 @@ retry). `succeeded`/`canceled` are terminal. Enforced by `assertTransition`.
 ## API
 
 ```ts
-enqueueTranscribeJob(principal, JobInput, webhookUrl?) -> job row   // + queue send
+enqueueTranscribeJob(principal, JobInput, webhookUrl?, metadata?) -> job row // + queue send
 getJob(principal, id) -> job | null                                 // org-scoped
+listJobs(principal, limit?) -> job[]                                // org-scoped
+retryJob(principal, id) -> job | null                               // failed -> queued
 markJob(id, from, to, patch) -> row | null   // compare-and-set on status
 processJob(jobId)   // worker: storage → whisper → pipeline → llm? → transcripts
 startWorker()       // consumes QUEUE_TRANSCRIBE (npm run worker)
@@ -24,5 +26,5 @@ startWorker()       // consumes QUEUE_TRANSCRIBE (npm run worker)
   "transcriptId": "…", "error": null, "ts": "ISO-8601" }
 ```
 
-Phase 2 adds HMAC signing + retries. Progress: 0→20 (blob) →70 (whisper)
-→90 (llm) →100.
+The body is signed with `WEBHOOK_SECRET` in `X-Semaje-Signature`. Delivery retries four times with
+capped exponential backoff. Progress: 0 -> 20 (blob) -> 70 (whisper) -> 90 (llm) -> 100.

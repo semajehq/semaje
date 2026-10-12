@@ -1,0 +1,12 @@
+{
+  "profile": "smoke",
+  "recordedAt": "2026-07-11T00:00:00.000Z",
+  "backend": "fixture",
+  "model": "baseline-2026-07",
+  "runtimeMs": 42,
+  "hypotheses": {
+    "meeting": "The launch moves to March tenth and Sarah owns the marketing rollout.",
+    "support": "Please send the invoice to the customer before Friday afternoon.",
+    "names": "Nairobi operations approved the Semaje transcription deployment."
+  }
+}

@@ -41,7 +41,7 @@ export default function TaskSelector({ task, onTaskChange }) {
       {/* Selected task button */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border transition-all"
+        className="w-full min-w-0 flex items-center gap-3 px-4 py-3 rounded-lg border transition-all"
         style={{
           background: 'var(--surface)',
           borderColor: open ? 'var(--accent)' : 'var(--border)',
@@ -54,9 +54,9 @@ export default function TaskSelector({ task, onTaskChange }) {
         >
           <CurrentIcon size={16} style={{ color: 'var(--accent)' }} />
         </div>
-        <div className="flex-1 text-left">
+        <div className="flex-1 min-w-0 text-left">
           <div className="text-sm font-semibold">{current.label}</div>
-          <div className="text-xs" style={{ color: 'var(--muted)' }}>{current.description}</div>
+          <div className="text-xs truncate" style={{ color: 'var(--muted)' }}>{current.description}</div>
         </div>
         <ChevronDown
           size={16}
@@ -71,7 +71,7 @@ export default function TaskSelector({ task, onTaskChange }) {
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
 
           <div
-            className="absolute z-50 left-0 right-0 mt-2 rounded-xl border shadow-2xl overflow-hidden"
+            className="absolute z-50 left-0 right-0 mt-2 rounded-lg border shadow-2xl overflow-hidden"
             style={{
               background: 'var(--surface)',
               borderColor: 'var(--border)',

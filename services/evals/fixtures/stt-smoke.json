@@ -1,0 +1,19 @@
+{
+  "license": "CC0 text fixtures; audio is synthesized locally from these references for full runs",
+  "fixtures": [
+    { "id": "meeting", "reference": "The launch moves to March tenth and Sarah owns the marketing rollout." },
+    { "id": "support", "reference": "Please send the invoice to the customer before Friday afternoon." },
+    { "id": "names", "reference": "Nairobi operations approved the Semaje transcription deployment." }
+  ],
+  "candidate": {
+    "backend": "fixture",
+    "model": "current-smoke",
+    "runtimeMs": 40,
+    "hypotheses": {
+      "meeting": "The launch moves to March tenth and Sarah owns the marketing rollout.",
+      "support": "Please send the invoice to the customer before Friday afternoon.",
+      "names": "Nairobi operations approved the Semaje transcription deployment."
+    }
+  },
+  "thresholds": { "maxWer": 0.2, "maxCer": 0.12, "maxWerRegression": 0.03, "maxRuntimeRatio": 1.25 }
+}

@@ -2,3 +2,12 @@ node_modules
 npm-debug.log
 dist
 .env
+.git
+data
+uploads
+services/stt/.venv
+services/stt/vendor
+services/tts/.venv
+services/extension/dist
+**/__pycache__
+**/* 2.*

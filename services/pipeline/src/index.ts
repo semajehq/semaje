@@ -4,7 +4,7 @@
 // Whisper transcript. No I/O here so it's unit-testable for free.
 // (Lifted from server/pipeline.js — same logic, now typed.)
 // ═══════════════════════════════════════════════════════════════
-import type { WhisperResult } from '@semaje/schemas'
+import type { SttResult } from '@semaje/schemas'
 
 // Tasks where the LLM needs accurate timing → feed it the Whisper
 // segment timestamps. Everything else gets plain text.
@@ -51,21 +51,21 @@ function shortTs(seconds: number): string {
 
 // Pure-Whisper transcription output (no LLM). Honors the timestamps option.
 export function renderPlainTranscript(
-  whisper: Pick<WhisperResult, 'text' | 'segments'>,
+  stt: Pick<SttResult, 'text' | 'segments'>,
   options: TaskOptions = {},
 ): string {
-  const segs = whisper?.segments || []
-  if (!whisper?.text) return '[No speech detected]'
-  if (!options.timestamps || segs.length === 0) return whisper.text
+  const segs = stt?.segments || []
+  if (!stt?.text) return '[No speech detected]'
+  if (!options.timestamps || segs.length === 0) return stt.text
   return segs.map(s => `${shortTs(s.start)} ${s.text}`).join('\n')
 }
 
 // Build the transcript block appended to the LLM task prompt.
 export function buildTranscriptContext(
   task: string,
-  whisper: Pick<WhisperResult, 'text' | 'segments' | 'language'>,
+  stt: Pick<SttResult, 'text' | 'segments' | 'language'>,
 ): string {
-  const lang = whisper?.language || 'unknown'
+  const lang = stt?.language || 'unknown'
   const header =
     `SOURCE: The text below is a verbatim speech-to-text transcript produced ` +
     `by Whisper (detected language: ${lang}). Perform the requested TASK on ` +
@@ -75,13 +75,13 @@ export function buildTranscriptContext(
       : ``)
 
   let body: string
-  const segs = whisper?.segments || []
+  const segs = stt?.segments || []
   if (TIMING_TASKS.has(task) && segs.length > 0) {
     body = segs
       .map(s => `[${formatTimestamp(s.start)} --> ${formatTimestamp(s.end)}] ${s.text}`)
       .join('\n')
   } else {
-    body = whisper?.text || '[No speech detected]'
+    body = stt?.text || '[No speech detected]'
   }
 
   return `${header}\n\nTRANSCRIPT:\n${body}`

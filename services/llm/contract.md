@@ -4,7 +4,7 @@ Swappable text-task engine. The ONLY place semaje talks to an LLM.
 The LLM only ever sees transcript text — never audio.
 
 ```ts
-getLlm(name?: string): LlmAdapter          // name defaults to env LLM_ADAPTER, then 'claude-local'
+getLlm(name?: string): LlmAdapter          // name defaults to env LLM_ADAPTER, then 'ollama'
 LlmAdapter.run(taskPrompt, transcriptContext): Promise<string>
 ```
 
@@ -12,12 +12,18 @@ LlmAdapter.run(taskPrompt, transcriptContext): Promise<string>
 
 | Adapter | Engine | Notes |
 |---|---|---|
-| `claude-local` (default) | Local Claude Code CLI (`claude -p`, stdin) | No hosted API. Needs the `claude` CLI + creds (`CLAUDE_BIN` overridable). Best available model, no downgrades. |
-| `gemini` | Gemini HTTP API | Fallback. Needs `GEMINI_API_KEY`. 429 retry ×3. |
+| `ollama` (default) | Ollama HTTP API | Fully local, retry x3, model and endpoint configurable per workspace. |
+| `llama-cpp` | llama.cpp OpenAI-compatible server | Fully local GGUF runtime. |
+| `claude-local` | Local Claude Code CLI (`claude -p`, stdin) | Optional; routes through the operator's own Claude Code install. |
 
-`claude-local` becomes the active default only after `npm run eval:llm` passes all
-15 task rubrics for it (see `evals/eval_tasks.ts`). Until then deployments pin
-`LLM_ADAPTER=gemini`.
+There is no hosted-API adapter. `ollama` and `llama-cpp` run open-weight models
+(Qwen, Llama, Mistral, Gemma) on your own hardware, which keeps the whole
+platform open source end to end. A gate test asserts no hosted adapter is
+registered.
+
+Meeting enrichment is validated as structured JSON containing summary,
+decisions, action items with owners/dates, risks, follow-ups, and chapters.
+Malformed model output receives one repair pass before the job fails safely.
 
 Task prompts come from `src/utils/promptBuilder.js` (the 15-task prompt library);
 transcript context from `services/pipeline`.

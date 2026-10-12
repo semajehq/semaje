@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-import { Sun, Moon, Server, KeyRound, ArrowLeftRight, Library, LogOut, Home, RadioTower, ListChecks, Settings, CalendarDays, PlugZap } from 'lucide-react'
+import { Sun, Moon, Library, LogOut, Home, RadioTower, ListChecks, Settings, CalendarDays, Sparkles } from 'lucide-react'
 
 export default function Header() {
-  const { theme, toggleTheme, apiMode, toggleApiMode, user, authRequired, signOut, account, onboarding } = useContext(AppContext)
+  const { theme, toggleTheme, user, authRequired, signOut, account, onboarding } = useContext(AppContext)
   const location = useLocation()
 
   const navLink = (to, label, Icon) => (
@@ -41,8 +41,7 @@ export default function Header() {
             {navLink('/', 'Capture', Home)}
             {navLink('/meetings', 'Meetings', CalendarDays)}
             {navLink('/library', 'Library', Library)}
-            {navLink('/settings/api-keys', 'Keys', KeyRound)}
-            {navLink('/settings/integrations', 'Integrations', PlugZap)}
+            {navLink('/settings/intelligence', 'Intelligence', Sparkles)}
             {navLink('/settings/platform', 'Platform', Settings)}
             {!onboarding.completed && navLink('/onboarding', 'Setup', ListChecks)}
           </nav>
@@ -53,17 +52,6 @@ export default function Header() {
             <RadioTower size={13} style={{ color: 'var(--accent)' }} />
             Self-host ready
           </div>
-          <button
-            onClick={toggleApiMode}
-            className="icon-button px-3 py-2 rounded-lg text-xs font-mono flex items-center gap-2 transition-all"
-            title="Click to switch API mode"
-          >
-            {apiMode === 'proxy'
-              ? <><Server size={13} /> <span className="api-mode-label">Server</span></>
-              : <><KeyRound size={13} /> <span className="api-mode-label">Direct</span></>
-            }
-            <ArrowLeftRight className="api-mode-swap" size={11} style={{ color: 'var(--border)' }} />
-          </button>
           <button
             onClick={toggleTheme}
             className="icon-button p-2.5 rounded-lg transition-colors"

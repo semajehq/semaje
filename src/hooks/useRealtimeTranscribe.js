@@ -1,6 +1,5 @@
 // Realtime transcription over the platform WebSocket (services/realtime).
-// Replaces 5s HTTP polling with one persistent socket. Sits beside the
-// retained useLiveTranscribe (BYO-key fallback).
+// One persistent socket; the server windows audio to the STT service.
 import { useState, useRef, useCallback } from 'react'
 import { getAccessToken } from '../utils/apiClient'
 
@@ -24,7 +23,7 @@ export function useRealtimeTranscribe() {
   const recorderRef = useRef(null)
   const streamRef = useRef(null)
 
-  const start = useCallback(async ({ mode = 'dictation', title = '' } = {}) => {
+  const start = useCallback(async ({ mode = 'dictation', title = '', language = '' } = {}) => {
     setError('')
     setSavedId(null)
     if (!window.MediaRecorder) {
@@ -43,7 +42,7 @@ export function useRealtimeTranscribe() {
       wsRef.current = ws
 
       ws.onopen = () => {
-        ws.send(JSON.stringify({ type: 'start', mode, title, mimeType }))
+        ws.send(JSON.stringify({ type: 'start', mode, title, mimeType, ...(language ? { language } : {}) }))
         const recorder = new MediaRecorder(stream, { mimeType })
         recorderRef.current = recorder
         recorder.ondataavailable = (e) => {

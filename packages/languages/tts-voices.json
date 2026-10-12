@@ -1,0 +1,3900 @@
+{
+ "version": 1,
+ "generatedBy": "python -m packages.languages.build",
+ "piper": [
+  {
+   "id": "ar_JO-kareem-low",
+   "engine": "piper",
+   "locale": "ar_JO",
+   "family": "ar",
+   "languageName": "Arabic",
+   "country": "Jordan",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
+    "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/AliMokhammad/arabicttstrain/",
+    "commercialUse": "verify"
+   },
+   "language": "arb_Arab"
+  },
+  {
+   "id": "ar_JO-kareem-medium",
+   "engine": "piper",
+   "locale": "ar_JO",
+   "family": "ar",
+   "languageName": "Arabic",
+   "country": "Jordan",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
+    "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/AliMokhammad/arabicttstrain/",
+    "commercialUse": "verify"
+   },
+   "language": "arb_Arab"
+  },
+  {
+   "id": "bg_BG-dimitar-medium",
+   "engine": "piper",
+   "locale": "bg_BG",
+   "family": "bg",
+   "languageName": "Bulgarian",
+   "country": "Bulgaria",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "bg/bg_BG/dimitar/medium/bg_BG-dimitar-medium.onnx",
+    "bg/bg_BG/dimitar/medium/bg_BG-dimitar-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "bul_Cyrl"
+  },
+  {
+   "id": "bn_BD-google-medium",
+   "engine": "piper",
+   "locale": "bn_BD",
+   "family": "bn",
+   "languageName": "Bengali",
+   "country": "Bangladesh",
+   "quality": "medium",
+   "speakers": 16,
+   "sizeBytes": 76782515,
+   "files": [
+    "bn/bn_BD/google/medium/bn_BD-google-medium.onnx",
+    "bn/bn_BD/google/medium/bn_BD-google-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Attribution-ShareAlike 4.0 International",
+    "datasetUrl": "http://www.openslr.org/37/",
+    "commercialUse": "verify"
+   },
+   "language": "ben_Beng"
+  },
+  {
+   "id": "ca_ES-upc_ona-medium",
+   "engine": "piper",
+   "locale": "ca_ES",
+   "family": "ca",
+   "languageName": "Catalan",
+   "country": "Spain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ca/ca_ES/upc_ona/medium/ca_ES-upc_ona-medium.onnx",
+    "ca/ca_ES/upc_ona/medium/ca_ES-upc_ona-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-SA 3.0 ES",
+    "datasetUrl": "https://collectivat.cat/asr#upc-festcat-tts-corpora",
+    "commercialUse": "verify"
+   },
+   "language": "cat_Latn"
+  },
+  {
+   "id": "ca_ES-upc_ona-x_low",
+   "engine": "piper",
+   "locale": "ca_ES",
+   "family": "ca",
+   "languageName": "Catalan",
+   "country": "Spain",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "ca/ca_ES/upc_ona/x_low/ca_ES-upc_ona-x_low.onnx",
+    "ca/ca_ES/upc_ona/x_low/ca_ES-upc_ona-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-SA 3.0 ES",
+    "datasetUrl": "https://collectivat.cat/asr#upc-festcat-tts-corpora",
+    "commercialUse": "verify"
+   },
+   "language": "cat_Latn"
+  },
+  {
+   "id": "ca_ES-upc_pau-x_low",
+   "engine": "piper",
+   "locale": "ca_ES",
+   "family": "ca",
+   "languageName": "Catalan",
+   "country": "Spain",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "ca/ca_ES/upc_pau/x_low/ca_ES-upc_pau-x_low.onnx",
+    "ca/ca_ES/upc_pau/x_low/ca_ES-upc_pau-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-SA 3.0 ES",
+    "datasetUrl": "https://collectivat.cat/asr#upc-festcat-tts-corpora",
+    "commercialUse": "verify"
+   },
+   "language": "cat_Latn"
+  },
+  {
+   "id": "cs_CZ-jirka-low",
+   "engine": "piper",
+   "locale": "cs_CZ",
+   "family": "cs",
+   "languageName": "Czech",
+   "country": "Czech Republic",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "cs/cs_CZ/jirka/low/cs_CZ-jirka-low.onnx",
+    "cs/cs_CZ/jirka/low/cs_CZ-jirka-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ces_Latn"
+  },
+  {
+   "id": "cs_CZ-jirka-medium",
+   "engine": "piper",
+   "locale": "cs_CZ",
+   "family": "cs",
+   "languageName": "Czech",
+   "country": "Czech Republic",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "cs/cs_CZ/jirka/medium/cs_CZ-jirka-medium.onnx",
+    "cs/cs_CZ/jirka/medium/cs_CZ-jirka-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ces_Latn"
+  },
+  {
+   "id": "cs_CZ-kasandra-medium",
+   "engine": "piper",
+   "locale": "cs_CZ",
+   "family": "cs",
+   "languageName": "Czech",
+   "country": "Czech Republic",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "cs/cs_CZ/kasandra/medium/cs_CZ-kasandra-medium.onnx",
+    "cs/cs_CZ/kasandra/medium/cs_CZ-kasandra-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "datasetUrl": "https://huggingface.co/ondrazarici/Cassandra-Kasandra-piper-cz",
+    "commercialUse": "verify"
+   },
+   "language": "ces_Latn"
+  },
+  {
+   "id": "cy_GB-bu_tts-medium",
+   "engine": "piper",
+   "locale": "cy_GB",
+   "family": "cy",
+   "languageName": "Welsh",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 7,
+   "sizeBytes": 77061326,
+   "files": [
+    "cy/cy_GB/bu_tts/medium/cy_GB-bu_tts-medium.onnx",
+    "cy/cy_GB/bu_tts/medium/cy_GB-bu_tts-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY",
+    "datasetUrl": "https://huggingface.co/datasets/techiaith/bu-tts-cy-en",
+    "commercialUse": "verify"
+   },
+   "language": "cym_Latn"
+  },
+  {
+   "id": "cy_GB-gwryw_gogleddol-medium",
+   "engine": "piper",
+   "locale": "cy_GB",
+   "family": "cy",
+   "languageName": "Welsh",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "cy/cy_GB/gwryw_gogleddol/medium/cy_GB-gwryw_gogleddol-medium.onnx",
+    "cy/cy_GB/gwryw_gogleddol/medium/cy_GB-gwryw_gogleddol-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://git.techiaith.bangor.ac.uk/data-porth-technolegau-iaith/corpws-talentau-llais",
+    "commercialUse": "verify"
+   },
+   "language": "cym_Latn"
+  },
+  {
+   "id": "da_DK-talesyntese-medium",
+   "engine": "piper",
+   "locale": "da_DK",
+   "family": "da",
+   "languageName": "Danish",
+   "country": "Denmark",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "da/da_DK/talesyntese/medium/da_DK-talesyntese-medium.onnx",
+    "da/da_DK/talesyntese/medium/da_DK-talesyntese-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-21/",
+    "commercialUse": "verify"
+   },
+   "language": "dan_Latn"
+  },
+  {
+   "id": "de_DE-eva_k-x_low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "de/de_DE/eva_k/x_low/de_DE-eva_k-x_low.onnx",
+    "de/de_DE/eva_k/x_low/de_DE-eva_k-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.caito.de/2019/01/03/the-m-ailabs-speech-dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-karlsson-low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "de/de_DE/karlsson/low/de_DE-karlsson-low.onnx",
+    "de/de_DE/karlsson/low/de_DE-karlsson-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.caito.de/2019/01/03/the-m-ailabs-speech-dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-kerstin-low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "de/de_DE/kerstin/low/de_DE-kerstin-low.onnx",
+    "de/de_DE/kerstin/low/de_DE-kerstin-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/rhasspy/dataset-voice-kerstin",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-mls-medium",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "medium",
+   "speakers": 236,
+   "sizeBytes": 76961079,
+   "files": [
+    "de/de_DE/mls/medium/de_DE-mls-medium.onnx",
+    "de/de_DE/mls/medium/de_DE-mls-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY 4.0",
+    "datasetUrl": "http://openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-pavoque-low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "de/de_DE/pavoque/low/de_DE-pavoque-low.onnx",
+    "de/de_DE/pavoque/low/de_DE-pavoque-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/pavoque-data",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-ramona-low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "de/de_DE/ramona/low/de_DE-ramona-low.onnx",
+    "de/de_DE/ramona/low/de_DE-ramona-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.caito.de/2019/01/03/the-m-ailabs-speech-dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-thorsten-high",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 113895201,
+   "files": [
+    "de/de_DE/thorsten/high/de_DE-thorsten-high.onnx",
+    "de/de_DE/thorsten/high/de_DE-thorsten-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/thorstenMueller/Thorsten-Voice",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-thorsten-low",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "de/de_DE/thorsten/low/de_DE-thorsten-low.onnx",
+    "de/de_DE/thorsten/low/de_DE-thorsten-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/thorstenMueller/Thorsten-Voice",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-thorsten-medium",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx",
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/thorstenMueller/Thorsten-Voice",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "de_DE-thorsten_emotional-medium",
+   "engine": "piper",
+   "locale": "de_DE",
+   "family": "de",
+   "languageName": "German",
+   "country": "Germany",
+   "quality": "medium",
+   "speakers": 8,
+   "sizeBytes": 76745905,
+   "files": [
+    "de/de_DE/thorsten_emotional/medium/de_DE-thorsten_emotional-medium.onnx",
+    "de/de_DE/thorsten_emotional/medium/de_DE-thorsten_emotional-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/thorstenMueller/Thorsten-Voice",
+    "commercialUse": "verify"
+   },
+   "language": "deu_Latn"
+  },
+  {
+   "id": "el_GR-joy-medium",
+   "engine": "piper",
+   "locale": "el_GR",
+   "family": "el",
+   "languageName": "Greek",
+   "country": "Greece",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx",
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC 4.0",
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "ell_Grek"
+  },
+  {
+   "id": "el_GR-rapunzelina-low",
+   "engine": "piper",
+   "locale": "el_GR",
+   "family": "el",
+   "languageName": "Greek",
+   "country": "Greece",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "el/el_GR/rapunzelina/low/el_GR-rapunzelina-low.onnx",
+    "el/el_GR/rapunzelina/low/el_GR-rapunzelina-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/datasets/bryanpark/greek-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "ell_Grek"
+  },
+  {
+   "id": "el_GR-rapunzelina-medium",
+   "engine": "piper",
+   "locale": "el_GR",
+   "family": "el",
+   "languageName": "Greek",
+   "country": "Greece",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "el/el_GR/rapunzelina/medium/el_GR-rapunzelina-medium.onnx",
+    "el/el_GR/rapunzelina/medium/el_GR-rapunzelina-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/datasets/bryanpark/greek-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "ell_Grek"
+  },
+  {
+   "id": "en_GB-alan-low",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_GB/alan/low/en_GB-alan-low.onnx",
+    "en/en_GB/alan/low/en_GB-alan-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic3-voices/blob/master/voices/en_UK/apope_low",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-alan-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_GB/alan/medium/en_GB-alan-medium.onnx",
+    "en/en_GB/alan/medium/en_GB-alan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic3-voices/blob/master/voices/en_UK/apope_low",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-alba-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_GB/alba/medium/en_GB-alba-medium.onnx",
+    "en/en_GB/alba/medium/en_GB-alba-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by/4.0/",
+    "datasetUrl": "https://datashare.ed.ac.uk/handle/10283/3270",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-aru-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 12,
+   "sizeBytes": 76754097,
+   "files": [
+    "en/en_GB/aru/medium/en_GB-aru-medium.onnx",
+    "en/en_GB/aru/medium/en_GB-aru-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by/4.0/",
+    "datasetUrl": "https://www.liverpool.ac.uk/architecture/research/acoustics-research-unit/speech-corpus/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-cori-high",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114219352,
+   "files": [
+    "en/en_GB/cori/high/en_GB-cori-high.onnx",
+    "en/en_GB/cori/high/en_GB-cori-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://librivox.org",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-cori-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_GB/cori/medium/en_GB-cori-medium.onnx",
+    "en/en_GB/cori/medium/en_GB-cori-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://librivox.org",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-jenny_dioco-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_GB/jenny_dioco/medium/en_GB-jenny_dioco-medium.onnx",
+    "en/en_GB/jenny_dioco/medium/en_GB-jenny_dioco-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/dioco-group/jenny-tts-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-northern_english_male-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_GB/northern_english_male/medium/en_GB-northern_english_male-medium.onnx",
+    "en/en_GB/northern_english_male/medium/en_GB-northern_english_male-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-SA 4.0 International",
+    "datasetUrl": "http://www.openslr.org/83/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-semaine-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 4,
+   "sizeBytes": 76737711,
+   "files": [
+    "en/en_GB/semaine/medium/en_GB-semaine-medium.onnx",
+    "en/en_GB/semaine/medium/en_GB-semaine-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/dfki-semaine-data",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-southern_english_female-low",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_GB/southern_english_female/low/en_GB-southern_english_female-low.onnx",
+    "en/en_GB/southern_english_female/low/en_GB-southern_english_female-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-SA 4.0 International",
+    "datasetUrl": "http://www.openslr.org/83/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_GB-vctk-medium",
+   "engine": "piper",
+   "locale": "en_GB",
+   "family": "en",
+   "languageName": "English",
+   "country": "Great Britain",
+   "quality": "medium",
+   "speakers": 109,
+   "sizeBytes": 76952753,
+   "files": [
+    "en/en_GB/vctk/medium/en_GB-vctk-medium.onnx",
+    "en/en_GB/vctk/medium/en_GB-vctk-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by/4.0/",
+    "datasetUrl": "https://datashare.ed.ac.uk/handle/10283/3443",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-amy-low",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_US/amy/low/en_US-amy-low.onnx",
+    "en/en_US/amy/low/en_US-amy-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic3-voices",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-amy-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/amy/medium/en_US-amy-medium.onnx",
+    "en/en_US/amy/medium/en_US-amy-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic3-voices",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-arctic-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 18,
+   "sizeBytes": 76766385,
+   "files": [
+    "en/en_US/arctic/medium/en_US-arctic-medium.onnx",
+    "en/en_US/arctic/medium/en_US-arctic-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See LICENSE file",
+    "datasetUrl": "http://www.festvox.org/cmu_arctic/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-bryce-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_US/bryce/medium/en_US-bryce-medium.onnx",
+    "en/en_US/bryce/medium/en_US-bryce-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-danny-low",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_US/danny/low/en_US-danny-low.onnx",
+    "en/en_US/danny/low/en_US-danny-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic3-voices",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-hfc_female-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx",
+    "en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en",
+    "datasetUrl": "https://ast-astrec.nict.go.jp/en/release/hi-fi-captain/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-hfc_male-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx",
+    "en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en",
+    "datasetUrl": "https://ast-astrec.nict.go.jp/en/release/hi-fi-captain/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-joe-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/joe/medium/en_US-joe-medium.onnx",
+    "en/en_US/joe/medium/en_US-joe-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-john-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_US/john/medium/en_US-john-medium.onnx",
+    "en/en_US/john/medium/en_US-john-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://librivox.org",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-kathleen-low",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_US/kathleen/low/en_US-kathleen-low.onnx",
+    "en/en_US/kathleen/low/en_US-kathleen-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/rhasspy/dataset-voice-kathleen",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-kristin-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_US/kristin/medium/en_US-kristin-medium.onnx",
+    "en/en_US/kristin/medium/en_US-kristin-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://librivox.org",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-kusal-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/kusal/medium/en_US-kusal-medium.onnx",
+    "en/en_US/kusal/medium/en_US-kusal-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/MycroftAI/mimic2",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-l2arctic-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 24,
+   "sizeBytes": 76778673,
+   "files": [
+    "en/en_US/l2arctic/medium/en_US-l2arctic-medium.onnx",
+    "en/en_US/l2arctic/medium/en_US-l2arctic-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "datasetUrl": "https://www.isca-speech.org/archive/interspeech_2018/zhao18b_interspeech.html",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-lessac-high",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 113895201,
+   "files": [
+    "en/en_US/lessac/high/en_US-lessac-high.onnx",
+    "en/en_US/lessac/high/en_US-lessac-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html",
+    "datasetUrl": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-lessac-low",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/lessac/low/en_US-lessac-low.onnx",
+    "en/en_US/lessac/low/en_US-lessac-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html",
+    "datasetUrl": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-lessac-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+    "en/en_US/lessac/medium/en_US-lessac-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html",
+    "datasetUrl": "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-libritts-high",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "high",
+   "speakers": 904,
+   "sizeBytes": 136673811,
+   "files": [
+    "en/en_US/libritts/high/en_US-libritts-high.onnx",
+    "en/en_US/libritts/high/en_US-libritts-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/60/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-libritts_r-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 904,
+   "sizeBytes": 78580914,
+   "files": [
+    "en/en_US/libritts_r/medium/en_US-libritts_r-medium.onnx",
+    "en/en_US/libritts_r/medium/en_US-libritts_r-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/141/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-ljspeech-high",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114199011,
+   "files": [
+    "en/en_US/ljspeech/high/en_US-ljspeech-high.onnx",
+    "en/en_US/ljspeech/high/en_US-ljspeech-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://keithito.com/LJ-Speech-Dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-ljspeech-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_US/ljspeech/medium/en_US-ljspeech-medium.onnx",
+    "en/en_US/ljspeech/medium/en_US-ljspeech-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://keithito.com/LJ-Speech-Dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-mike-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "en/en_US/mike/medium/en_US-mike-medium.onnx",
+    "en/en_US/mike/medium/en_US-mike-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-norman-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "en/en_US/norman/medium/en_US-norman-medium.onnx",
+    "en/en_US/norman/medium/en_US-norman-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "public domain",
+    "datasetUrl": "https://librivox.org",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-reza_ibrahim-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "en/en_US/reza_ibrahim/medium/en_US-reza_ibrahim-medium.onnx",
+    "en/en_US/reza_ibrahim/medium/en_US-reza_ibrahim-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://huggingface.co/datasets/mah92/Hedayatfar-Persian-Quran-Audio-Dataset",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-ryan-high",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 120786792,
+   "files": [
+    "en/en_US/ryan/high/en_US-ryan-high.onnx",
+    "en/en_US/ryan/high/en_US-ryan-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC-SA 4.0",
+    "datasetUrl": "https://www.kaggle.com/datasets/roholazandie/ryanspeech",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-ryan-low",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "en/en_US/ryan/low/en_US-ryan-low.onnx",
+    "en/en_US/ryan/low/en_US-ryan-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC-SA 4.0",
+    "datasetUrl": "https://www.kaggle.com/datasets/roholazandie/ryanspeech",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-ryan-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "en/en_US/ryan/medium/en_US-ryan-medium.onnx",
+    "en/en_US/ryan/medium/en_US-ryan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC-SA 4.0",
+    "datasetUrl": "https://www.kaggle.com/datasets/roholazandie/ryanspeech",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "en_US-sam-medium",
+   "engine": "piper",
+   "locale": "en_US",
+   "family": "en",
+   "languageName": "English",
+   "country": "United States",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "en/en_US/sam/medium/en_US-sam-medium.onnx",
+    "en/en_US/sam/medium/en_US-sam-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "datasetUrl": "https://github.com/Sam-Accenture-Non-Binary-Voice/non-binary-voice-files",
+    "commercialUse": "verify"
+   },
+   "language": "eng_Latn"
+  },
+  {
+   "id": "es_AR-daniela-high",
+   "engine": "piper",
+   "locale": "es_AR",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Argentina",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114199011,
+   "files": [
+    "es/es_AR/daniela/high/es_AR-daniela-high.onnx",
+    "es/es_AR/daniela/high/es_AR-daniela-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Attribution-ShareAlike 4.0 International",
+    "datasetUrl": "https://www.openslr.org/61/",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_ES-carlfm-x_low",
+   "engine": "piper",
+   "locale": "es_ES",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Spain",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "es/es_ES/carlfm/x_low/es_ES-carlfm-x_low.onnx",
+    "es/es_ES/carlfm/x_low/es_ES-carlfm-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Public domain",
+    "datasetUrl": "https://github.com/carlfm01/my-speech-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_ES-davefx-medium",
+   "engine": "piper",
+   "locale": "es_ES",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Spain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "es/es_ES/davefx/medium/es_ES-davefx-medium.onnx",
+    "es/es_ES/davefx/medium/es_ES-davefx-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_ES-mls_10246-low",
+   "engine": "piper",
+   "locale": "es_ES",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Spain",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "es/es_ES/mls_10246/low/es_ES-mls_10246-low.onnx",
+    "es/es_ES/mls_10246/low/es_ES-mls_10246-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_ES-mls_9972-low",
+   "engine": "piper",
+   "locale": "es_ES",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Spain",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "es/es_ES/mls_9972/low/es_ES-mls_9972-low.onnx",
+    "es/es_ES/mls_9972/low/es_ES-mls_9972-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_ES-sharvard-medium",
+   "engine": "piper",
+   "locale": "es_ES",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Spain",
+   "quality": "medium",
+   "speakers": 2,
+   "sizeBytes": 76733615,
+   "files": [
+    "es/es_ES/sharvard/medium/es_ES-sharvard-medium.onnx",
+    "es/es_ES/sharvard/medium/es_ES-sharvard-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by/3.0/",
+    "datasetUrl": "https://datashare.ed.ac.uk/handle/10283/574",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_MX-ald-medium",
+   "engine": "piper",
+   "locale": "es_MX",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Mexico",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "es/es_MX/ald/medium/es_MX-ald-medium.onnx",
+    "es/es_MX/ald/medium/es_MX-ald-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://unlicense.org",
+    "datasetUrl": "https://huggingface.co/datasets/rmcpantoja/Ald_Mexican_Spanish_speech_dataset",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_MX-ald-x_low",
+   "engine": "piper",
+   "locale": "es_MX",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Mexico",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20986952,
+   "files": [
+    "es/es_MX/ald/x_low/es_MX-ald-x_low.onnx",
+    "es/es_MX/ald/x_low/es_MX-ald-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "es_MX-claude-high",
+   "engine": "piper",
+   "locale": "es_MX",
+   "family": "es",
+   "languageName": "Spanish",
+   "country": "Mexico",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 63122309,
+   "files": [
+    "es/es_MX/claude/high/es_MX-claude-high.onnx",
+    "es/es_MX/claude/high/es_MX-claude-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "apache-2.0",
+    "datasetUrl": "https://huggingface.co/spaces/HirCoir/Piper-TTS-Spanish",
+    "commercialUse": "verify"
+   },
+   "language": "spa_Latn"
+  },
+  {
+   "id": "et_EE-news-medium",
+   "engine": "piper",
+   "locale": "et_EE",
+   "family": "et",
+   "languageName": "Estonian",
+   "country": "Estonia",
+   "quality": "medium",
+   "speakers": 4,
+   "sizeBytes": 76757937,
+   "files": [
+    "et/et_EE/news/medium/et_EE-news-medium.onnx",
+    "et/et_EE/news/medium/et_EE-news-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY (META-SHARE \"Available - Unrestricted Use\")",
+    "datasetUrl": "https://metashare.ut.ee/repository/browse/speech-corpus-of-estonian-news-sentences/37b7c5d6a0d411eebb4773db10791bcfb0c0cf788d2d4030bfaf2f2e6e55dd8d/",
+    "commercialUse": "verify"
+   },
+   "language": "ekk_Latn"
+  },
+  {
+   "id": "eu_ES-antton-medium",
+   "engine": "piper",
+   "locale": "eu_ES",
+   "family": "eu",
+   "languageName": "Basque",
+   "country": "Spain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "eu/eu_ES/antton/medium/eu_ES-antton-medium.onnx",
+    "eu/eu_ES/antton/medium/eu_ES-antton-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Creative Commons Attribution 4.0",
+    "datasetUrl": "https://huggingface.co/datasets/itzune/antton-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "eus_Latn"
+  },
+  {
+   "id": "eu_ES-maider-medium",
+   "engine": "piper",
+   "locale": "eu_ES",
+   "family": "eu",
+   "languageName": "Basque",
+   "country": "Spain",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "eu/eu_ES/maider/medium/eu_ES-maider-medium.onnx",
+    "eu/eu_ES/maider/medium/eu_ES-maider-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Creative Commons Attribution 4.0",
+    "datasetUrl": "https://huggingface.co/datasets/itzune/maider-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "eus_Latn"
+  },
+  {
+   "id": "fa_IR-amir-medium",
+   "engine": "piper",
+   "locale": "fa_IR",
+   "family": "fa",
+   "languageName": "Farsi",
+   "country": "Iran",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531379,
+   "files": [
+    "fa/fa_IR/amir/medium/fa_IR-amir-medium.onnx",
+    "fa/fa_IR/amir/medium/fa_IR-amir-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://datacula.com/tts-databases",
+    "commercialUse": "verify"
+   },
+   "language": "fas_Arab"
+  },
+  {
+   "id": "fa_IR-ganji-medium",
+   "engine": "piper",
+   "locale": "fa_IR",
+   "family": "fa",
+   "languageName": "Farsi",
+   "country": "Iran",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "fa/fa_IR/ganji/medium/fa_IR-ganji-medium.onnx",
+    "fa/fa_IR/ganji/medium/fa_IR-ganji-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://tts.datacula.com/",
+    "commercialUse": "verify"
+   },
+   "language": "fas_Arab"
+  },
+  {
+   "id": "fa_IR-ganji_adabi-medium",
+   "engine": "piper",
+   "locale": "fa_IR",
+   "family": "fa",
+   "languageName": "Farsi",
+   "country": "Iran",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "fa/fa_IR/ganji_adabi/medium/fa_IR-ganji_adabi-medium.onnx",
+    "fa/fa_IR/ganji_adabi/medium/fa_IR-ganji_adabi-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://tts.datacula.com/",
+    "commercialUse": "verify"
+   },
+   "language": "fas_Arab"
+  },
+  {
+   "id": "fa_IR-gyro-medium",
+   "engine": "piper",
+   "locale": "fa_IR",
+   "family": "fa",
+   "languageName": "Farsi",
+   "country": "Iran",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63122309,
+   "files": [
+    "fa/fa_IR/gyro/medium/fa_IR-gyro-medium.onnx",
+    "fa/fa_IR/gyro/medium/fa_IR-gyro-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://github.com/gyroing",
+    "commercialUse": "verify"
+   },
+   "language": "fas_Arab"
+  },
+  {
+   "id": "fa_IR-reza_ibrahim-medium",
+   "engine": "piper",
+   "locale": "fa_IR",
+   "family": "fa",
+   "languageName": "Farsi",
+   "country": "Iran",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "fa/fa_IR/reza_ibrahim/medium/fa_IR-reza_ibrahim-medium.onnx",
+    "fa/fa_IR/reza_ibrahim/medium/fa_IR-reza_ibrahim-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://huggingface.co/datasets/mah92/Hedayatfar-Persian-Quran-Audio-Dataset",
+    "commercialUse": "verify"
+   },
+   "language": "fas_Arab"
+  },
+  {
+   "id": "fi_FI-harri-low",
+   "engine": "piper",
+   "locale": "fi_FI",
+   "family": "fi",
+   "languageName": "Finnish",
+   "country": "Finland",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 69795191,
+   "files": [
+    "fi/fi_FI/harri/low/fi_FI-harri-low.onnx",
+    "fi/fi_FI/harri/low/fi_FI-harri-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/bryanpark/finnish-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "fin_Latn"
+  },
+  {
+   "id": "fi_FI-harri-medium",
+   "engine": "piper",
+   "locale": "fi_FI",
+   "family": "fi",
+   "languageName": "Finnish",
+   "country": "Finland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "fi/fi_FI/harri/medium/fi_FI-harri-medium.onnx",
+    "fi/fi_FI/harri/medium/fi_FI-harri-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/bryanpark/finnish-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "fin_Latn"
+  },
+  {
+   "id": "fr_FR-gilles-low",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "fr/fr_FR/gilles/low/fr_FR-gilles-low.onnx",
+    "fr/fr_FR/gilles/low/fr_FR-gilles-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/datasets/bryanpark/french-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-mls-medium",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "medium",
+   "speakers": 125,
+   "sizeBytes": 76733750,
+   "files": [
+    "fr/fr_FR/mls/medium/fr_FR-mls-medium.onnx",
+    "fr/fr_FR/mls/medium/fr_FR-mls-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY 4.0",
+    "datasetUrl": "http://openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-mls_1840-low",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "fr/fr_FR/mls_1840/low/fr_FR-mls_1840-low.onnx",
+    "fr/fr_FR/mls_1840/low/fr_FR-mls_1840-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-siwis-low",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "fr/fr_FR/siwis/low/fr_FR-siwis-low.onnx",
+    "fr/fr_FR/siwis/low/fr_FR-siwis-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY 4.0",
+    "datasetUrl": "https://datashare.is.ed.ac.uk/handle/10283/2353",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-siwis-medium",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx",
+    "fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY 4.0",
+    "datasetUrl": "https://datashare.is.ed.ac.uk/handle/10283/2353",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-tom-medium",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "fr/fr_FR/tom/medium/fr_FR-tom-medium.onnx",
+    "fr/fr_FR/tom/medium/fr_FR-tom-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "AGPLv3",
+    "datasetUrl": "https://git.bksp.space/Tjiho/French-tts-model-piper",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "fr_FR-upmc-medium",
+   "engine": "piper",
+   "locale": "fr_FR",
+   "family": "fr",
+   "languageName": "French",
+   "country": "France",
+   "quality": "medium",
+   "speakers": 2,
+   "sizeBytes": 76733615,
+   "files": [
+    "fr/fr_FR/upmc/medium/fr_FR-upmc-medium.onnx",
+    "fr/fr_FR/upmc/medium/fr_FR-upmc-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/upmc-pierre-data",
+    "commercialUse": "verify"
+   },
+   "language": "fra_Latn"
+  },
+  {
+   "id": "he_IL-saspeech-medium",
+   "engine": "piper",
+   "locale": "he_IL",
+   "family": "he",
+   "languageName": "Hebrew",
+   "country": "Israel",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "he/he_IL/saspeech/medium/he_IL-saspeech-medium.onnx",
+    "he/he_IL/saspeech/medium/he_IL-saspeech-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See dataset URL",
+    "datasetUrl": "https://www.openslr.org/134",
+    "commercialUse": "verify"
+   },
+   "language": "heb_Hebr"
+  },
+  {
+   "id": "hi_IN-pratham-medium",
+   "engine": "piper",
+   "locale": "hi_IN",
+   "family": "hi",
+   "languageName": "Hindi",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "hi/hi_IN/pratham/medium/hi_IN-pratham-medium.onnx",
+    "hi/hi_IN/pratham/medium/hi_IN-pratham-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "hin_Deva"
+  },
+  {
+   "id": "hi_IN-priyamvada-medium",
+   "engine": "piper",
+   "locale": "hi_IN",
+   "family": "hi",
+   "languageName": "Hindi",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "hi/hi_IN/priyamvada/medium/hi_IN-priyamvada-medium.onnx",
+    "hi/hi_IN/priyamvada/medium/hi_IN-priyamvada-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "hin_Deva"
+  },
+  {
+   "id": "hi_IN-rohan-medium",
+   "engine": "piper",
+   "locale": "hi_IN",
+   "family": "hi",
+   "languageName": "Hindi",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "hi/hi_IN/rohan/medium/hi_IN-rohan-medium.onnx",
+    "hi/hi_IN/rohan/medium/hi_IN-rohan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://www.iitm.ac.in/donlab/indictts/downloads/license.pdf",
+    "datasetUrl": "https://www.iitm.ac.in/donlab/indictts",
+    "commercialUse": "verify"
+   },
+   "language": "hin_Deva"
+  },
+  {
+   "id": "hu_HU-anna-medium",
+   "engine": "piper",
+   "locale": "hu_HU",
+   "family": "hu",
+   "languageName": "Hungarian",
+   "country": "Hungary",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "hu/hu_HU/anna/medium/hu_HU-anna-medium.onnx",
+    "hu/hu_HU/anna/medium/hu_HU-anna-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "hun_Latn"
+  },
+  {
+   "id": "hu_HU-berta-medium",
+   "engine": "piper",
+   "locale": "hu_HU",
+   "family": "hu",
+   "languageName": "Hungarian",
+   "country": "Hungary",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "hu/hu_HU/berta/medium/hu_HU-berta-medium.onnx",
+    "hu/hu_HU/berta/medium/hu_HU-berta-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "hun_Latn"
+  },
+  {
+   "id": "hu_HU-imre-medium",
+   "engine": "piper",
+   "locale": "hu_HU",
+   "family": "hu",
+   "languageName": "Hungarian",
+   "country": "Hungary",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "hu/hu_HU/imre/medium/hu_HU-imre-medium.onnx",
+    "hu/hu_HU/imre/medium/hu_HU-imre-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "hun_Latn"
+  },
+  {
+   "id": "hy_AM-gor-medium",
+   "engine": "piper",
+   "locale": "hy_AM",
+   "family": "hy",
+   "languageName": "Armenian",
+   "country": "Armenia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "hy/hy_AM/gor/medium/hy_AM-gor-medium.onnx",
+    "hy/hy_AM/gor/medium/hy_AM-gor-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "GPL 2.0",
+    "datasetUrl": "https://huggingface.co/davit312/piper-TTS-Armenian",
+    "commercialUse": "verify"
+   },
+   "language": "hye_Armn"
+  },
+  {
+   "id": "id_ID-news_tts-medium",
+   "engine": "piper",
+   "locale": "id_ID",
+   "family": "id",
+   "languageName": "Indonesian",
+   "country": "Indonesia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "id/id_ID/news_tts/medium/id_ID-news_tts-medium.onnx",
+    "id/id_ID/news_tts/medium/id_ID-news_tts-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.kaggle.com/code/mpwolke/indic-tts-malayalam-speech-corpus",
+    "commercialUse": "verify"
+   },
+   "language": "ind_Latn"
+  },
+  {
+   "id": "is_IS-bui-medium",
+   "engine": "piper",
+   "locale": "is_IS",
+   "family": "is",
+   "languageName": "Icelandic",
+   "country": "Iceland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 76495465,
+   "files": [
+    "is/is_IS/bui/medium/is_IS-bui-medium.onnx",
+    "is/is_IS/bui/medium/is_IS-bui-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "http://hdl.handle.net/20.500.12537/104",
+    "commercialUse": "verify"
+   },
+   "language": "isl_Latn"
+  },
+  {
+   "id": "is_IS-salka-medium",
+   "engine": "piper",
+   "locale": "is_IS",
+   "family": "is",
+   "languageName": "Icelandic",
+   "country": "Iceland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 76495465,
+   "files": [
+    "is/is_IS/salka/medium/is_IS-salka-medium.onnx",
+    "is/is_IS/salka/medium/is_IS-salka-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "http://hdl.handle.net/20.500.12537/104",
+    "commercialUse": "verify"
+   },
+   "language": "isl_Latn"
+  },
+  {
+   "id": "is_IS-steinn-medium",
+   "engine": "piper",
+   "locale": "is_IS",
+   "family": "is",
+   "languageName": "Icelandic",
+   "country": "Iceland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 76495465,
+   "files": [
+    "is/is_IS/steinn/medium/is_IS-steinn-medium.onnx",
+    "is/is_IS/steinn/medium/is_IS-steinn-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "http://hdl.handle.net/20.500.12537/104",
+    "commercialUse": "verify"
+   },
+   "language": "isl_Latn"
+  },
+  {
+   "id": "is_IS-ugla-medium",
+   "engine": "piper",
+   "locale": "is_IS",
+   "family": "is",
+   "languageName": "Icelandic",
+   "country": "Iceland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 76495465,
+   "files": [
+    "is/is_IS/ugla/medium/is_IS-ugla-medium.onnx",
+    "is/is_IS/ugla/medium/is_IS-ugla-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "http://hdl.handle.net/20.500.12537/104",
+    "commercialUse": "verify"
+   },
+   "language": "isl_Latn"
+  },
+  {
+   "id": "it_IT-paola-medium",
+   "engine": "piper",
+   "locale": "it_IT",
+   "family": "it",
+   "languageName": "Italian",
+   "country": "Italy",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "it/it_IT/paola/medium/it_IT-paola-medium.onnx",
+    "it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://huggingface.co/datasets/paolapersico1/Voice-Dataset-Italian",
+    "commercialUse": "verify"
+   },
+   "language": "ita_Latn"
+  },
+  {
+   "id": "it_IT-riccardo-x_low",
+   "engine": "piper",
+   "locale": "it_IT",
+   "family": "it",
+   "languageName": "Italian",
+   "country": "Italy",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "it/it_IT/riccardo/x_low/it_IT-riccardo-x_low.onnx",
+    "it/it_IT/riccardo/x_low/it_IT-riccardo-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.caito.de/2019/01/03/the-m-ailabs-speech-dataset/",
+    "commercialUse": "verify"
+   },
+   "language": "ita_Latn"
+  },
+  {
+   "id": "it_IT-serena-high",
+   "engine": "piper",
+   "locale": "it_IT",
+   "family": "it",
+   "languageName": "Italian",
+   "country": "Italy",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114204024,
+   "files": [
+    "it/it_IT/serena/high/it_IT-serena-high.onnx",
+    "it/it_IT/serena/high/it_IT-serena-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://huggingface.co/datasets/committa/serena-synthetic-it-27h",
+    "commercialUse": "verify"
+   },
+   "language": "ita_Latn"
+  },
+  {
+   "id": "it_IT-serena-medium",
+   "engine": "piper",
+   "locale": "it_IT",
+   "family": "it",
+   "languageName": "Italian",
+   "country": "Italy",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516051,
+   "files": [
+    "it/it_IT/serena/medium/it_IT-serena-medium.onnx",
+    "it/it_IT/serena/medium/it_IT-serena-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://huggingface.co/datasets/committa/serena-synthetic-it-27h",
+    "commercialUse": "verify"
+   },
+   "language": "ita_Latn"
+  },
+  {
+   "id": "ja_JP-hi_fi_captain-medium",
+   "engine": "piper",
+   "locale": "ja_JP",
+   "family": "ja",
+   "languageName": "Japanese",
+   "country": "Japan",
+   "quality": "medium",
+   "speakers": 2,
+   "sizeBytes": 76753841,
+   "files": [
+    "ja/ja_JP/hi_fi_captain/medium/ja_JP-hi_fi_captain-medium.onnx",
+    "ja/ja_JP/hi_fi_captain/medium/ja_JP-hi_fi_captain-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en",
+    "datasetUrl": "https://ast-astrec.nict.go.jp/en/release/hi-fi-captain/",
+    "commercialUse": "verify"
+   },
+   "language": "jpn_Jpan"
+  },
+  {
+   "id": "ka_GE-natia-medium",
+   "engine": "piper",
+   "locale": "ka_GE",
+   "family": "ka",
+   "languageName": "Georgian",
+   "country": "Georgia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ka/ka_GE/natia/medium/ka_GE-natia-medium.onnx",
+    "ka/ka_GE/natia/medium/ka_GE-natia-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See LICENSE file",
+    "datasetUrl": "http://github.com/Olga-Yakovleva/RHVoice",
+    "commercialUse": "verify"
+   },
+   "language": "kat_Geor"
+  },
+  {
+   "id": "kk_KZ-iseke-x_low",
+   "engine": "piper",
+   "locale": "kk_KZ",
+   "family": "kk",
+   "languageName": "Kazakh",
+   "country": "Kazakhstan",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "kk/kk_KZ/iseke/x_low/kk_KZ-iseke-x_low.onnx",
+    "kk/kk_KZ/iseke/x_low/kk_KZ-iseke-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://github.com/IS2AI/Kazakh_TTS",
+    "commercialUse": "verify"
+   },
+   "language": "kaz_Cyrl"
+  },
+  {
+   "id": "kk_KZ-issai-high",
+   "engine": "piper",
+   "locale": "kk_KZ",
+   "family": "kk",
+   "languageName": "Kazakh",
+   "country": "Kazakhstan",
+   "quality": "high",
+   "speakers": 6,
+   "sizeBytes": 127864258,
+   "files": [
+    "kk/kk_KZ/issai/high/kk_KZ-issai-high.onnx",
+    "kk/kk_KZ/issai/high/kk_KZ-issai-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://github.com/IS2AI/Kazakh_TTS",
+    "commercialUse": "verify"
+   },
+   "language": "kaz_Cyrl"
+  },
+  {
+   "id": "kk_KZ-raya-x_low",
+   "engine": "piper",
+   "locale": "kk_KZ",
+   "family": "kk",
+   "languageName": "Kazakh",
+   "country": "Kazakhstan",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 28130791,
+   "files": [
+    "kk/kk_KZ/raya/x_low/kk_KZ-raya-x_low.onnx",
+    "kk/kk_KZ/raya/x_low/kk_KZ-raya-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://github.com/IS2AI/Kazakh_TTS",
+    "commercialUse": "verify"
+   },
+   "language": "kaz_Cyrl"
+  },
+  {
+   "id": "ko_KR-kss-medium",
+   "engine": "piper",
+   "locale": "ko_KR",
+   "family": "ko",
+   "languageName": "Korean",
+   "country": "South Korea",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "ko/ko_KR/kss/medium/ko_KR-kss-medium.onnx",
+    "ko/ko_KR/kss/medium/ko_KR-kss-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://www.kaggle.com/datasets/bryanpark/korean-single-speaker-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "kor_Hang"
+  },
+  {
+   "id": "ku_TR-berfin_renas-medium",
+   "engine": "piper",
+   "locale": "ku_TR",
+   "family": "ku",
+   "languageName": "Kurmanji Kurdish",
+   "country": "Turkey",
+   "quality": "medium",
+   "speakers": 2,
+   "sizeBytes": 77060307,
+   "files": [
+    "ku/ku_TR/berfin_renas/medium/ku_TR-berfin_renas-medium.onnx",
+    "ku/ku_TR/berfin_renas/medium/ku_TR-berfin_renas-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free for non-commercial use with attribution; commercial use restricted due to [Blizzard 2013 base model](https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html)",
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "kmr_Latn"
+  },
+  {
+   "id": "lb_LU-marylux-medium",
+   "engine": "piper",
+   "locale": "lb_LU",
+   "family": "lb",
+   "languageName": "Luxembourgish",
+   "country": "Luxembourg",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "lb/lb_LU/marylux/medium/lb_LU-marylux-medium.onnx",
+    "lb/lb_LU/marylux/medium/lb_LU-marylux-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/marylux-data",
+    "commercialUse": "verify"
+   },
+   "language": "ltz_Latn"
+  },
+  {
+   "id": "lt_LT-reginute1-medium",
+   "engine": "piper",
+   "locale": "lt_LT",
+   "family": "lt",
+   "languageName": "Lithuanian",
+   "country": "Lithuania",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516051,
+   "files": [
+    "lt/lt_LT/reginute1/medium/lt_LT-reginute1-medium.onnx",
+    "lt/lt_LT/reginute1/medium/lt_LT-reginute1-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://huggingface.co/datasets/meldynamics/liepa-tts",
+    "commercialUse": "verify"
+   },
+   "language": "lit_Latn"
+  },
+  {
+   "id": "lv_LV-aivars-medium",
+   "engine": "piper",
+   "locale": "lv_LV",
+   "family": "lv",
+   "languageName": "Latvian",
+   "country": "Latvia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "lv/lv_LV/aivars/medium/lv_LV-aivars-medium.onnx",
+    "lv/lv_LV/aivars/medium/lv_LV-aivars-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0 1.0 Universal",
+    "datasetUrl": "https://huggingface.co/RaivisDejus/Piper-lv_LV-Aivars-medium",
+    "commercialUse": "verify"
+   },
+   "language": "lav_Latn"
+  },
+  {
+   "id": "ml_IN-arjun-medium",
+   "engine": "piper",
+   "locale": "ml_IN",
+   "family": "ml",
+   "languageName": "Malayalam",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "ml/ml_IN/arjun/medium/ml_IN-arjun-medium.onnx",
+    "ml/ml_IN/arjun/medium/ml_IN-arjun-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.kaggle.com/code/mpwolke/indic-tts-malayalam-speech-corpus",
+    "commercialUse": "verify"
+   },
+   "language": "mal_Mlym"
+  },
+  {
+   "id": "ml_IN-meera-medium",
+   "engine": "piper",
+   "locale": "ml_IN",
+   "family": "ml",
+   "languageName": "Malayalam",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "ml/ml_IN/meera/medium/ml_IN-meera-medium.onnx",
+    "ml/ml_IN/meera/medium/ml_IN-meera-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://www.kaggle.com/code/mpwolke/indic-tts-malayalam-speech-corpus",
+    "commercialUse": "verify"
+   },
+   "language": "mal_Mlym"
+  },
+  {
+   "id": "mr_IN-google-medium",
+   "engine": "piper",
+   "locale": "mr_IN",
+   "family": "mr",
+   "languageName": "Marathi",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 9,
+   "sizeBytes": 76768179,
+   "files": [
+    "mr/mr_IN/google/medium/mr_IN-google-medium.onnx",
+    "mr/mr_IN/google/medium/mr_IN-google-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Attribution-ShareAlike 4.0 International",
+    "datasetUrl": "https://openslr.org/64/",
+    "commercialUse": "verify"
+   },
+   "language": "mar_Deva"
+  },
+  {
+   "id": "ne_NP-chitwan-medium",
+   "engine": "piper",
+   "locale": "ne_NP",
+   "family": "ne",
+   "languageName": "Nepali",
+   "country": "Nepal",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "ne/ne_NP/chitwan/medium/ne_NP-chitwan-medium.onnx",
+    "ne/ne_NP/chitwan/medium/ne_NP-chitwan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "nep_Deva"
+  },
+  {
+   "id": "ne_NP-google-medium",
+   "engine": "piper",
+   "locale": "ne_NP",
+   "family": "ne",
+   "languageName": "Nepali",
+   "country": "Nepal",
+   "quality": "medium",
+   "speakers": 18,
+   "sizeBytes": 76766385,
+   "files": [
+    "ne/ne_NP/google/medium/ne_NP-google-medium.onnx",
+    "ne/ne_NP/google/medium/ne_NP-google-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-SA-4.0 International",
+    "datasetUrl": "http://www.openslr.org/43/",
+    "commercialUse": "verify"
+   },
+   "language": "nep_Deva"
+  },
+  {
+   "id": "ne_NP-google-x_low",
+   "engine": "piper",
+   "locale": "ne_NP",
+   "family": "ne",
+   "languageName": "Nepali",
+   "country": "Nepal",
+   "quality": "x_low",
+   "speakers": 18,
+   "sizeBytes": 27693157,
+   "files": [
+    "ne/ne_NP/google/x_low/ne_NP-google-x_low.onnx",
+    "ne/ne_NP/google/x_low/ne_NP-google-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-SA-4.0 International",
+    "datasetUrl": "http://www.openslr.org/43/",
+    "commercialUse": "verify"
+   },
+   "language": "nep_Deva"
+  },
+  {
+   "id": "nl_BE-nathalie-medium",
+   "engine": "piper",
+   "locale": "nl_BE",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Belgium",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "nl/nl_BE/nathalie/medium/nl_BE-nathalie-medium.onnx",
+    "nl/nl_BE/nathalie/medium/nl_BE-nathalie-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/rhasspy/dataset-voice-nathalie",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_BE-nathalie-x_low",
+   "engine": "piper",
+   "locale": "nl_BE",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Belgium",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "nl/nl_BE/nathalie/x_low/nl_BE-nathalie-x_low.onnx",
+    "nl/nl_BE/nathalie/x_low/nl_BE-nathalie-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/rhasspy/dataset-voice-nathalie",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_BE-rdh-medium",
+   "engine": "piper",
+   "locale": "nl_BE",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Belgium",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "nl/nl_BE/rdh/medium/nl_BE-rdh-medium.onnx",
+    "nl/nl_BE/rdh/medium/nl_BE-rdh-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0 1.0 Universal",
+    "datasetUrl": "https://github.com/r-dh/dutch-vl-tts",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_BE-rdh-x_low",
+   "engine": "piper",
+   "locale": "nl_BE",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Belgium",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "nl/nl_BE/rdh/x_low/nl_BE-rdh-x_low.onnx",
+    "nl/nl_BE/rdh/x_low/nl_BE-rdh-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0 1.0 Universal",
+    "datasetUrl": "https://github.com/r-dh/dutch-vl-tts",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-alex-medium",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63531476,
+   "files": [
+    "nl/nl_NL/alex/medium/nl_NL-alex-medium.onnx",
+    "nl/nl_NL/alex/medium/nl_NL-alex-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-mls-medium",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "medium",
+   "speakers": 52,
+   "sizeBytes": 76584246,
+   "files": [
+    "nl/nl_NL/mls/medium/nl_NL-mls-medium.onnx",
+    "nl/nl_NL/mls/medium/nl_NL-mls-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY 4.0",
+    "datasetUrl": "http://openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-mls_5809-low",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "nl/nl_NL/mls_5809/low/nl_NL-mls_5809-low.onnx",
+    "nl/nl_NL/mls_5809/low/nl_NL-mls_5809-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-mls_7432-low",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "nl/nl_NL/mls_7432/low/nl_NL-mls_7432-low.onnx",
+    "nl/nl_NL/mls_7432/low/nl_NL-mls_7432-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-pim-medium",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "nl/nl_NL/pim/medium/nl_NL-pim-medium.onnx",
+    "nl/nl_NL/pim/medium/nl_NL-pim-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "nl_NL-ronnie-medium",
+   "engine": "piper",
+   "locale": "nl_NL",
+   "family": "nl",
+   "languageName": "Dutch",
+   "country": "Netherlands",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "nl/nl_NL/ronnie/medium/nl_NL-ronnie-medium.onnx",
+    "nl/nl_NL/ronnie/medium/nl_NL-ronnie-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "nld_Latn"
+  },
+  {
+   "id": "no_NO-nvcc-medium",
+   "engine": "piper",
+   "locale": "no_NO",
+   "family": "no",
+   "languageName": "Norwegian",
+   "country": "Norway",
+   "quality": "medium",
+   "speakers": 10,
+   "sizeBytes": 76770227,
+   "files": [
+    "no/no_NO/nvcc/medium/no_NO-nvcc-medium.onnx",
+    "no/no_NO/nvcc/medium/no_NO-nvcc-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-75/",
+    "commercialUse": "verify"
+   },
+   "language": "nob_Latn"
+  },
+  {
+   "id": "no_NO-talesyntese-medium",
+   "engine": "piper",
+   "locale": "no_NO",
+   "family": "no",
+   "languageName": "Norwegian",
+   "country": "Norway",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "no/no_NO/talesyntese/medium/no_NO-talesyntese-medium.onnx",
+    "no/no_NO/talesyntese/medium/no_NO-talesyntese-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-15/",
+    "commercialUse": "verify"
+   },
+   "language": "nob_Latn"
+  },
+  {
+   "id": "pl_PL-bass-high",
+   "engine": "piper",
+   "locale": "pl_PL",
+   "family": "pl",
+   "languageName": "Polish",
+   "country": "Poland",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114204024,
+   "files": [
+    "pl/pl_PL/bass/high/pl_PL-bass-high.onnx",
+    "pl/pl_PL/bass/high/pl_PL-bass-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "pol_Latn"
+  },
+  {
+   "id": "pl_PL-darkman-medium",
+   "engine": "piper",
+   "locale": "pl_PL",
+   "family": "pl",
+   "languageName": "Polish",
+   "country": "Poland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx",
+    "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "pol_Latn"
+  },
+  {
+   "id": "pl_PL-gosia-medium",
+   "engine": "piper",
+   "locale": "pl_PL",
+   "family": "pl",
+   "languageName": "Polish",
+   "country": "Poland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "pl/pl_PL/gosia/medium/pl_PL-gosia-medium.onnx",
+    "pl/pl_PL/gosia/medium/pl_PL-gosia-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "pol_Latn"
+  },
+  {
+   "id": "pl_PL-mc_speech-medium",
+   "engine": "piper",
+   "locale": "pl_PL",
+   "family": "pl",
+   "languageName": "Polish",
+   "country": "Poland",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "pl/pl_PL/mc_speech/medium/pl_PL-mc_speech-medium.onnx",
+    "pl/pl_PL/mc_speech/medium/pl_PL-mc_speech-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.kaggle.com/datasets/czyzi0/the-mc-speech-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "pol_Latn"
+  },
+  {
+   "id": "pl_PL-mls_6892-low",
+   "engine": "piper",
+   "locale": "pl_PL",
+   "family": "pl",
+   "languageName": "Polish",
+   "country": "Poland",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "pl/pl_PL/mls_6892/low/pl_PL-mls_6892-low.onnx",
+    "pl/pl_PL/mls_6892/low/pl_PL-mls_6892-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "http://www.openslr.org/94/",
+    "commercialUse": "verify"
+   },
+   "language": "pol_Latn"
+  },
+  {
+   "id": "pt_BR-cadu-medium",
+   "engine": "piper",
+   "locale": "pt_BR",
+   "family": "pt",
+   "languageName": "Portuguese",
+   "country": "Brazil",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "pt/pt_BR/cadu/medium/pt_BR-cadu-medium.onnx",
+    "pt/pt_BR/cadu/medium/pt_BR-cadu-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "por_Latn"
+  },
+  {
+   "id": "pt_BR-edresson-low",
+   "engine": "piper",
+   "locale": "pt_BR",
+   "family": "pt",
+   "languageName": "Portuguese",
+   "country": "Brazil",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "pt/pt_BR/edresson/low/pt_BR-edresson-low.onnx",
+    "pt/pt_BR/edresson/low/pt_BR-edresson-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY 4.0",
+    "datasetUrl": "https://github.com/Edresson/TTS-Portuguese-Corpus",
+    "commercialUse": "verify"
+   },
+   "language": "por_Latn"
+  },
+  {
+   "id": "pt_BR-faber-medium",
+   "engine": "piper",
+   "locale": "pt_BR",
+   "family": "pt",
+   "languageName": "Portuguese",
+   "country": "Brazil",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx",
+    "pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "por_Latn"
+  },
+  {
+   "id": "pt_BR-jeff-medium",
+   "engine": "piper",
+   "locale": "pt_BR",
+   "family": "pt",
+   "languageName": "Portuguese",
+   "country": "Brazil",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "pt/pt_BR/jeff/medium/pt_BR-jeff-medium.onnx",
+    "pt/pt_BR/jeff/medium/pt_BR-jeff-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "por_Latn"
+  },
+  {
+   "id": "pt_PT-tugão-medium",
+   "engine": "piper",
+   "locale": "pt_PT",
+   "family": "pt",
+   "languageName": "Portuguese",
+   "country": "Portugal",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx",
+    "pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "por_Latn"
+  },
+  {
+   "id": "ro_RO-mihai-medium",
+   "engine": "piper",
+   "locale": "ro_RO",
+   "family": "ro",
+   "languageName": "Romanian",
+   "country": "Romania",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ro/ro_RO/mihai/medium/ro_RO-mihai-medium.onnx",
+    "ro/ro_RO/mihai/medium/ro_RO-mihai-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ron_Latn"
+  },
+  {
+   "id": "ru_RU-denis-medium",
+   "engine": "piper",
+   "locale": "ru_RU",
+   "family": "ru",
+   "languageName": "Russian",
+   "country": "Russia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ru/ru_RU/denis/medium/ru_RU-denis-medium.onnx",
+    "ru/ru_RU/denis/medium/ru_RU-denis-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "rus_Cyrl"
+  },
+  {
+   "id": "ru_RU-dmitri-medium",
+   "engine": "piper",
+   "locale": "ru_RU",
+   "family": "ru",
+   "languageName": "Russian",
+   "country": "Russia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ru/ru_RU/dmitri/medium/ru_RU-dmitri-medium.onnx",
+    "ru/ru_RU/dmitri/medium/ru_RU-dmitri-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "rus_Cyrl"
+  },
+  {
+   "id": "ru_RU-irina-medium",
+   "engine": "piper",
+   "locale": "ru_RU",
+   "family": "ru",
+   "languageName": "Russian",
+   "country": "Russia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ru/ru_RU/irina/medium/ru_RU-irina-medium.onnx",
+    "ru/ru_RU/irina/medium/ru_RU-irina-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Unknown",
+    "datasetUrl": "https://github.com/RHVoice/RHVoice",
+    "commercialUse": "verify"
+   },
+   "language": "rus_Cyrl"
+  },
+  {
+   "id": "ru_RU-ruslan-medium",
+   "engine": "piper",
+   "locale": "ru_RU",
+   "family": "ru",
+   "languageName": "Russian",
+   "country": "Russia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "ru/ru_RU/ruslan/medium/ru_RU-ruslan-medium.onnx",
+    "ru/ru_RU/ruslan/medium/ru_RU-ruslan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://ruslan-corpus.github.io/",
+    "commercialUse": "verify"
+   },
+   "language": "rus_Cyrl"
+  },
+  {
+   "id": "sk_SK-lili-medium",
+   "engine": "piper",
+   "locale": "sk_SK",
+   "family": "sk",
+   "languageName": "Slovak",
+   "country": "Slovakia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "sk/sk_SK/lili/medium/sk_SK-lili-medium.onnx",
+    "sk/sk_SK/lili/medium/sk_SK-lili-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "slk_Latn"
+  },
+  {
+   "id": "sl_SI-artur-medium",
+   "engine": "piper",
+   "locale": "sl_SI",
+   "family": "sl",
+   "languageName": "Slovenian",
+   "country": "Slovenia",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63200492,
+   "files": [
+    "sl/sl_SI/artur/medium/sl_SI-artur-medium.onnx",
+    "sl/sl_SI/artur/medium/sl_SI-artur-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by/4.0/",
+    "datasetUrl": "https://huggingface.co/datasets/ppisljar/artur_studio_tts/",
+    "commercialUse": "verify"
+   },
+   "language": "slv_Latn"
+  },
+  {
+   "id": "sq_AL-edon-medium",
+   "engine": "piper",
+   "locale": "sq_AL",
+   "family": "sq",
+   "languageName": "Albanian",
+   "country": "Albania",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "sq/sq_AL/edon/medium/sq_AL-edon-medium.onnx",
+    "sq/sq_AL/edon/medium/sq_AL-edon-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://huggingface.co/edonseki/folsh.ai",
+    "commercialUse": "verify"
+   },
+   "language": "als_Latn"
+  },
+  {
+   "id": "sr_RS-serbski_institut-medium",
+   "engine": "piper",
+   "locale": "sr_RS",
+   "family": "sr",
+   "languageName": "Serbian",
+   "country": "Serbia",
+   "quality": "medium",
+   "speakers": 2,
+   "sizeBytes": 76733615,
+   "files": [
+    "sr/sr_RS/serbski_institut/medium/sr_RS-serbski_institut-medium.onnx",
+    "sr/sr_RS/serbski_institut/medium/sr_RS-serbski_institut-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/serbski-institut-dsb-data",
+    "commercialUse": "verify"
+   },
+   "language": "srp_Cyrl"
+  },
+  {
+   "id": "sv_SE-alma-medium",
+   "engine": "piper",
+   "locale": "sv_SE",
+   "family": "sv",
+   "languageName": "Swedish",
+   "country": "Sweden",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63434611,
+   "files": [
+    "sv/sv_SE/alma/medium/sv_SE-alma-medium.onnx",
+    "sv/sv_SE/alma/medium/sv_SE-alma-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": "https://huggingface.co/yeagersthlm/piper-voice-sv-alma",
+    "commercialUse": "verify"
+   },
+   "language": "swe_Latn"
+  },
+  {
+   "id": "sv_SE-lisa-medium",
+   "engine": "piper",
+   "locale": "sv_SE",
+   "family": "sv",
+   "languageName": "Swedish",
+   "country": "Sweden",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63511038,
+   "files": [
+    "sv/sv_SE/lisa/medium/sv_SE-lisa-medium.onnx",
+    "sv/sv_SE/lisa/medium/sv_SE-lisa-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "swe_Latn"
+  },
+  {
+   "id": "sv_SE-nst-medium",
+   "engine": "piper",
+   "locale": "sv_SE",
+   "family": "sv",
+   "languageName": "Swedish",
+   "country": "Sweden",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "sv/sv_SE/nst/medium/sv_SE-nst-medium.onnx",
+    "sv/sv_SE/nst/medium/sv_SE-nst-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-17/",
+    "commercialUse": "verify"
+   },
+   "language": "swe_Latn"
+  },
+  {
+   "id": "sw_CD-lanfrica-medium",
+   "engine": "piper",
+   "locale": "sw_CD",
+   "family": "sw",
+   "languageName": "Swahili",
+   "country": "Democratic Republic of the Congo",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "sw/sw_CD/lanfrica/medium/sw_CD-lanfrica-medium.onnx",
+    "sw/sw_CD/lanfrica/medium/sw_CD-lanfrica-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "See URL",
+    "datasetUrl": "https://lanfrica.com/record/kiswahili-tts-dataset",
+    "commercialUse": "verify"
+   },
+   "language": "swh_Latn"
+  },
+  {
+   "id": "te_IN-maya-medium",
+   "engine": "piper",
+   "locale": "te_IN",
+   "family": "te",
+   "languageName": "Telugu",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 62950044,
+   "files": [
+    "te/te_IN/maya/medium/te_IN-maya-medium.onnx",
+    "te/te_IN/maya/medium/te_IN-maya-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "www.iitm.ac.in/donlab/indictts/downloads/license.pdf",
+    "datasetUrl": "https://www.iitm.ac.in/donlab/indictts",
+    "commercialUse": "verify"
+   },
+   "language": "tel_Telu"
+  },
+  {
+   "id": "te_IN-padmavathi-medium",
+   "engine": "piper",
+   "locale": "te_IN",
+   "family": "te",
+   "languageName": "Telugu",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "te/te_IN/padmavathi/medium/te_IN-padmavathi-medium.onnx",
+    "te/te_IN/padmavathi/medium/te_IN-padmavathi-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://huggingface.co/datasets/ai4bharat/indicvoices_r",
+    "commercialUse": "verify"
+   },
+   "language": "tel_Telu"
+  },
+  {
+   "id": "te_IN-venkatesh-medium",
+   "engine": "piper",
+   "locale": "te_IN",
+   "family": "te",
+   "languageName": "Telugu",
+   "country": "India",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63516050,
+   "files": [
+    "te/te_IN/venkatesh/medium/te_IN-venkatesh-medium.onnx",
+    "te/te_IN/venkatesh/medium/te_IN-venkatesh-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC-BY-4.0",
+    "datasetUrl": "https://huggingface.co/datasets/ai4bharat/indicvoices_r",
+    "commercialUse": "verify"
+   },
+   "language": "tel_Telu"
+  },
+  {
+   "id": "th_TH-tsync2-medium",
+   "engine": "piper",
+   "locale": "th_TH",
+   "family": "th",
+   "languageName": "Thai",
+   "country": "Thailand",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "th/th_TH/tsync2/medium/th_TH-tsync2-medium.onnx",
+    "th/th_TH/tsync2/medium/th_TH-tsync2-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC-SA 3.0 (**non-commercial**)",
+    "datasetUrl": "https://huggingface.co/datasets/dubbing-ai/vaja-thai",
+    "commercialUse": "verify"
+   },
+   "language": "tha_Thai"
+  },
+  {
+   "id": "tr_TR-dfki-medium",
+   "engine": "piper",
+   "locale": "tr_TR",
+   "family": "tr",
+   "languageName": "Turkish",
+   "country": "Turkey",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "tr/tr_TR/dfki/medium/tr_TR-dfki-medium.onnx",
+    "tr/tr_TR/dfki/medium/tr_TR-dfki-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "datasetUrl": "https://github.com/marytts/dfki-ot-data/",
+    "commercialUse": "verify"
+   },
+   "language": "tur_Latn"
+  },
+  {
+   "id": "uk_UA-lada-x_low",
+   "engine": "piper",
+   "locale": "uk_UA",
+   "family": "uk",
+   "languageName": "Ukrainian",
+   "country": "Ukraine",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "uk/uk_UA/lada/x_low/uk_UA-lada-x_low.onnx",
+    "uk/uk_UA/lada/x_low/uk_UA-lada-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Apache 2.0",
+    "datasetUrl": "https://github.com/egorsmkv/ukrainian-tts-datasets/tree/main/lada",
+    "commercialUse": "verify"
+   },
+   "language": "ukr_Cyrl"
+  },
+  {
+   "id": "uk_UA-mykyta-high",
+   "engine": "piper",
+   "locale": "uk_UA",
+   "family": "uk",
+   "languageName": "Ukrainian",
+   "country": "Ukraine",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114204024,
+   "files": [
+    "uk/uk_UA/mykyta/high/uk_UA-mykyta-high.onnx",
+    "uk/uk_UA/mykyta/high/uk_UA-mykyta-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Apache 2.0",
+    "datasetUrl": "https://github.com/egorsmkv/ukrainian-tts-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ukr_Cyrl"
+  },
+  {
+   "id": "uk_UA-oleksa-high",
+   "engine": "piper",
+   "locale": "uk_UA",
+   "family": "uk",
+   "languageName": "Ukrainian",
+   "country": "Ukraine",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114204024,
+   "files": [
+    "uk/uk_UA/oleksa/high/uk_UA-oleksa-high.onnx",
+    "uk/uk_UA/oleksa/high/uk_UA-oleksa-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Apache 2.0",
+    "datasetUrl": "https://github.com/egorsmkv/ukrainian-tts-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ukr_Cyrl"
+  },
+  {
+   "id": "uk_UA-tetiana-high",
+   "engine": "piper",
+   "locale": "uk_UA",
+   "family": "uk",
+   "languageName": "Ukrainian",
+   "country": "Ukraine",
+   "quality": "high",
+   "speakers": 1,
+   "sizeBytes": 114204024,
+   "files": [
+    "uk/uk_UA/tetiana/high/uk_UA-tetiana-high.onnx",
+    "uk/uk_UA/tetiana/high/uk_UA-tetiana-high.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Apache 2.0",
+    "datasetUrl": "https://github.com/egorsmkv/ukrainian-tts-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ukr_Cyrl"
+  },
+  {
+   "id": "uk_UA-ukrainian_tts-medium",
+   "engine": "piper",
+   "locale": "uk_UA",
+   "family": "uk",
+   "languageName": "Ukrainian",
+   "country": "Ukraine",
+   "quality": "medium",
+   "speakers": 3,
+   "sizeBytes": 76735663,
+   "files": [
+    "uk/uk_UA/ukrainian_tts/medium/uk_UA-ukrainian_tts-medium.onnx",
+    "uk/uk_UA/ukrainian_tts/medium/uk_UA-ukrainian_tts-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "ukr_Cyrl"
+  },
+  {
+   "id": "ur_PK-aegis_female-medium",
+   "engine": "piper",
+   "locale": "ur_PK",
+   "family": "ur",
+   "languageName": "Urdu",
+   "country": "Pakistan",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63515589,
+   "files": [
+    "ur/ur_PK/aegis_female/medium/ur_PK-aegis_female-medium.onnx",
+    "ur/ur_PK/aegis_female/medium/ur_PK-aegis_female-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "urd_Arab"
+  },
+  {
+   "id": "ur_PK-fasih-medium",
+   "engine": "piper",
+   "locale": "ur_PK",
+   "family": "ur",
+   "languageName": "Urdu",
+   "country": "Pakistan",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63532015,
+   "files": [
+    "ur/ur_PK/fasih/medium/ur_PK-fasih-medium.onnx",
+    "ur/ur_PK/fasih/medium/ur_PK-fasih-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": null,
+    "datasetUrl": null,
+    "commercialUse": "verify"
+   },
+   "language": "urd_Arab"
+  },
+  {
+   "id": "vi_VN-25hours_single-low",
+   "engine": "piper",
+   "locale": "vi_VN",
+   "family": "vi",
+   "languageName": "Vietnamese",
+   "country": "Vietnam",
+   "quality": "low",
+   "speakers": 1,
+   "sizeBytes": 63104526,
+   "files": [
+    "vi/vi_VN/25hours_single/low/vi_VN-25hours_single-low.onnx",
+    "vi/vi_VN/25hours_single/low/vi_VN-25hours_single-low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Unknown",
+    "datasetUrl": "https://github.com/TensorSpeech/TensorFlowASR/blob/main/README.md#vietnamese",
+    "commercialUse": "verify"
+   },
+   "language": "vie_Latn"
+  },
+  {
+   "id": "vi_VN-vais1000-medium",
+   "engine": "piper",
+   "locale": "vi_VN",
+   "family": "vi",
+   "languageName": "Vietnamese",
+   "country": "Vietnam",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "vi/vi_VN/vais1000/medium/vi_VN-vais1000-medium.onnx",
+    "vi/vi_VN/vais1000/medium/vi_VN-vais1000-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "https://creativecommons.org/licenses/by/4.0/",
+    "datasetUrl": "https://ieee-dataport.org/documents/vais-1000-vietnamese-speech-synthesis-corpus",
+    "commercialUse": "verify"
+   },
+   "language": "vie_Latn"
+  },
+  {
+   "id": "vi_VN-vivos-x_low",
+   "engine": "piper",
+   "locale": "vi_VN",
+   "family": "vi",
+   "languageName": "Vietnamese",
+   "country": "Vietnam",
+   "quality": "x_low",
+   "speakers": 65,
+   "sizeBytes": 27789413,
+   "files": [
+    "vi/vi_VN/vivos/x_low/vi_VN-vivos-x_low.onnx",
+    "vi/vi_VN/vivos/x_low/vi_VN-vivos-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC BY-NC-SA 4.0",
+    "datasetUrl": "https://ailab.hcmus.edu.vn/vivos/",
+    "commercialUse": "verify"
+   },
+   "language": "vie_Latn"
+  },
+  {
+   "id": "zh_CN-chaowen-medium",
+   "engine": "piper",
+   "locale": "zh_CN",
+   "family": "zh",
+   "languageName": "Chinese",
+   "country": "China",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "zh/zh_CN/chaowen/medium/zh_CN-chaowen-medium.onnx",
+    "zh/zh_CN/chaowen/medium/zh_CN-chaowen-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "CC0",
+    "datasetUrl": "https://github.com/OHF-Voice/voice-datasets",
+    "commercialUse": "verify"
+   },
+   "language": "cmn_Hans"
+  },
+  {
+   "id": "zh_CN-huayan-medium",
+   "engine": "piper",
+   "locale": "zh_CN",
+   "family": "zh",
+   "languageName": "Chinese",
+   "country": "China",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63201294,
+   "files": [
+    "zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx",
+    "zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Unknown",
+    "datasetUrl": "https://github.com/PlayVoice/HuaYan_TTS",
+    "commercialUse": "verify"
+   },
+   "language": "cmn_Hans"
+  },
+  {
+   "id": "zh_CN-huayan-x_low",
+   "engine": "piper",
+   "locale": "zh_CN",
+   "family": "zh",
+   "languageName": "Chinese",
+   "country": "China",
+   "quality": "x_low",
+   "speakers": 1,
+   "sizeBytes": 20628813,
+   "files": [
+    "zh/zh_CN/huayan/x_low/zh_CN-huayan-x_low.onnx",
+    "zh/zh_CN/huayan/x_low/zh_CN-huayan-x_low.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Unknown",
+    "datasetUrl": "https://github.com/PlayVoice/HuaYan_TTS",
+    "commercialUse": "verify"
+   },
+   "language": "cmn_Hans"
+  },
+  {
+   "id": "zh_CN-xiao_ya-medium",
+   "engine": "piper",
+   "locale": "zh_CN",
+   "family": "zh",
+   "languageName": "Chinese",
+   "country": "China",
+   "quality": "medium",
+   "speakers": 1,
+   "sizeBytes": 63221984,
+   "files": [
+    "zh/zh_CN/xiao_ya/medium/zh_CN-xiao_ya-medium.onnx",
+    "zh/zh_CN/xiao_ya/medium/zh_CN-xiao_ya-medium.onnx.json"
+   ],
+   "license": {
+    "engine": "GPL-3.0-or-later",
+    "dataset": "Non-commercial use (see https://www.data-baker.com/data/index/TNtts/)",
+    "datasetUrl": "https://huggingface.co/openspeech/BZNSYP",
+    "commercialUse": "verify"
+   },
+   "language": "cmn_Hans"
+  }
+ ]
+}

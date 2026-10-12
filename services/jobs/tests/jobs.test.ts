@@ -35,10 +35,10 @@ test('webhook payload has the stable contract shape', () => {
 
 test('failed webhook payload carries the error', () => {
   const p = buildWebhookPayload({
-    id: 'job-2', status: 'failed' as never, transcript_id: null, error: 'whisper unreachable',
+    id: 'job-2', status: 'failed' as never, transcript_id: null, error: 'stt unreachable',
   })
   assert.equal(p.event, 'job.failed')
-  assert.equal(p.error, 'whisper unreachable')
+  assert.equal(p.error, 'stt unreachable')
   assert.equal(p.transcriptId, null)
 })
 

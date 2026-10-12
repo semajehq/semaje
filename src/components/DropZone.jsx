@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import { Mic, Upload, FileAudio } from 'lucide-react'
+import { Disc3, Upload, FileAudio } from 'lucide-react'
 
-export default function DropZone({ onFile, disabled }) {
+export default function DropZone({ onFile, disabled, active = false }) {
   const [dragging, setDragging] = useState(false)
   const [fileName, setFileName] = useState('')
   const inputRef = useRef()
@@ -25,8 +25,7 @@ export default function DropZone({ onFile, disabled }) {
       onDragLeave={() => setDragging(false)}
       onDrop={onDrop}
       onClick={() => !disabled && inputRef.current?.click()}
-      className={`rounded-xl border-2 border-dashed p-8 sm:p-10 text-center cursor-pointer transition-all select-none ${dragging ? 'drag-active' : ''} ${disabled ? 'opacity-40 cursor-not-allowed' : ''}`}
-      style={{ borderColor: dragging ? 'var(--accent)' : 'var(--border)', background: 'var(--surface)' }}
+      className={`capture-drop select-none ${dragging ? 'drag-active' : ''} ${active ? 'is-processing' : ''} ${disabled ? 'is-disabled' : ''}`}
     >
       <input
         ref={inputRef}
@@ -35,14 +34,18 @@ export default function DropZone({ onFile, disabled }) {
         className="hidden"
         onChange={e => handleFile(e.target.files[0])}
       />
+      <div className="capture-reel" aria-hidden="true">
+        <span /><span />
+        <div className="capture-tape" />
+      </div>
       <div className="flex justify-center mb-4">
         {fileName ? (
-          <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: 'rgba(var(--accent-rgb),0.1)', border: '1px solid rgba(var(--accent-rgb),0.2)' }}>
+          <div className="capture-drop-icon">
             <FileAudio size={24} style={{ color: 'var(--accent)' }} />
           </div>
         ) : (
-          <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: 'rgba(var(--accent-rgb),0.06)', border: '1px solid var(--border)' }}>
-            <Mic size={24} style={{ color: 'var(--muted)' }} />
+          <div className="capture-drop-icon">
+            <Disc3 size={24} style={{ color: 'var(--muted)' }} />
           </div>
         )}
       </div>
@@ -50,7 +53,7 @@ export default function DropZone({ onFile, disabled }) {
         {fileName || 'Drop a recording into the workspace'}
       </p>
       <p className="text-xs font-mono mb-3" style={{ color: 'var(--muted)' }}>
-        MP3 · WAV · M4A · OGG · FLAC · MP4
+        MP3 / WAV / M4A / OGG / FLAC / MP4
       </p>
       {!fileName && (
         <div className="inline-flex items-center gap-1.5 text-[11px] font-mono px-3 py-1.5 rounded-lg border transition-colors"

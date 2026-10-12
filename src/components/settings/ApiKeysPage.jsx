@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import { KeyRound, Trash2 } from 'lucide-react'
 import { listApiKeys, createApiKey, revokeApiKey } from '../../utils/apiClient'
 
+const SCOPES = ['transcribe', 'read', 'write', 'export', 'share', 'admin']
+
 export default function ApiKeysPage() {
   const [keys, setKeys] = useState([])
   const [name, setName] = useState('')
   const [newToken, setNewToken] = useState('')
   const [error, setError] = useState('')
+  const [scopes, setScopes] = useState(['transcribe', 'read'])
 
   const refresh = () => listApiKeys().then(setKeys).catch(e => setError(e.message))
   useEffect(() => { refresh() }, [])
@@ -15,7 +18,7 @@ export default function ApiKeysPage() {
     e.preventDefault()
     if (!name.trim()) return
     try {
-      const { token } = await createApiKey(name.trim())
+      const { token } = await createApiKey(name.trim(), scopes)
       setNewToken(token)
       setName('')
       refresh()
@@ -40,20 +43,19 @@ export default function ApiKeysPage() {
         </p>
       </section>
 
-      <form onSubmit={create} className="app-panel p-4 flex gap-2">
-        <input
-          className="field-input px-3"
-          style={{ background: 'transparent', color: 'var(--text)' }}
-          placeholder="Key name (e.g. extension)"
-          value={name} onChange={e => setName(e.target.value)}
-        />
-        <button className="primary-button">
-          Create
-        </button>
+      <form onSubmit={create} className="app-panel p-4 grid gap-3">
+        <div className="flex gap-2">
+          <input className="field-input px-3 flex-1" style={{ background: 'transparent', color: 'var(--text)' }} placeholder="Key name" value={name} onChange={e => setName(e.target.value)} />
+          <button className="primary-button" disabled={!scopes.length}>Create</button>
+        </div>
+        <fieldset className="scope-picker">
+          <legend>Scopes</legend>
+          {SCOPES.map(scope => <label key={scope}><input type="checkbox" checked={scopes.includes(scope)} onChange={() => setScopes(current => current.includes(scope) ? current.filter(item => item !== scope) : [...current, scope])} /><span>{scope}</span></label>)}
+        </fieldset>
       </form>
 
       {newToken && (
-        <div className="p-3 rounded-xl text-xs break-all"
+        <div className="p-3 rounded-lg text-xs break-all"
              style={{ background: 'var(--card)', border: '1px solid var(--accent)', color: 'var(--text)' }}>
           Copy your key now. It is shown only once:<br /><b>{newToken}</b>
         </div>
@@ -62,7 +64,7 @@ export default function ApiKeysPage() {
 
       <div className="flex flex-col gap-2">
         {keys.map(k => (
-          <div key={k.id} className="flex items-center gap-3 p-3 rounded-xl"
+          <div key={k.id} className="flex items-center gap-3 p-3 rounded-lg"
                style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
             <KeyRound size={16} style={{ color: 'var(--muted)' }} />
             <div className="flex-1 min-w-0">
@@ -71,6 +73,7 @@ export default function ApiKeysPage() {
                 smj_{k.key_prefix}_... · created {new Date(k.created_at).toLocaleDateString()}
                 {k.last_used_at ? ` · last used ${new Date(k.last_used_at).toLocaleDateString()}` : ''}
               </div>
+              <div className="key-scopes">{k.scopes.map(scope => <span key={scope}>{scope}</span>)}</div>
             </div>
             <button onClick={() => revoke(k.id)} title="Revoke"><Trash2 size={15} style={{ color: '#f87171' }} /></button>
           </div>

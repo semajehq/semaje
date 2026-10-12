@@ -1,28 +1,34 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>semaje</title>
+  <link rel="stylesheet" href="../ui/theme.css" />
   <style>
-    body { width: 300px; margin: 0; padding: 14px; font: 13px/1.5 -apple-system, system-ui, sans-serif; background: #101014; color: #e5e5e5; }
-    @media (prefers-color-scheme: light) { body { background: #fafafa; color: #222; } }
-    h1 { font-size: 15px; margin: 0 0 10px; background: linear-gradient(135deg,#e8ff47,#ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    label { display: block; font-size: 11px; opacity: .7; margin: 8px 0 3px; }
-    input { width: 100%; box-sizing: border-box; padding: 7px 9px; border-radius: 8px; border: 1px solid #333; background: transparent; color: inherit; outline: none; }
-    button { margin-top: 12px; width: 100%; padding: 8px; border-radius: 8px; border: none; cursor: pointer; background: linear-gradient(135deg,#e8ff47,#ff6b35); font-weight: 600; }
-    #msg { font-size: 11px; margin-top: 8px; opacity: .7; }
-    .row { margin-top: 10px; display: flex; gap: 8px; }
-    .row button { margin-top: 0; background: transparent; border: 1px solid #444; color: inherit; font-weight: 400; }
+    body { width: 340px; padding: 14px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .actions { display: grid; gap: 8px; }
+    .actions button { display: flex; justify-content: space-between; align-items: center; text-align: left; padding: 10px 12px; }
+    .actions button span:last-child { color: var(--muted); font-size: 11px; }
+    footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+    footer button { border: 0; background: none; padding: 4px 0; color: var(--accent); }
   </style>
 </head>
 <body>
-  <h1>semaje</h1>
-  <label for="apiBase">Server URL</label>
-  <input id="apiBase" placeholder="http://localhost:3001" />
-  <label for="apiKey">API key (create one at /settings/api-keys — leave empty for single-user)</label>
-  <input id="apiKey" type="password" placeholder="smj_…" />
-  <button id="save">Save & test</button>
-  <div class="row"><button id="panel">Open library panel</button></div>
-  <div id="msg"></div>
-  <script src="popup.js"></script>
+  <header><h1>semaje</h1><span class="badge" id="server-badge">checking…</span></header>
+  <div class="actions">
+    <button class="primary" id="dictate"><span>Dictate into this page</span><span><kbd id="key-dictate">⌘⇧1</kbd></span></button>
+    <button id="tab"><span>Transcribe this tab live</span><span><kbd id="key-tab">⌘⇧2</kbd></span></button>
+    <button id="speak"><span>Read selection aloud</span><span><kbd id="key-read">⌘⇧3</kbd></span></button>
+    <button id="file"><span>Transcribe a file…</span><span>any audio or video</span></button>
+    <button id="stop" class="danger" hidden><span>Stop</span><span id="live-kind"></span></button>
+  </div>
+  <label for="lang">Spoken language</label>
+  <input id="lang" autocomplete="off" role="combobox" aria-controls="lang-results" />
+  <div class="lang-results" id="lang-results" role="listbox"></div>
+  <div class="muted" id="lang-hint" style="font-size:11px;margin-top:4px"></div>
+  <div class="status" id="msg" role="status"></div>
+  <footer><button id="library">Open library</button><button id="settings">Settings</button></footer>
+  <script type="module" src="popup.js"></script>
 </body>
 </html>

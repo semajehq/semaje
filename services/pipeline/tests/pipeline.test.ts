@@ -6,7 +6,7 @@ import {
   buildTranscriptContext, TIMING_TASKS,
 } from '../src/index.ts'
 
-const whisper = {
+const stt = {
   text: 'hello world this is a test',
   language: 'en',
   segments: [
@@ -41,11 +41,11 @@ test('formatTimestamp renders HH:MM:SS.mmm', () => {
 })
 
 test('renderPlainTranscript returns raw text without timestamps option', () => {
-  assert.equal(renderPlainTranscript(whisper, {}), 'hello world this is a test')
+  assert.equal(renderPlainTranscript(stt, {}), 'hello world this is a test')
 })
 
 test('renderPlainTranscript injects [mm:ss] when timestamps enabled', () => {
-  const out = renderPlainTranscript(whisper, { timestamps: true })
+  const out = renderPlainTranscript(stt, { timestamps: true })
   assert.equal(out, '[00:00] hello world\n[00:02] this is a test')
 })
 
@@ -54,7 +54,7 @@ test('renderPlainTranscript handles no speech', () => {
 })
 
 test('buildTranscriptContext uses plain text for non-timing tasks', () => {
-  const ctx = buildTranscriptContext('summary', whisper)
+  const ctx = buildTranscriptContext('summary', stt)
   assert.match(ctx, /detected language: en/)
   assert.match(ctx, /TRANSCRIPT:\nhello world this is a test/)
   assert.doesNotMatch(ctx, /-->/)
@@ -62,7 +62,7 @@ test('buildTranscriptContext uses plain text for non-timing tasks', () => {
 
 test('buildTranscriptContext includes segment timestamps for timing tasks', () => {
   assert.ok(TIMING_TASKS.has('subtitles'))
-  const ctx = buildTranscriptContext('subtitles', whisper)
+  const ctx = buildTranscriptContext('subtitles', stt)
   assert.match(ctx, /\[00:00:00\.000 --> 00:00:02\.500\] hello world/)
   assert.match(ctx, /\[00:00:02\.500 --> 00:00:06\.000\] this is a test/)
 })

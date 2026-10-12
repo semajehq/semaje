@@ -1,0 +1,29 @@
+{
+  "transcript": "The launch moves to March 10. Sarah owns marketing. Tom will finish billing by Friday. The team decided to drop the legacy importer. Everyone was positive, but Tom was concerned about testing time. The next checkpoint is March 3.",
+  "fixtures": [
+    {
+      "task": "summary",
+      "promptMustMatch": ["summary", "do not invent|ground"],
+      "expectedOutput": ["march 10", "sarah|tom"],
+      "candidate": "The launch moves to March 10. Sarah owns marketing and Tom owns billing, with testing time still a concern."
+    },
+    {
+      "task": "meeting",
+      "promptMustMatch": ["action", "decision"],
+      "expectedOutput": ["tom.*billing", "drop.*legacy importer", "march 3"],
+      "candidate": "Action: Tom finishes billing by Friday. Decision: drop the legacy importer. Next checkpoint: March 3."
+    },
+    {
+      "task": "chapters",
+      "promptMustMatch": ["timestamp|chapter"],
+      "expectedOutput": ["00:00", "launch", "decision"],
+      "candidate": "00:00 Launch plan\n00:18 Owners and risks\n00:31 Decision and next checkpoint"
+    },
+    {
+      "task": "sentiment",
+      "promptMustMatch": ["sentiment"],
+      "expectedOutput": ["positive", "concern.*testing"],
+      "candidate": "Overall sentiment is positive, with Tom expressing concern about testing time."
+    }
+  ]
+}

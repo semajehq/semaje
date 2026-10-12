@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+archive="${1:-}"
+confirm="${2:-}"
+if [[ -z "$archive" || "$confirm" != "--yes" ]]; then
+  echo "usage: deploy/restore <backup-directory> --yes"
+  echo "This replaces the current database and local data volumes."
+  exit 2
+fi
+archive="$(cd "$archive" && pwd)"
+
+(
+  cd "$archive"
+  shasum -a 256 -c SHA256SUMS
+)
+
+docker compose stop frontend api worker watcher retention >/dev/null 2>&1 || true
+docker compose exec -T postgres pg_restore -U semaje -d semaje --clean --if-exists --no-owner < "$archive/postgres.dump"
+docker compose run --rm --no-deps -T api sh -c \
+  'rm -rf /data/blobs /data/exports /data/logs /data/integrations /data/observability; mkdir -p /data; tar -C /data -xzf -' \
+  < "$archive/app-data.tar.gz"
+docker compose run --rm --no-deps -T stt sh -c \
+  'rm -rf /models/*; tar -C /models -xzf -' < "$archive/stt-models.tar.gz"
+
+if [[ -f "$archive/ollama-models.tar.gz" ]]; then
+  docker compose --profile local-llm run --rm --no-deps -T ollama sh -c \
+    'rm -rf /root/.ollama/*; tar -C /root/.ollama -xzf -' < "$archive/ollama-models.tar.gz"
+fi
+if [[ -f "$archive/config.env" ]]; then cp "$archive/config.env" .env.restored; fi
+
+docker compose run --rm migrate
+docker compose --profile local-llm up -d
+printf 'Restore complete. Review .env.restored before replacing the active .env.\n'
